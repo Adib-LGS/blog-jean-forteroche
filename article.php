@@ -21,30 +21,15 @@ if (!$article_id) {
     die("Vous devez préciser un paramètre `id` dans l'URL !");
 }
 
-/**
- * Connexion à la base de données avec PDO
- * 
- */
-$pdo = new Database();
-$pdo->getPdo();
+
 
 /**
  *  Récupération de l'article en question
  */
-$query = $pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
+$article = findArticle($article_id);
 
-// On exécute la requête en précisant le paramètre :article_id 
-$query->execute(['article_id' => $article_id]);
-
-// On fouille le résultat pour en extraire les données réelles de l'article
-$article = $query->fetch();
-
-/**
- * Récupération des commentaires de l'article en question
- */
-$query = $pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
-$query->execute(['article_id' => $article_id]);
-$commentaires = $query->fetchAll();
+/**Recupére les commentaires */
+$commentaires = findAllComments($article_id);
 
 /**
  * Affiche 

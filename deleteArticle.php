@@ -17,26 +17,20 @@ if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
 
 $id = $_GET['id'];
 
-/**
- * 2. Connexion à la base de données avec PDO
- */
-$pdo = new Database();
-$pdo->getPdo();
+
 
 /**
  * Vérification que l'article existe bel et bien
  */
-$query = $pdo->prepare('SELECT * FROM articles WHERE id = :id');
-$query->execute(['id' => $id]);
-if ($query->rowCount() === 0) {
+$article = findArticle($id);
+if (!$article) {
     die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
 }
 
 /**
  * Réelle suppression de l'article
  */
-$query = $pdo->prepare('DELETE FROM articles WHERE id = :id');
-$query->execute(['id' => $id]);
+deleteArticle($id);
 
 /**
  * Redirection vers la page d'accueil

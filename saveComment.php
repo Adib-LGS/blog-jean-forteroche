@@ -45,22 +45,19 @@ if (!$author || !$article_id || !$content) {
  * Ca nécessite une connexion à la base de données puis une requête qui va aller chercher l'article en question
  * Si rien ne revient, la personne se fout de nous.
  */
-$pdo = new Database();
-$pdo->getPdo();
 
-$query = $pdo->prepare('SELECT * FROM articles WHERE id = :article_id');
-$query->execute(['article_id' => $article_id]);
+//Retrouver L'Article
+$article = findArticle($article_id);
 
 // Si rien n'est revenu, on fait une erreur
-if ($query->rowCount() === 0) {
+if (!$article) {
     die("Ho ! L'article $article_id n'existe pas boloss !");
 }
 
 /**
  * Insertion du commentaire
  * */ 
-$query = $pdo->prepare('INSERT INTO comments SET author = :author, content = :content, article_id = :article_id, created_at = NOW()');
-$query->execute(compact('author', 'content', 'article_id'));
+insertComment($author, $content, $article_id);
 
 // 4. Redirection vers l'article en question :
 redirect("article.php?id=" . $article_id);

@@ -1,4 +1,6 @@
 <?php
+require_once 'libraries/Database.php';
+require_once 'libraries/Utils.php';
 
 /**
  * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
@@ -23,10 +25,8 @@ if (!$article_id) {
  * Connexion à la base de données avec PDO
  * 
  */
-$pdo = new PDO('mysql:host=localhost;dbname=blogpoo;charset=utf8', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+$pdo = new Database();
+$pdo->getPdo();
 
 /**
  *  Récupération de l'article en question
@@ -50,8 +50,6 @@ $commentaires = $query->fetchAll();
  * Affiche 
  */
 $pageTitle = $article['title'];
-ob_start();
-require('templates/articles/show.html.php');
-$pageContent = ob_get_clean();
 
-require('templates/layout.html.php');
+/**Compact() créer un Array $k=>Value a partir des valeurs entrées */
+render('articles/show', compact('pageTitle','article', 'commentaires', 'article_id' ));

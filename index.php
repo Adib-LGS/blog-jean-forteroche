@@ -1,5 +1,6 @@
 <?php
-
+require_once 'libraries/Database.php';
+require_once 'libraries/Utils.php';
 /**
  * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
  * 
@@ -7,13 +8,8 @@
  * puis on va boucler dessus pour afficher chacun d'entre eux
  */
 
-/**
- * Connexion à la base de données avec PDO
- */
-$pdo = new PDO('mysql:host=localhost;dbname=blogpoo;charset=utf8', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+$pdo = new Database();
+$pdo->getPdo();
 
 /**
  * Récupération des articles
@@ -27,8 +23,5 @@ $articles = $resultats->fetchAll();
  * Affichage
  */
 $pageTitle = "Accueil";
-ob_start();
-require('templates/articles/index.html.php');
-$pageContent = ob_get_clean();
-
-require('templates/layout.html.php');
+/**Compact() créer un Array $k=>Value a partir des valeurs entrées */
+render('articles/index', compact('pageTitle','articles'));

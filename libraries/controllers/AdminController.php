@@ -7,14 +7,11 @@
  * 
  */
 
-namespace Controlllers;
+namespace Controllers;
 
 require_once 'libraries/Utils.php';
-require_once 'libraries/controllers/Controller.php';
-require_once 'libraries/models/Article.php';
-require_once 'libraries/models/Comment.php';
 
-class AdminController extends Controller{
+class AdminController extends Controllers{
 
     //Va chercher via Constructor de Abstarct Controller
     protected $modelName = \Models\Comment::class;
@@ -88,7 +85,7 @@ class AdminController extends Controller{
         /**
          * Vérification que l'article existe bel et bien
          */
-        $article = $this->modelArticle->find($id);
+        $article = $this->model->find($id);
         if (!$article) {
             die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
         }
@@ -97,7 +94,7 @@ class AdminController extends Controller{
          * Réelle suppression de l'article
          */
         $modelArticle = new \Models\Article();
-        $this->modelArticle->delete($id);
+        $modelArticle->delete($id);
 
         /**
          * Redirection vers la page d'accueil

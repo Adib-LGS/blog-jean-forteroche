@@ -1,7 +1,7 @@
 <?php
-require_once 'libraries/controllers/Controller.php';
+require_once 'libraries/autoload.php';
 /**
 * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE EST REDIRIGER SUR L'ARTICLE !
 */
-$controller = new \Controlllers\UserController();
+$controller = new \Controllers\UserController();
 $controller->insert();

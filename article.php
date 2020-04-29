@@ -1,7 +1,7 @@
 <?php
 
-require_once 'libraries/controllers/Controller.php';
+require_once 'libraries/autoload.php';
 
 /**Afficher un Article */
-$controller = new \Controlllers\UserController();
+$controller = new \Controllers\UserController();
 $controller->show();

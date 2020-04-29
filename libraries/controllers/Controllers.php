@@ -5,10 +5,10 @@
  * Les Actions Commune (Users/Admin)
  */
 
-namespace Controlllers;
+namespace Controllers;
 
 
-abstract class Controller{
+abstract class Controllers{
 
     //Faire en sorte d'avoir le bon Model pour le bon Controller en permanence
     //protected $modelArticle;

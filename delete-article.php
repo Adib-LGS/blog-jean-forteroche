@@ -1,6 +1,6 @@
 <?php
 
-require_once 'libraries/controllers/Controller.php';
+require_once 'libraries/autoload.php';
 /**
  * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
  * 
@@ -9,5 +9,5 @@ require_once 'libraries/controllers/Controller.php';
  */
 
  
- $controller = new \Controlllers\AdminController();
+ $controller = new \Controllers\AdminController();
  $controller->deleteArticle();

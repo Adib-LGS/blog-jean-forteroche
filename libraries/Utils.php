@@ -10,7 +10,7 @@ function render(string $path, array $variables = []){
 extract($variables);
 /*** Affichage */
 ob_start();
-require('templates/' .$path. '.php');
+require('templates/' .$path. '.html.php');
 $pageContent = ob_get_clean();
 
 require('templates/layout.html.php');

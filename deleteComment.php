@@ -1,41 +1,9 @@
 <?php
-require_once 'libraries/Database.php';
-require_once 'Utils/Database.php';
+require_once 'libraries/controllers/Controller.php';
 /**
- * DANS CE FICHIER ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
+ * Dans cette page nous supprimons les commentaires
  */
 
-/**
- * Récupération du paramètre "id" en GET
- */
-if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
-    die("Ho ! Fallait préciser le paramètre id en GET !");
-}
+ $controller = new \Controlllers\AdminController();
+ $controller->deleteComment();
 
-$id = $_GET['id'];
-
-
-
-
-/**
- * Vérification de l'existence du commentaire
- */
-$commentaire = findComment($id);
-if (!$commentaire) {
-    die("Aucun commentaire n'a l'identifiant $id !");
-}
-
-/**
- * Suppression réelle du commentaire
- * On récupère l'identifiant de l'article avant de supprimer le commentaire
- */
-
-$article_id = $commentaire['article_id'];
-
-deleteComment($id);
-
-/**
- * Redirection vers l'article en question
- */
-
-redirect("article.php?id=" . $article_id);

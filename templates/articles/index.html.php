@@ -1,16 +1,33 @@
-  
+<div class="slider"></div><!-- slider -->
+	<section class="blog-area section">
+		<div class="container">
+		<h1>Bienvenu Sur mon Blog !</h1>
+        <p>Vous trouverez en dessous mes dérniers Posts</p>
+			<div class="row">
+        <?php
+        foreach ($articles as $article):
+         ?>
+				<div class="col-lg-4 col-md-6">
+					<div class="card h-100">
+						<div class="single-post post-style-1">
+							<div class="blog-image"><img src="public/images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							
+							<a class="avatar" href="article.php?id=<?= $article['id'] ?>"><img src="public/images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<div class="blog-info">
 
-<h1>Bienvenu Sur mon Blog !</h1>
-<p>Vous trouverez en dessous mes dérniers Posts</p>
+								<h4 class="title"><a href="article.php?id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
 
-<a href="profil.php?id=">Profil Administrateur</a>
-
-<h2>Liste des Articles:</h2>
-
-<?php foreach ($articles as $article) : ?>
-    <h2><?= $article['title'] ?></h2>
-    <small>Ecrit le <?= $article['created_at'] ?></small>
-    <p><?= $article['introduction'] ?></p>
-    <a href="article.php?id=<?= $article['id'] ?>">Lire la suite</a>
-    <a href="delete-article.php?id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sur de vouloir supprimer cet article ?!`)">Supprimer</a>
-<?php endforeach ?>
+								<ul class="post-footer">
+									<li><a href="#"><i class="ion-heart"></i>57</a></li>
+									<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+									<li><a href="#"><i class="ion-eye"></i>138</a></li>
+								</ul>
+							</div><!-- blog-info -->
+						</div><!-- single-post -->
+					</div><!-- card -->
+				</div><!-- col-lg-4 col-md-6 -->
+        <?php endforeach ?>
+			</div><!-- row -->
+			<a class="load-more-btn" href="#"><b>VOIR PLUS</b></a>
+		</div><!-- container -->
+	</section><!-- section -->

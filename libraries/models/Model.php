@@ -1,19 +1,18 @@
 <?php
-
-namespace Models;
 /**
  * Class Abstract, 
  * Idée Général de ttes les class Models
  * Cette classe ne peut etre Instancier
  * Sécurité du code
  */
-require_once 'libraries/Database.php'; 
+
+namespace Models;
 
 abstract class Model {
 
     /**Récupere la Connexion de Database */
     protected $pdo;
-
+    
     /**
     * l'Héritage rend la table SQL dynamique 
     * Dans les classes Filles sur la function find($id); 

@@ -9,13 +9,17 @@
 
 namespace Controllers;
 
-require_once 'libraries/Utils.php';
 
 class AdminController extends Controllers{
 
     //Va chercher via Constructor de Abstarct Controller
     protected $modelName = \Models\Comment::class;
 
+    /**Se connecter a l'espace Administration */
+    public function logIn(){}
+
+    /** Créer un Article */
+    public function createArticle(){}
 
     /** Supprimer un commentaire */
     public function deleteComment(){
@@ -57,7 +61,7 @@ class AdminController extends Controllers{
          * Redirection vers l'article en question
          */
 
-        redirect("article.php?id=" . $article_id);
+        \Http::redirect("article.php?id=" . $article_id);
     }
 
     /**Supprimer un Article */
@@ -101,7 +105,7 @@ class AdminController extends Controllers{
          */
 
 
-        redirect("index.php");
+        \Http::redirect("index.php");
 
     }
 }

@@ -7,7 +7,9 @@
  */
 
 namespace Controllers;
-require_once 'libraries/Utils.php';
+
+use Renderer;
+
 
 class UserController extends Controllers{
 
@@ -21,6 +23,7 @@ class UserController extends Controllers{
          * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
          * Apl de la class Article Dossier Models
          */
+
         //$model = new \Models\Article();
 
         /** Ranger les articles par Ordre Descendant */
@@ -30,8 +33,8 @@ class UserController extends Controllers{
          * Affichage
          */
         $pageTitle = "Accueil";
-        /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        render('articles/index', compact('pageTitle','articles'));
+        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/index', compact('pageTitle','articles'));
 
         /* Récupere les data des Users
         $userModel = new User();
@@ -40,7 +43,7 @@ class UserController extends Controllers{
         die();*/
     }
 
-    /** Montrer un Article */
+    /**Montrer un Article */
     public function show(){
 
         /**
@@ -81,11 +84,11 @@ class UserController extends Controllers{
         $pageTitle = $article['title'];
 
         /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        render('articles/show', compact('pageTitle','article', 'commentaires', 'article_id' ));
+        \Renderer::render('articles/show', compact('pageTitle','article', 'commentaires', 'article_id' ));
 
     }
 
-    /** Inserer un Commentaire */
+    /**Inserer un Commentaire */
     public function insert(){
 
         //$articleModel = new \Models\Article();
@@ -140,7 +143,10 @@ class UserController extends Controllers{
         $modelComment = new \Models\Comment(); 
         $modelComment->insert($author, $content, $article_id);
 
-        // 4. Redirection vers l'article en question :
-        redirect("article.php?id=" . $article_id);
+        // 4. Methode Static redirect Redirection vers l'article en question :
+        \Http::redirect("article.php?id=" . $article_id);
     }
+
+    /**Signaler un Commentaire Menancant :) */
+    public function signalComment(){}
 }

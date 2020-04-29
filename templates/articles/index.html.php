@@ -1,5 +1,11 @@
   
-<h1>Nos articles</h1>
+
+<h1>Bienvenu Sur mon Blog !</h1>
+<p>Vous trouverez en dessous mes dérniers Posts</p>
+
+<a href="profil.php?id=">Profil Administrateur</a>
+
+<h2>Liste des Articles:</h2>
 
 <?php foreach ($articles as $article) : ?>
     <h2><?= $article['title'] ?></h2>

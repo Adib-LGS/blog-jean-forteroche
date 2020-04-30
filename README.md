@@ -1,3 +1,3 @@
 # blog-jean-forteroche
 
-Scholl Test First-Time in PHP
+School Test First-Time in PHP

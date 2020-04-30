@@ -40,15 +40,16 @@
         <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
-<!--  Utilisateur peut Ajouter un Commentaire-->
-              <form action="index.php?controller=usercontroller&action=insert" method="POST">
+              <form action="save-comment.php" method="POST">
                 <input type="text" aria-required="true" name="author" class="form-control"
                 placeholder="Votre pseudo !" aria-invalid="true" required >
+              </div><!-- col-sm-6 -->
+              <div class="col-sm-12">
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
                     <input type="hidden" name="article_id" value="<?= $article_id ?>">
                     <button class="submit-btn" type="submit" id="form-submit"><b>COMMENTER</b></button>
-              </form>
-              </div><!-- col-sm-6 -->
+                </form>
+                </div><!-- col-sm-12 -->
               </div><!-- col-sm-12 -->
             </div>
         </div><!-- row -->
@@ -58,6 +59,8 @@
           <div class="comment">
             <div class="post-info">
             <?= $article['content'] ?>
+<!--Admin peut Supprimer un Article -->
+            <a href="index.php?controller=admincontroller&action=delete&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cetArticle ?!`)">Supprimer Article</a>
               <?php if (count($commentaires) === 0) : ?>
                   <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
               <?php else : ?>
@@ -69,8 +72,8 @@
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
 
-<!-- User ne peut pas Supprimer un commentaire
-                      <a href="index.php?controller=admincontroller&action=delete&id=<= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>-->
+<!-- Admin peut Supprimer un commentaire -->
+                      <a href="index.php?controller=admincontroller&action=delete&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
 
                   <?php endforeach ?>
               <?php endif ?>

@@ -12,6 +12,32 @@ namespace Controllers;
 
 class AdminController extends Controllers{
 
+    /**Montrer la Liste des Articles */
+    public function index(){
+        /**
+         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
+         * Apl de la class Article Dossier Models
+         */
+
+        //$model = new \Models\Article();
+
+        /** Ranger les articles par Ordre Descendant */
+        $articles = $this->model->findAll("created_at DESC");
+
+        /**
+         * Affichage
+         */
+        $pageTitle = "Accueil";
+        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/index', compact('pageTitle','articles'));
+
+        /* Récupere les data des Users
+        $userModel = new User();
+        $users = $userModel->findAll();
+        var_dump($users);
+        die();*/
+    }
+    
     //Va chercher via Constructor de Abstarct Controller
     protected $modelName = \Models\Comment::class;
 
@@ -61,7 +87,7 @@ class AdminController extends Controllers{
          * Redirection vers l'article en question
          */
 
-        \Http::redirect("article.php?id=" . $article_id);
+        \Http::redirect("indexAdmin.php?controller=admincontroller&action=show&id=" . $article_id);
     }
 
     /**Supprimer un Article */
@@ -103,9 +129,7 @@ class AdminController extends Controllers{
         /**
          * Redirection vers la page d'accueil
          */
-
-
-        \Http::redirect("index.php");
+        \Http::redirect("indexAdmin.php");
 
     }
 }

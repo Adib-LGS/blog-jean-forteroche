@@ -14,10 +14,10 @@
 						<div class="single-post post-style-1">
 							<div class="blog-image"><img src="public/images/marion-michele-330691.jpg" alt="Blog Image"></div>
 							
-							<a class="avatar" href="index.php?controller=usercontroller&action=show&id=<?= $article['id'] ?>"><img src="public/images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="index.php?controller=admincontroller&action=show&id=<?= $article['id'] ?>"><img src="public/images/icons8-team-355979.jpg" alt="Profile Image"></a>
 							<div class="blog-info">
 
-								<h4 class="title"><a href="index.php?controller=usercontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
+								<h4 class="title"><a href="index.php?controller=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
 
 								<ul class="post-footer">
 									<li><a href="#"><i class="ion-heart"></i>57</a></li>

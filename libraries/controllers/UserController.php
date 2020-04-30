@@ -144,7 +144,7 @@ class UserController extends Controllers{
         $modelComment->insert($author, $content, $article_id);
 
         // 4. Methode Static redirect Redirection vers l'article en question :
-        \Http::redirect("article.php?id=" . $article_id);
+        \Http::redirect("index.php?controller=usercontroller&action=show&id=" . $article_id);
     }
 
     /**Signaler un Commentaire Menancant :) */

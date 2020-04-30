@@ -7,7 +7,8 @@
 
 require_once 'libraries/autoload.php';
 
-$controller =  new \Controllers\UserController();
+//$controller =  new \Controllers\UserController();
+//$controller->index();
+/**Apl du Router Method Static */
+\Router::process();
 
-/**Affichage */
-$controller->index();

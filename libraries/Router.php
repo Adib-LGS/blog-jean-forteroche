@@ -9,15 +9,15 @@
 
 
 class Router {
-
+    
 
     public static function process(){
 
         //Define ControllerName + Instantiation du Controller
-        $controllerName = "UserController";
+        $controllerName = "userController";
         //Apl de sa Méthode
         $action = "index";
-
+        
         if(!empty($_GET['controller'])){
             //For EX: le GET => UserController va se transformer en:
                 //UserController et se mettre ds $controllerName
@@ -35,5 +35,6 @@ class Router {
         $controller = new $controllerName();
         //Apl de l'action
         $controller->$action();
+
     }
 }

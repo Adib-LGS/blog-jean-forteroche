@@ -1,8 +1,8 @@
 <?php
 /**
  * Methode Static appartient a la Class elle meme
- * Pour créer du rendu
- * Gerer le contenu des pages
+ * Pour créer du rendu des pages
+ * Gerer le contenu des pages html.php
  */
 
  class Renderer {

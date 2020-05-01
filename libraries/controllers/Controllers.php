@@ -11,8 +11,7 @@ namespace Controllers;
 abstract class Controllers{
 
     //Faire en sorte d'avoir le bon Model pour le bon Controller en permanence
-    //protected $modelArticle;
-   // protected $modelComment;
+
     protected $modelName; // \Models\Article ou \Models\Comment ect...
 
     public function __construct()

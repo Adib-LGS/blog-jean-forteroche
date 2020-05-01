@@ -60,7 +60,7 @@
             <div class="post-info">
             <?= $article['content'] ?>
 <!--Admin peut Supprimer un Article -->
-            <a href="index.php?controller=admincontroller&action=delete&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cetArticle ?!`)">Supprimer Article</a>
+            <a href="index.php?controller=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cetArticle ?!`)">Supprimer Article</a>
               <?php if (count($commentaires) === 0) : ?>
                   <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
               <?php else : ?>
@@ -71,10 +71,8 @@
                       <blockquote>
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
-
 <!-- Admin peut Supprimer un commentaire -->
-                      <a href="index.php?controller=admincontroller&action=delete&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
-
+                      <a href="index.php?controller=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                   <?php endforeach ?>
               <?php endif ?>
             </div><!-- post-info -->

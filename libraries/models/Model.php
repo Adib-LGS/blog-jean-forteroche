@@ -13,10 +13,6 @@ abstract class Model {
     /**Récupere la Connexion de Database */
     protected $pdo;
     
-    /**
-    * l'Héritage rend la table SQL dynamique 
-    * Dans les classes Filles sur la function find($id); 
-    */
     protected $table;
 
     public function __construct()

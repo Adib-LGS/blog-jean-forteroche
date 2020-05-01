@@ -1,6 +1,5 @@
 <!--Show User ce que voit l'utilisateur -->
 
-
 <div class="slider">
   <div class="display-table  center-text">
     <h1 class="title display-table-cell"><b>DESIGN</b></h1>
@@ -69,7 +68,7 @@
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
 
-<!-- User ne peut pas Supprimer un commentaire
+<!-- User ne peut pas Supprimer un commentaire->
                       <a href="index.php?controller=admincontroller&action=delete&id=<= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>-->
 
                   <?php endforeach ?>

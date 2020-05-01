@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>Mon superbe blog By Jean Forteroche <?= $pageTitle ?></title>
+<title> <?= $pageTitle ?></title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
@@ -21,8 +21,8 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li><a href="#">Accueil</a></li>
 				<li><a href="#">Articles</a></li>
-				<li><a href="#">Profil</a></li>
-				<li><a href="post&create">Créer un article</a></li>
+				<li><a href="index?controller=usercontroller&action=login&id=<?= $pseudo_id ?>">Connexion</a></li>
+				<!--<li><a href="post&create">Créer un article</a></li>-->
 			</ul><!-- main-menu -->
 			<div class="src-area">
 				<form>

@@ -23,7 +23,7 @@ class AdminController extends Controllers{
          */
         
         // On part du principe qu'on possède 'admin' en param "id"
-        $pseudo_id = 'admin';
+        $pseudo_id = 'jf';
 
         //ctype_alpha — Vérifie qu'une chaîne est alphabétique
         if (!empty($_GET['id']) && ctype_alpha($_GET['id'])) {
@@ -39,25 +39,24 @@ class AdminController extends Controllers{
          * On test que le pseudo et le MDP soit conforme
          */
          
-            if(!empty($_POST) && !empty($_POST['pseudo']) AND !empty($_POST['password'])){
-                
-                //On empeche l'injection de baslises ds le pseudo
-                $pseudo = htmlspecialchars($_POST['pseudo']);
-                $pass_id = htmlspecialchars($_POST['password']);
-                
-                $resultat2 = $this->model2->checkPseudo($pseudo);
-                $resultat = $this->model2->getInfoUser($pass_id);
-                if(!$resultat || !$resultat2){
-                    echo 'Mauvais identifiant ou mot de passe !';
-                }elseif($resultat && $resultat2){
-                    //session_start();
-                   // $_SESSION['pseudo'] = $resultat['pseudo'];
-                    echo 'Vous êtes connecté !';
-                    //\Http::redirect("index.php?controller=admincontroller&action=index&pseudo=".$_SESSION['pseudo']);
-                }else{
-                    die('ERROR SCRIPT!');
-                }
+        if(!empty($_POST) && !empty($_POST['pseudo']) AND !empty($_POST['password'])){
+            //On empeche l'injection de baslises ds le pseudo
+            $pseudo = htmlspecialchars($_POST['pseudo']);
+            $pass_id = htmlspecialchars($_POST['password']);
+            
+            $resultat2 = $this->model2->checkPseudo($pseudo);
+            $resultat = $this->model2->getInfoUser($pass_id);
+            if(!$resultat || !$resultat2){
+                echo 'Mauvais identifiant ou mot de passe !';
+            }elseif($resultat && $resultat2){
+                session_start();
+                $_SESSION['pseudo'] = ucfirst($pseudo);
+                echo 'Vous êtes connecté !';
+                \Http::redirect("index.php?controller=admincontroller&action=index&pseudo=". $pseudo);
+            }else{
+                die('ERROR SCRIPT!');
             }
+        }
         /**
          * Affichage
          */
@@ -108,8 +107,6 @@ class AdminController extends Controllers{
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
 
-
-
         /**
          *  Récupération de l'article en question
          */
@@ -118,11 +115,11 @@ class AdminController extends Controllers{
         $article = $articleModel->find($article_id);
 
         /**Recupére les commentaires */
-        $commentModel = new \Models\Comment();
-        $commentaires = $commentModel->findAllWithArticle($article_id);
+       
+        $commentaires = $this->model->findAllWithArticle($article_id);
 
         /**
-         * Affiche 
+         * Affichage 
          */
         $pageTitle = $article['title'];
 
@@ -132,7 +129,7 @@ class AdminController extends Controllers{
     }
 
     /** Créer un Article */
-    public function createArticle(){
+    public function addArticle(){
         //$articleModel = new \Models\Article();
         /**
          * On vérifie que les données ont bien été envoyées en POST
@@ -140,53 +137,66 @@ class AdminController extends Controllers{
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
 
-        // On commence par l'author
-        $author = null;
-        if (!empty($_POST['author'])) {
-            $author = $_POST['author'];
-        }
+        if(!empty($_POST)){
 
-        // Ensuite le contenu
-        $content = null;
-        if (!empty($_POST['content'])) {
-            // On fait attention a ce que l"Admin ne publie pas du rien du tout
-            $content = htmlspecialchars($_POST['content']);
-        }
+            if(isset($_POST)){
 
-        // Enfin le itre de l'article
-        $article_title = null;
-        if (!empty($_POST['article_id']) && ctype_digit($_POST['article_id'])) {
-            $article_id = $_POST['article_id'];
-        }
+                // On commence par l'author
+                $author = null;
+                if (!empty($_POST['author'])) {
+                    $author = $_POST['author'];
+                }
+    
+                // Ensuite le contenu
+                $content = null;
+                if (!empty($_POST['content'])) {
+                    // On fait attention a ce que l"Admin ne publie pas du rien du tout ou n'ajoute pas de balise
+                    $content = htmlspecialchars($_POST['content']);
+                }
+    
+                // Enfin le itre de l'article
+                $article_title = null;
+                if (!empty($_POST['article_id']) && ctype_digit($_POST['article_id'])) {
+                    $article_id = $_POST['article_id'];
+                }
+    
+                // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
+                // Si il n'y a pas d'auteur OU qu'il n'y a pas de contenu OU qu'il n'y a pas d'identifiant d'article
+                if (!$author || !$article_title || !$content) {
+                    die("Votre formulaire a été mal rempli !");
+                }
+    
+                /**
+                 * Vérification que l'id de l'article pointe bien vers un nvl article qui n'éxiste pas
+                 * Ca nécessite une connexion à la base de données puis une requête qui va aller chercher l'article en question
+                 * Si ca revient, l'Admin ne peut ajouter l'article.
+                 */
+    
+                
+                /**
+                 * Insertion de l'Article
+                 * */
+                $modelArticle = new \Models\Article(); 
+                $modelArticle->insert($author, $content, $article_id);
 
-        // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
-        // Si il n'y a pas d'auteur OU qu'il n'y a pas de contenu OU qu'il n'y a pas d'identifiant d'article
-        if (!$author || !$article_title || !$content) {
-            die("Votre formulaire a été mal rempli !");
+                //Retrouver L'Article
+                $article = $this->model->find($article_id);
+    
+                // Si rien n'est revenu, on fait une erreur
+                if (!$article) {
+                    die(" L'article $article_id n'existe pas !");
+                }
+    
+                // 4. Methode Static redirect Redirection vers l'article en question :
+                \Http::redirect("index.php?controller=admincontroller&action=show&id=" . $article_id);
+            }   
         }
-
-        /**
-         * Vérification que l'id de l'article pointe bien vers un nvl article qui n'éxiste pas
-         * Ca nécessite une connexion à la base de données puis une requête qui va aller chercher l'article en question
-         * Si ca revient, l'Admin ne peut ajouter l'article.
+         /**
+         * Affichage
          */
-
-        //Retrouver L'Article
-        $article = $this->model->find($article_id);
-
-        // Si rien n'est revenu, on fait une erreur
-        if (!$article) {
-            die("Ho ! L'article $article_id n'existe pas boloss !");
-        }
-
-        /**
-         * Insertion de l'Article
-         * */
-        $modelArticle = new \Models\Article(); 
-        $modelArticle->insert($author, $content, $article_id);
-
-        // 4. Methode Static redirect Redirection vers l'article en question :
-        \Http::redirect("index.php?controller=admincontroller&action=show&id=" . $article_id);
+        $pageTitle = "Ajouter un Article";
+        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/addArticle', compact('pageTitle')); //Il manque une valeur ds compact;
     
     }
 
@@ -196,18 +206,14 @@ class AdminController extends Controllers{
          * DANS CE FICHIER ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
          */
 
-        //$model = new Comment();
         /**
          * Récupération du paramètre "id" en GET
          */
         if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
-            die("Ho ! Fallait préciser le paramètre id en GET !");
+            die(" Veuillez préciser le paramètre 'id' en GET !");
         }
 
         $id = $_GET['id'];
-
-
-
 
         /**
          * Vérification de l'existence du commentaire
@@ -248,12 +254,10 @@ class AdminController extends Controllers{
          * Vérifie que le GET possède bien un paramètre "id" 
          */
         if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
-            die("Ho ?! Tu n'as pas précisé l'id de l'article !");
+            die(" Veuillez préciser l'id de l'article !");
         }
 
         $id = $_GET['id'];
-
-
 
         /**
          * Vérification que l'article existe bel et bien

@@ -1,10 +1,12 @@
+<?php session_start()?>
 <div class="slider"></div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
-		<h1>Bienvenu Sur mon Blog !</h1>
-        <p>Vous trouverez en dessous mes dérniers Posts</p>
+		<?php 
+			if (isset($_SESSION['pseudo'])):?> 
+			<?= 'Bonjour ' . $_SESSION['pseudo']?>
+		<?php endif ?>
 			<div class="row">
-
 <!-- ICI ON AFFICHE LES ARTICLES VISIBLES INDEX.PHP-->
         <?php
         foreach ($articles as $article):

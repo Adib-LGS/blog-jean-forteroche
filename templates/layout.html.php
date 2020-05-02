@@ -19,10 +19,20 @@
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
-				<li><a href="#">Accueil</a></li>
-				<li><a href="#">Articles</a></li>
-				<li><a href="index.php?controller=admincontroller&action=login&id=admin">Admin</a></li>
-				<!--<li><a href="post&create">Créer un article</a></li>-->
+				<?php if(!isset($_SESSION)): ?>
+				<li>
+					<a href="index.php?controller=usercontroller&action=index&id=">Accueil</a>
+				</li>
+				<li>
+					<a href="index.php?controller=admincontroller&action=login&id=jf">Admin</a>
+				</li><?php endif ?>
+				<?php if(isset($_SESSION)): ?>
+				<li>
+					<a href="index.php?controller=admincontroller&action=index&id=">Accueil</a>
+				</li>
+					<li><a href="index.php?controller=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+				</li>
+				<?php endif?>
 			</ul><!-- main-menu -->
 			<div class="src-area">
 				<form>

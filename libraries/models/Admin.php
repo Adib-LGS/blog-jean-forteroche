@@ -22,9 +22,9 @@ class Admin extends Model {
     
     /**Check if existing Password */
     public function getInfoUser($pass_id){
-    $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE pass = ?");
-    $req->execute(array($pass_id));
-    $resultat = $req->fetch();
-    return $resultat;
+        $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE pass = ?");
+        $req->execute(array($pass_id));
+        $resultat = $req->fetch();
+        return $resultat;
     }
 }

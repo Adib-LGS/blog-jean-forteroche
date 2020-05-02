@@ -1,6 +1,5 @@
+<?php session_start() ?>
 <!--Show User ce que voit l'utilisateur -->
-
-
 <div class="slider">
   <div class="display-table  center-text">
     <h1 class="title display-table-cell"><b>DESIGN</b></h1>
@@ -34,24 +33,8 @@
 </section><!-- post-area -->
 <section class="comment-section">
   <div class="container">
-    <h4><b>LAISSER UN COMMENTAIRES</b></h4>
     <div class="row">
       <div class="col-lg-8 col-md-12">
-        <div class="comment-form">
-            <div class="row">
-              <div class="col-sm-6">
-              <form action="save-comment.php" method="POST">
-                <input type="text" aria-required="true" name="author" class="form-control"
-                placeholder="Votre pseudo !" aria-invalid="true" required >
-              </div><!-- col-sm-6 -->
-              <div class="col-sm-12">
-                    <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
-                    <input type="hidden" name="article_id" value="<?= $article_id ?>">
-                    <button class="submit-btn" type="submit" id="form-submit"><b>COMMENTER</b></button>
-                </form>
-                </div><!-- col-sm-12 -->
-              </div><!-- col-sm-12 -->
-            </div>
         </div><!-- row -->
         </div><!-- comment-form -->
         <div class="col-lg-8 col-md-12">
@@ -76,9 +59,25 @@
                   <?php endforeach ?>
               <?php endif ?>
             </div><!-- post-info -->
-          </div>
+         
         </div><!-- commnets-area -->
       </div><!-- col-lg-8 col-md-12 -->
+      <h4><b>LAISSER UN COMMENTAIRES</b></h4>
+      <div class="comment-form">
+            <div class="row">
+              <div class="col-sm-6">
+              <form action="index.php?controller=admincontroller&action=insert" method="POST" class="form-control">
+                <input type="text" aria-required="true" name="author" class="form-control"
+                placeholder="Votre pseudo !" aria-invalid="true" required >
+              </div><!-- col-sm-6 -->
+              <div class="col-sm-12">
+                    <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
+                    <input type="hidden" name="article_id" value="<?= $article_id ?>">
+                    <button class="btn btn-primary" type="submit" id="form-submit"><b>COMMENTER</b></button>
+                </form>
+                </div><!-- col-sm-12 -->
+              </div><!-- col-sm-12 -->
+            </div>
     </div><!-- row -->
   </div><!-- container -->
 </section>

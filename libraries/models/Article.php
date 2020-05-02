@@ -1,11 +1,10 @@
 <?php
+/**
+ * Manipuler les Articles
+ */
 
 namespace Models;
 
-/**
- * Manipuler les Data
- * des Articles
- */
 class Article extends Model{
     /**Voir les functions ds abstract Model */
     protected $table = "articles";

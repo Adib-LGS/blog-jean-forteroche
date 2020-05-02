@@ -15,6 +15,7 @@ class UserController extends Controllers{
 
     //Va chercher via Constructor de Abstarct Controller
     protected $modelName = \Models\Article::class;
+    protected $secondModelName = \Models\User::class;
 
 
     /**Montrer la Liste des Articles */
@@ -36,74 +37,6 @@ class UserController extends Controllers{
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/index', compact('pageTitle','articles'));
 
-    }
-
-     /**Se connecter a l'espace Administration */
-     public function logIn(){
-        /**
-         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE DE CONNECTION !
-         * Apl de la class Article Dossier Models
-         */
-        
-        // On part du principe qu'on ne possède pas de param "id"
-        $pseudo_id = null;
-
-
-        if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
-            $pseudo_id = $_GET['id'];
-        }
-
-
-        if (!$pseudo_id) {
-            die("Vous devez préciser un paramètre `id` dans l'URL !");
-        }
-        
-        /**
-         * Retrouver le pseudo
-         */
-
-        $model = new \Models\Admin();
-        $pseudo = $this->model->checkPseudo($pseudo_id);
-
-        /**
-         * On vérifie si les données sont Posté a partir du Formulaire
-         * On test que le pseudo et le MDP soit conforme
-         */
-
-         //On vérifie si l'admin a bien renseigner les champs
-         if(empty($_POST['pseudo']) || $_POST['password']){
-            die("Vous devez entrer votre pseudo et votre mot de pass");
-        }
-
-
-        if(!empty($_POST)){
-
-            //On empeche l'injection de baslises ds le pseudo
-            $pseudo = htmlspecialchars($_POST['pseudo']);
-            //  Récupération du pseudo de l'administrateur et de son mot de pass
-            $resultat = $this->model->getInfoUser($pseudo);
-            // Comparaison du pass avec la bdd
-            $isPasswordCorrect = password_verify($_POST['password'], $resultat['pass']);
-            
-            if(!$resultat){
-                echo 'Mauvais identifiant ou mot de passe !';
-            }elseif($isPasswordCorrect){
-                session_start();
-                $_SESSION['id'] = $resultat['id'];
-                $_SESSION['pseudo'] = $resultat['pseudo'];
-                echo 'Vous êtes connecté !';
-
-                \Http::redirect("index.php?controller=admincontroller&action=index&pseudo=".$_SESSION['pseudo']);
-            }else{
-                die('Mauvais identifiant ou mot de passe !');
-            }
-        }
-        /**
-         * Affichage
-         */
-        $pageTitle = "Connexion";
-        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        \Renderer::render('articles/profil', compact('pageTitle','pseudo_id'));
     }
 
     /**Montrer un Article */

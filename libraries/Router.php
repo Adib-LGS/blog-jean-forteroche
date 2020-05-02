@@ -14,7 +14,7 @@ class Router {
     public static function process(){
 
         //Define ControllerName + Instantiation du Controller
-        $controllerName = "userController";
+        $controllerName = "UserController";
         //Apl de sa Méthode
         $action = "index";
         

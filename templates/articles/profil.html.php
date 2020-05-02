@@ -1,8 +1,8 @@
-    <?= $pageTitle = 'Espace Admin' ?>
+    <?= $pageTitle  ?>
 <div>
-    <form class="form-group" method="post" action="index.php?controller=admincontroller&action=index&id=<?= $_SESSION['pseudo'] ?>">
+    <form class="form-group" method="post" action="index.php?controller=admincontroller&action=login&id=admin">
         <label for="pseudo">Pseudo</label><br>
-        <input type="text" id="pseudo" name="pseudo" value="<?= $pseudo_id ?>" class="form-control"><br>
+        <input type="text" id="pseudo" name="pseudo" class="form-control"><br>
         <label for="password">Mot de passe</label><br>
         <input type="password" id="password" name="password" class="form-control" ><br>
         <button type="submit"  id="submit" name="submit" class="btn btn-primary">Connexion</button>

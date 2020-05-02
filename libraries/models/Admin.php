@@ -1,30 +1,29 @@
 <?php
-
-namespace Models;
 /**
  * Cette class Hérite du Model Principale
- * Permet d'ajouter des futurs functionalité pour l'Admin
+ * Permet de se connecter a l'espace d'aministration du blog
  */
 
+namespace Models;
 
 class Admin extends Model {
 
     protected $table = "admins";
 
-    /**Check if existing Pseudo_id */
-    public function checkPseudo($pseudo_id){
-        $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE pseudo = :pseudo_id");
-        // On exécute la requête en précisant le paramètre :pseudo_id 
-        $req->execute(['pseudo' => $pseudo_id]);
+    /**Check if existing Pseudo */
+    public function checkPseudo($pseudo){
+        $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE pseudo = ?");
+        // On exécute la requête en précisant le paramètre :pseudo 
+        $req->execute(array($pseudo));  
         // On fouille le résultat pour en extraire le pseudo
-        $pseudo = $req->fetch();
-        return $pseudo;
+        $resultat = $req->fetch();
+        return $resultat;
     }
     
-    /**If Password is already used */
-    public function getInfoUser(string $pseudo):array{
-    $req = $this->pdo->prepare("SELECT id, pseudo, pass FROM {$this->table} WHERE pseudo = ?");
-    $req->execute(array($pseudo));
+    /**Check if existing Password */
+    public function getInfoUser($pass_id){
+    $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE pass = ?");
+    $req->execute(array($pass_id));
     $resultat = $req->fetch();
     return $resultat;
     }

@@ -13,12 +13,13 @@ abstract class Controllers{
     //Faire en sorte d'avoir le bon Model pour le bon Controller en permanence
 
     protected $modelName; // \Models\Article ou \Models\Comment ect...
+    protected $secondModelName; // \Models\Admin ou \Models\User ect...
 
     public function __construct()
     {
-        $this->model = new $this->modelName();
-        //$this->modelArticle = new \Models\Article();
-        //$this->modelComment = new \Models\Comment();
+        $this->model = new $this->modelName(); //$this->modelArticle = new \Models\Article() || $this->modelComment = new \Models\Comment();
+
+        $this->model2 = new $this->secondModelName();
     }
 
 }

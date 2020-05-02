@@ -21,7 +21,7 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li><a href="#">Accueil</a></li>
 				<li><a href="#">Articles</a></li>
-				<li><a href="index?controller=usercontroller&action=login&id=<?= $pseudo_id ?>">Connexion</a></li>
+				<li><a href="index.php?controller=admincontroller&action=login&id=admin">Admin</a></li>
 				<!--<li><a href="post&create">Créer un article</a></li>-->
 			</ul><!-- main-menu -->
 			<div class="src-area">

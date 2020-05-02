@@ -14,7 +14,57 @@ class AdminController extends Controllers{
     
     /**Va chercher via Constructor de Abstarct Controller*/
     protected $modelName = \Models\Comment::class;
+    protected $secondModelName = \Models\Admin::class;
 
+    /**Se connecter a l'espace Administration */
+    public function logIn(){
+        /**
+         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE DE CONNECTION Administrateur !
+         */
+        
+        // On part du principe qu'on possède 'admin' en param "id"
+        $pseudo_id = 'admin';
+
+        //ctype_alpha — Vérifie qu'une chaîne est alphabétique
+        if (!empty($_GET['id']) && ctype_alpha($_GET['id'])) {
+            $pseudo_id = $_GET['id'];
+        }
+
+        if (!$pseudo_id) {
+            die("Vous devez préciser le bon paramètre `id` dans l'URL !");
+        }
+        
+        /**
+         * On vérifie si les données sont Posté a partir du Formulaire
+         * On test que le pseudo et le MDP soit conforme
+         */
+         
+            if(!empty($_POST) && !empty($_POST['pseudo']) AND !empty($_POST['password'])){
+                
+                //On empeche l'injection de baslises ds le pseudo
+                $pseudo = htmlspecialchars($_POST['pseudo']);
+                $pass_id = htmlspecialchars($_POST['password']);
+                
+                $resultat2 = $this->model2->checkPseudo($pseudo);
+                $resultat = $this->model2->getInfoUser($pass_id);
+                if(!$resultat || !$resultat2){
+                    echo 'Mauvais identifiant ou mot de passe !';
+                }elseif($resultat && $resultat2){
+                    //session_start();
+                   // $_SESSION['pseudo'] = $resultat['pseudo'];
+                    echo 'Vous êtes connecté !';
+                    //\Http::redirect("index.php?controller=admincontroller&action=index&pseudo=".$_SESSION['pseudo']);
+                }else{
+                    die('ERROR SCRIPT!');
+                }
+            }
+        /**
+         * Affichage
+         */
+        $pageTitle = "Espace Admin";
+        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/profil', compact('pageTitle','pseudo_id'));
+    }
 
     /**Montrer la Liste des Articles */
      public function index(){
@@ -222,7 +272,7 @@ class AdminController extends Controllers{
         /**
          * Redirection vers la page d'accueil
          */
-        \Http::redirect("index.php");
+        \Http::redirect("indexAdmin.php");
 
     }
 }

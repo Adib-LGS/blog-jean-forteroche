@@ -136,6 +136,7 @@ class AdminController extends Controllers{
          * D'abord, on récupère les informations à partir du POST
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
+        $author_id = null;
 
         if(!empty($_POST)){
 
@@ -146,7 +147,20 @@ class AdminController extends Controllers{
                 if (!empty($_POST['author'])) {
                     $author = $_POST['author'];
                 }
-    
+                
+                // le slug de l'article
+                $slug = null;
+                if (!empty($_POST['slug']) && ctype_digit($_POST['slug'])) {
+                    $slug = $_POST['slug'];
+                }
+
+                // Ensuite le contenu
+                $introduction = null;
+                if (!empty($_POST['introduction'])) {
+                    // On fait attention a ce que l"Admin ne publie pas du rien du tout ou n'ajoute pas de balise
+                    $introduction = htmlspecialchars($_POST['introduction']);
+                }
+
                 // Ensuite le contenu
                 $content = null;
                 if (!empty($_POST['content'])) {
@@ -154,15 +168,15 @@ class AdminController extends Controllers{
                     $content = htmlspecialchars($_POST['content']);
                 }
     
-                // Enfin le itre de l'article
-                $article_title = null;
+                // Enfin le tbitre de l'article
+                $article_id = null;
                 if (!empty($_POST['article_id']) && ctype_digit($_POST['article_id'])) {
                     $article_id = $_POST['article_id'];
                 }
     
                 // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
                 // Si il n'y a pas d'auteur OU qu'il n'y a pas de contenu OU qu'il n'y a pas d'identifiant d'article
-                if (!$author || !$article_title || !$content) {
+                if (!$author || !$slug || !$introduction|| !$content || !$article_id ) {
                     die("Votre formulaire a été mal rempli !");
                 }
     
@@ -177,7 +191,7 @@ class AdminController extends Controllers{
                  * Insertion de l'Article
                  * */
                 $modelArticle = new \Models\Article(); 
-                $modelArticle->insert($author, $content, $article_id);
+                $modelArticle->insert($author, $slug, $introduction, $content, $article_id);
 
                 //Retrouver L'Article
                 $article = $this->model->find($article_id);
@@ -196,8 +210,68 @@ class AdminController extends Controllers{
          */
         $pageTitle = "Ajouter un Article";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        \Renderer::render('articles/addArticle', compact('pageTitle')); //Il manque une valeur ds compact;
+        \Renderer::render('articles/addArticle', compact('pageTitle', 'author_id'));
     
+    }
+    
+    /**Inserer un Commentaire */
+    public function insert(){
+
+        //$articleModel = new \Models\Article();
+        /**
+         * On vérifie que les données ont bien été envoyées en POST
+         * D'abord, on récupère les informations à partir du POST
+         * Ensuite, on vérifie qu'elles ne sont pas nulles
+         */
+
+        // On commence par l'author
+        $author = null;
+        if (!empty($_POST['author'])) {
+            $author = $_POST['author'];
+        }
+
+        // Ensuite le contenu
+        $content = null;
+        if (!empty($_POST['content'])) {
+            // On fait quand même gaffe à ce que le gars n'essaye pas des balises cheloues dans son commentaire
+            $content = htmlspecialchars($_POST['content']);
+        }
+
+        // Enfin l'id de l'article
+        $article_id = null;
+        if (!empty($_POST['article_id']) && ctype_digit($_POST['article_id'])) {
+            $article_id = $_POST['article_id'];
+        }
+
+        // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
+        // Si il n'y a pas d'auteur OU qu'il n'y a pas de contenu OU qu'il n'y a pas d'identifiant d'article
+        if (!$author || !$article_id || !$content) {
+            die("Votre formulaire a été mal rempli !");
+        }
+
+        /**
+         * Vérification que l'id de l'article pointe bien vers un article qui existe
+         * Ca nécessite une connexion à la base de données puis une requête qui va aller chercher l'article en question
+         * Si rien ne revient, la personne se fout de nous.
+         */
+
+        //Retrouver L'Article
+        $article = new \Models\Article();
+        $article->find($article_id);
+
+        // Si rien n'est revenu, on fait une erreur
+        if (!$article) {
+            die("Ho ! L'article $article_id n'existe pas boloss !");
+        }
+
+        /**
+         * Insertion du commentaire
+         * */
+        
+        $this->model->insert($author, $content, $article_id);
+
+        // 4. Methode Static redirect Redirection vers l'article en question :
+        \Http::redirect("index.php?controller=admincontroller&action=show&id=" . $article_id);
     }
 
     /** Supprimer un commentaire */

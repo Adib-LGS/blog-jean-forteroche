@@ -16,9 +16,9 @@
    extract($variables);
    /*** Affichage */
    ob_start();
-   require('templates/' .$path. '.html.php');
+   require('views/' .$path. '.html.php');
    $pageContent = ob_get_clean();
    
-   require('templates/layout.html.php');
+   require('views/layout.html.php');
    } 
 }

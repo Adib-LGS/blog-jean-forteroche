@@ -62,7 +62,9 @@
          
         </div><!-- commnets-area -->
       </div><!-- col-lg-8 col-md-12 -->
+      <br>
       <h4><b>LAISSER UN COMMENTAIRES</b></h4>
+      <br>
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
@@ -70,9 +72,12 @@
                 <input type="text" aria-required="true" name="author" class="form-control"
                 placeholder="Votre pseudo !" aria-invalid="true" required >
               </div><!-- col-sm-6 -->
+              <br>
               <div class="col-sm-12">
+                <br>
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
-                    <input type="hidden" name="article_id" value="<?= $article_id ?>">
+                    <input type="hidden" name="article_id" value="<?= $article_id ?>"><br>
+
                     <button class="btn btn-primary" type="submit" id="form-submit"><b>COMMENTER</b></button>
                 </form>
                 </div><!-- col-sm-12 -->

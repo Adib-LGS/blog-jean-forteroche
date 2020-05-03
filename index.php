@@ -5,10 +5,8 @@
  * puis on va boucler dessus pour afficher chacun d'entre eux
  */
 
-require_once 'libraries/autoload.php';
+require_once 'app/autoload.php';
 
-//$controller =  new \Controllers\UserController();
-//$controller->index();
 /**Apl du Router Method Static */
 \Router::process();
 

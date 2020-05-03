@@ -24,12 +24,9 @@ class UserController extends Controllers{
          * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
          * Apl de la class Article Dossier Models
          */
-
-        //$model = new \Models\Article();
-
         /** Ranger les articles par Ordre Descendant */
         $articles = $this->model->findAll("created_at DESC");
-
+        
         /**
          * Affichage
          */

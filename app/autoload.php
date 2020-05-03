@@ -6,7 +6,7 @@ spl_autoload_register(function($className){
     $className = str_replace("\\", "/", $className);
 
     //require_once "libraries/namespace/Class.php;
-    require_once "libraries/$className.php";
+    require_once "app/$className.php";
     //var_dump($className);
 });
 

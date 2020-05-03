@@ -21,14 +21,14 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<?php if(!isset($_SESSION)): ?>
 				<li>
-					<a href="index.php?controller=usercontroller&action=index&id=">Accueil</a>
+					<a href="index.php?controller=usercontroller&action=index">Accueil</a>
 				</li>
 				<li>
 					<a href="index.php?controller=admincontroller&action=login&id=jf">Admin</a>
 				</li><?php endif ?>
 				<?php if(isset($_SESSION)): ?>
 				<li>
-					<a href="index.php?controller=admincontroller&action=index&id=">Accueil</a>
+					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
 				</li>
 					<li><a href="index.php?controller=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
 				</li>

@@ -6,11 +6,11 @@
 			if (isset($_SESSION['pseudo'])):?> 
 			<?= 'Bonjour ' . $_SESSION['pseudo']?>
 		<?php endif ?>
+		<br>
 			<div class="row">
 <!-- ICI ON AFFICHE LES ARTICLES VISIBLES INDEX.PHP-->
-        <?php
-        foreach ($articles as $article):
-         ?>
+		<?php foreach ($articles as $article):?>
+			
 				<div class="col-lg-4 col-md-6">
 					<div class="card h-100">
 						<div class="single-post post-style-1">

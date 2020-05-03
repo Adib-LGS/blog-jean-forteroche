@@ -10,10 +10,11 @@ class Comment extends Model{
     protected $table = "comments";
     /**
      * Récupération des commentaires de l'article en question
+     * Jointure de table
      * @param integer $article_id
      * @return array
      */
-    public function findAllWithArticle(int $article_id) :array{
+    public function findAllCommentWithArticle(int $article_id) :array{
         $query = $this->pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
         $query->execute(['article_id' => $article_id]);
         $commentaires = $query->fetchAll();

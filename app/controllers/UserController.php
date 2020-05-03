@@ -69,7 +69,7 @@ class UserController extends Controllers{
 
         /**Recupére les commentaires */
         $commentModel = new \Models\Comment();
-        $commentaires = $commentModel->findAllWithArticle($article_id);
+        $commentaires = $commentModel->findAllCommentWithArticle($article_id);
 
         /**
          * Affiche 
@@ -83,8 +83,7 @@ class UserController extends Controllers{
 
     /**Inserer un Commentaire */
     public function insert(){
-
-        //$articleModel = new \Models\Article();
+        
         /**
          * On vérifie que les données ont bien été envoyées en POST
          * D'abord, on récupère les informations à partir du POST

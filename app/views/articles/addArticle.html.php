@@ -8,12 +8,10 @@
             
               <form action="index.php?controller=admincontroller&action=addArticle" method="POST" class="form-group">
 
-                <input type="text" aria-required="true" name="id" class="form-control"
-                placeholder="Num de l'article" aria-invalid="true" required >
-                <br>
+                <br />
                 <input type="text" aria-required="true" name="title" class="form-control"
-                placeholder="Titre de l'article" aria-invalid="true" required >
-
+                placeholder="Titre de l'article" aria-invalid="true"  required >
+                <br />
                 <input type="text" aria-required="true" name="slug" class="form-control"
                 placeholder="slug de l'article" aria-invalid="true" required >
               </div><!-- col-sm-6 -->
@@ -22,12 +20,12 @@
                     
 
                     <input name="introduction" id="" rows="2" class="text-area-messge form-control" placeholder="Intro"></input>
-                    <input type="hidden" name="introduction"><br>
+                    <input type="hidden" name="introduction" ><br>
 
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre Article"></textarea>
-                    <input type="hidden" name="content"><br>
+                    <input type="hidden" name="article_id" value=""><br>
 
-                    <button class="btn btn-primary" type="submit" id="form-submit" value="<?= $article_id ?>"><b>Poster</button>
+                    <button class="btn btn-primary" type="submit" id="form-submit" ><b>Poster</button>
 
                 </form>
               

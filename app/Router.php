@@ -11,11 +11,11 @@
 class Router {
     
 
-    public static function process(){
+    public static function route(){
 
-            //Define ControllerName + Instantiation du Controller
+            //Define ControllerName par Deafut
             $controllerName = "UserController";
-            //Apl de sa Méthode
+            //Define la Method par Defaut
             $action = "index";
     
             if(!empty($_GET['controller'])){
@@ -30,7 +30,7 @@ class Router {
             $controllerName = "\Controllers\\" .$controllerName;
 
             
-            //J'instancie le controller via controllerName9()
+            //Crée nvl Objet controllerName9()
             $controller = new $controllerName();
             //Apl de l'action
             $controller->$action();

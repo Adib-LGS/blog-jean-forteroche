@@ -1,7 +1,7 @@
 <div class="slider"></div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
-		<h1>Bienvenu Sur mon Blog !</h1>
+		<h1>Bienvenue Sur mon Blog !</h1>
         <p>Vous trouverez en dessous mes dérniers Posts</p>
 			<div class="row">
 

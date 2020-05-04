@@ -16,54 +16,7 @@ class AdminController extends Controllers{
     protected $modelName = \Models\Comment::class;
     protected $secondModelName = \Models\Admin::class;
 
-    /**Se connecter a l'espace Administration */
-    public function logIn(){
-        /**
-         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE DE CONNECTION Administrateur !
-         */
-        
-        // On part du principe qu'on possède 'admin' en param "id"
-        $pseudo_id = 'jf';
-
-        //ctype_alpha — Vérifie qu'une chaîne est alphabétique
-        if (!empty($_GET['id']) && ctype_alpha($_GET['id'])) {
-            $pseudo_id = $_GET['id'];
-        }
-
-        if (!$pseudo_id) {
-            die("Vous devez préciser le bon paramètre `id` dans l'URL !");
-        }
-        
-        /**
-         * On vérifie si les données sont Posté a partir du Formulaire
-         * On test que le pseudo et le MDP soit conforme
-         */
-         
-        if(!empty($_POST) && !empty($_POST['pseudo']) AND !empty($_POST['password'])){
-            //On empeche l'injection de baslises ds le pseudo
-            $pseudo = htmlspecialchars($_POST['pseudo']);
-            $pass_id = htmlspecialchars($_POST['password']);
-            
-            $resultat2 = $this->model2->checkPseudo($pseudo);
-            $resultat = $this->model2->getInfoUser($pass_id);
-            if(!$resultat || !$resultat2){
-                echo 'Mauvais identifiant ou mot de passe !';
-            }elseif($resultat && $resultat2){
-                session_start();
-                $_SESSION['pseudo'] = ucfirst($pseudo);
-                echo 'Vous êtes connecté !';
-                \Http::redirect("index.php?controller=admincontroller&action=index&pseudo=". $pseudo);
-            }else{
-                die('ERROR SCRIPT!');
-            }
-        }
-        /**
-         * Affichage
-         */
-        $pageTitle = "Espace Admin";
-        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        \Renderer::render('articles/profil', compact('pageTitle','pseudo_id'));
-    }
+   
 
     /**Montrer la Liste des Articles */
      public function index(){
@@ -137,7 +90,6 @@ class AdminController extends Controllers{
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
         if(isset($_POST)){
-
             if(!empty($_POST)){
 
                 // On commence par l'author
@@ -148,37 +100,20 @@ class AdminController extends Controllers{
                 $introduction = htmlspecialchars($_POST['introduction']);
                 // Ensuite le contenu
                 $content = htmlspecialchars($_POST['content']);
-                // Enfin le tbitre de l'article
-                //$article_id =  $_POST['article_id'];
-                /**
+               
+                if (!$title || !$slug ||  !$introduction ||!$content) {
+                    die("Votre formulaire a été mal rempli !");
+                } else {
+                    /**
                  * Insertion de l'Article
                  * */
                 $modelArticle = new \Models\Article(); 
-                $modelArticle->insertArticle($title, $slug, $introduction, $content);
-    
-                // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
-                // Si il n'y a pas de titre  OU qu'il n'y a pas de contenu OU  pas d'intro 
-                if (!$modelArticle) {
-                    echo "Votre formulaire a été mal rempli !";
-                }else {
-                /**
-                 * Vérification que l'id de l'article pointe bien vers un nvl article qui n'éxiste pas
-                 * Ca nécessite une connexion à la base de données puis une requête qui va aller chercher l'article en question
-                 * Si ca revient, l'Admin ne peut ajouter l'article.
-                 */
-                //Retrouver L'Article
-                //$article = $this->model->find();
-    
-                // Si rien n'est revenu, on fait une erreur
-                //if (!$article) {
-                //    die(" L'article $article_id n'existe pas !");
-                //}
-    
-                // 4. Methode Static redirect Redirection vers l'article en question :
+                $modelArticle->insert($title, $slug, $introduction, $content);
                 \Http::redirect("index.php?controller=admincontroller&action=index");
                 }
+    
+                }
             }      
-        }
         
          /**
          * Affichage

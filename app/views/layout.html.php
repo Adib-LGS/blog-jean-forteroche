@@ -19,20 +19,34 @@
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
-				<?php if(!isset($_SESSION)): ?>
 				<li>
 					<a href="index.php?controller=usercontroller&action=index">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?controller=admincontroller&action=login&id=jf">Admin</a>
-				</li><?php endif ?>
-				<?php if(isset($_SESSION)): ?>
+					<a href="index.php?controller=usercontroller&action=subscription">Inscription</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Connexion</a>
+				</li>
+			<?php if(isset($_SESSION['id']) && $_SESSION['id_role'] == 0): ?>
 				<li>
 					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
 				</li>
-					<li><a href="index.php?controller=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Deconnexion</a>
 				</li>
-				<?php endif?>
+				<?php endif ?>
+				<?php if(isset($_SESSION['id']) && $_SESSION['id_role'] == 1): ?>
+				<li>
+					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Deconnexion</a>
+				</li>
+				<li>
+					<a href="index.php?controller=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+				</li>
+				<?php endif ?>
 			</ul><!-- main-menu -->
 			<div class="src-area">
 				<form>

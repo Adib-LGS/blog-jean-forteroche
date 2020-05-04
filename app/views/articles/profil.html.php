@@ -1,7 +1,7 @@
 
   <?= $pageTitle  ?>
 <div>
-    <form class="form-group" method="post" action="index.php?controller=admincontroller&action=login&id=jf">
+    <form class="form-group" method="post" action="index.php?controller=usercontroller&action=login">
         <label for="pseudo">Pseudo</label><br>
         <input type="text" id="pseudo" name="pseudo" class="form-control"><br>
         <label for="password">Mot de passe</label><br>
@@ -10,3 +10,4 @@
     </form>
     <a href="../index.php">Retour à l'accueil</a>
 </div>
+

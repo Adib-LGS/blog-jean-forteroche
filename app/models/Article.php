@@ -18,7 +18,7 @@ class Article extends Model{
     * @param string $content
     * @return void  
     */
-     public function insertArticle(string $title, string $slug, string $introduction, string $content) :void{
+     public function insert(string $title, string $slug, string $introduction, string $content) :void{
         $query = $this->pdo->prepare("INSERT INTO {$this->table} (title, slug, introduction, content, created_at) VALUES( :title, :slug, :introduction, :content, NOW())");
         $query->execute(compact('title', 'slug', 'introduction', 'content'));
     }

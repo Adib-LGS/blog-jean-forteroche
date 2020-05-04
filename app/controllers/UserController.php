@@ -17,7 +17,7 @@ class UserController extends Controllers{
     protected $modelName = \Models\Article::class;
     protected $secondModelName = \Models\User::class;
 
-
+    
     /**Montrer la Liste des Articles */
     public function index(){
         /**
@@ -138,6 +138,106 @@ class UserController extends Controllers{
         // 4. Methode Static redirect Redirection vers l'article en question :
         \Http::redirect("index.php?controller=usercontroller&action=show&id=" . $article_id);
     }
+
+    /**Subscribe  */
+    public function subscription(){
+
+        if(isset($_POST)){
+
+            if(!empty($_POST) && !empty($_POST['pseudo']) AND !empty($_POST['pass'])){
+
+            $errors = array();
+            $pseudo = htmlspecialchars($_POST['pseudo']);
+            $email = htmlspecialchars($_POST['email']);
+
+            if(empty($pseudo) || !preg_match('/^[a-zA-Z0-9_]+$/', htmlspecialchars($pseudo))){
+                $errors = "Votre pseudo n'est pas valide";
+            }else {//If User name is already used
+                $user = $this->model2->checkPseudo($pseudo);
+                if($user){
+                        $errors = 'Ce pseudo est deja pris';
+                }
+            }
+                
+            if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $errors = "Entrez un e-mail valide";
+            }else {//If Email is already used
+                $user = $this->model2->checkEmail($email);
+                if($user){
+                        $errors = 'Cet email est déja utilisé pour un autre compte';
+                }
+            }
+
+            if(empty($_POST['pass']) || $_POST['pass'] != $_POST['pass2']){
+                $errors = "Vous devez entrer un mot de passe cool";
+            }
+        
+            if(empty($errors)){ // Insertion User + Encrypt Password in Data-Base
+                $user = $this->model2->insertUser($pseudo, $email);
+                \Http::redirect('index.php?controller=usercontroller&action=login');
+            }
+                \Utils::debug($errors);
+
+            }
+        }
+
+        /**
+         * Affichage
+         */
+        $pageTitle = "Inscription";
+        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/subscribe', compact('pageTitle'));
+
+    }
+
+    /**Connection */
+    public function login(){
+        /**
+        * CE FICHIER A POUR BUT D'AFFICHER LA PAGE DE CONNECTION et de conencter les Users!
+        */
+        
+        /**
+         * On vérifie si les données sont Posté a partir du Formulaire
+         * On test que le pseudo et le MDP soit conforme
+         * */
+        if(isset($_POST)){
+
+            if(!empty($_POST) && !empty($_POST['pseudo']) AND !empty($_POST['password'])){
+                $errors2 = array();
+                $pseudoConnect = htmlspecialchars($_POST['pseudo']);
+    
+                $resultat = $this->model2->getInfoUser($pseudoConnect);
+                 // Comparaison du pass envoyé via le formulaire avec la base
+                $isPasswordCorrect = password_verify($_POST['password'], $resultat['pass']);
+                
+                if(!$resultat){
+                    $errors2 = 'Mauvais identifiant ou mot de passe !';
+    
+                }elseif($isPasswordCorrect){
+                    session_start();
+                    
+                    $_SESSION['pseudo'] = $resultat['pseudo'];
+                    $errors2 = 'Vous êtes connecté !';
+                    \Http::redirect("index.php?controller=admincontroller&action=index&pseudo=". $_SESSION['pseudo']);
+    
+                }else{
+                    $errors2 = 'Mauvais identifiant ou mot de passe !';
+                }
+                \Utils::debug($errors2);
+            }
+        }
+        
+        /**
+         * Affichage
+         */
+        $pageTitle = "Espace Admin";
+        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/profil', compact('pageTitle'));
+
+
+       
+    
+}
 
     /**Signaler un Commentaire Menancant :) */
     public function signalComment(){}

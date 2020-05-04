@@ -14,22 +14,15 @@
                 <br />
                 <input type="text" aria-required="true" name="slug" class="form-control"
                 placeholder="slug de l'article" aria-invalid="true" required >
-              </div><!-- col-sm-6 -->
+            </div><!-- col-sm-6 -->
 
               <div class="col-sm-12">
-                    
-
-                    <input name="introduction" id="" rows="2" class="text-area-messge form-control" placeholder="Intro"></input>
-                    <input type="hidden" name="introduction" ><br>
-
-                    <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre Article"></textarea>
-                    <input type="hidden" name="article_id" value=""><br>
-
-                    <button class="btn btn-primary" type="submit" id="form-submit" ><b>Poster</button>
-
+                  <input name="introduction" id="" rows="2" class="text-area-messge form-control" placeholder="Intro"></input><br/>
+                  <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre Article"></textarea>
+                  <input type="hidden" name="article_id" value=""><br />
+                  <button class="btn btn-primary" type="submit" id="form-submit" ><b>Poster</button>
                 </form>
-              
-                </div><!-- col-sm-12 -->
               </div><!-- col-sm-12 -->
+            </div><!-- col-sm-12 -->
         </div>
         <br>

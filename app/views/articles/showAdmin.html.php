@@ -68,8 +68,8 @@
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
-              <form action="index.php?controller=admincontroller&action=insert" method="POST" class="form-control">
-                <input type="text" aria-required="true" name="author" class="form-control"
+              <form action="index.php?controller=admincontroller&action=insert" method="POST" class="form-group">
+              <input type="text" aria-required="true" name="author" class="form-control"
                 placeholder="Votre pseudo !" aria-invalid="true" required >
               </div><!-- col-sm-6 -->
               <br>

@@ -1,4 +1,28 @@
 <?php session_start() ?>
+
+<?php if(isset($_SESSION['role_id'])): ?>
+	<header>
+		<div class="container-fluid position-relative no-side-padding">
+			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+			<ul class="main-menu visible-on-click" id="main-menu">
+				<li>
+					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Deconnexion</a>
+				</li>
+			</ul>
+
+			<div class="src-area">
+				<form>
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input class="src-input" type="text" placeholder="Type of search">
+				</form>
+			</div>
+		</div><!-- conatiner -->
+	</header>
+<?php endif ?>
 <!--Show User ce que voit l'utilisateur -->
 <div class="slider">
   <div class="display-table  center-text">
@@ -42,8 +66,9 @@
           <div class="comment">
             <div class="post-info">
             <?= $article['content'] ?>
-<!--Admin peut Supprimer un Article -->
+          <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
             <a href="index.php?controller=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cetArticle ?!`)">Supprimer Article</a>
+          <?php endif ?>
               <?php if (count($commentaires) === 0) : ?>
                   <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
               <?php else : ?>
@@ -54,8 +79,9 @@
                       <blockquote>
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
-<!-- Admin peut Supprimer un commentaire -->
+                      <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
                       <a href="index.php?controller=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+                      <?php endif ?>
                   <?php endforeach ?>
               <?php endif ?>
             </div><!-- post-info -->
@@ -65,24 +91,23 @@
       <br>
       <h4><b>LAISSER UN COMMENTAIRES</b></h4>
       <br>
+      <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" ): ?>
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
-              <form action="index.php?controller=admincontroller&action=insert" method="POST" class="form-group">
-              <input type="text" aria-required="true" name="author" class="form-control"
+              <form action="index.php?controller=usercontroller&action=insert" method="POST" class="form-group">
+                <input type="text" aria-required="true" name="author" class="form-control"
                 placeholder="Votre pseudo !" aria-invalid="true" required >
               </div><!-- col-sm-6 -->
-              <br>
               <div class="col-sm-12">
-                <br>
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
-                    <input type="hidden" name="article_id" value="<?= $article_id ?>"><br>
-
+                    <input type="hidden" name="article_id" value="<?= $article_id ?>">
                     <button class="btn btn-primary" type="submit" id="form-submit"><b>COMMENTER</b></button>
                 </form>
                 </div><!-- col-sm-12 -->
               </div><!-- col-sm-12 -->
-            </div>
+        </div>
+      <?php endif ?>
     </div><!-- row -->
   </div><!-- container -->
 </section>

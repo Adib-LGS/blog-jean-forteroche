@@ -1,5 +1,5 @@
 <?php session_start()?>
-<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] == "0" ): ?>
+<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" ): ?>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
@@ -23,7 +23,7 @@
 	</header>
 <?php endif ?>
 
-<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] == "1" ): ?>
+<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
@@ -53,10 +53,9 @@
 <div class="slider"></div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
-		<?php 
-			if (isset($_SESSION['role_id']) && !empty($_SESSION['role_id'])):?> 
+		
 			<?= 'Bonjour ' . $_SESSION['pseudo'] ?>
-		<?php endif ?>
+		
 		<br>
 			<div class="row">
 <!-- ICI ON AFFICHE LES ARTICLES VISIBLES INDEX.PHP-->

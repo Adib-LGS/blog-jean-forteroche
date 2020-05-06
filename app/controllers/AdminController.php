@@ -14,7 +14,7 @@ class AdminController extends Controllers{
     
     /**Va chercher via Constructor de Abstarct Controller*/
     protected $modelName = \Models\Comment::class;
-    protected $secondModelName = \Models\Admin::class;
+
 
    
 
@@ -123,6 +123,47 @@ class AdminController extends Controllers{
         \Renderer::render('articles/addArticle', compact('pageTitle'));
     
     }
+
+    /**Supprimer un Article */
+    public function deleteArticle(){
+                
+        
+        /**
+         * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
+         * 
+         * S'assurer qu'un paramètre "id" est bien passé en GET, puis que cet article existe bel et bien
+         * Ensuite, supprimer l'article et rediriger vers la page d'accueil
+         */
+        //$model = new \Models\Article();
+        /**
+         * Vérifie que le GET possède bien un paramètre "id" 
+         */
+        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
+            die(" Veuillez préciser l'id de l'article !");
+        }
+
+        $id = $_GET['id'];
+
+        /**
+         * Vérification que l'article existe bel et bien
+         */
+        $article = $this->model->find($id);
+        if (!$article) {
+            die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
+        }
+
+        /**
+         * Réelle suppression de l'article
+         */
+        $modelArticle = new \Models\Article();
+        $modelArticle->delete($id);
+
+        /**
+         * Redirection vers la page d'accueil
+         */
+        \Http::redirect("index.php?controller=admincontroller&action=index");
+
+    }
     
     /**Inserer un Commentaire */
     public function insert(){
@@ -221,46 +262,5 @@ class AdminController extends Controllers{
          */
 
         \Http::redirect("index.php?controller=admincontroller&action=show&id=" . $article_id);
-    }
-
-    /**Supprimer un Article */
-    public function deleteArticle(){
-                
-        
-        /**
-         * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
-         * 
-         * S'assurer qu'un paramètre "id" est bien passé en GET, puis que cet article existe bel et bien
-         * Ensuite, supprimer l'article et rediriger vers la page d'accueil
-         */
-        //$model = new \Models\Article();
-        /**
-         * Vérifie que le GET possède bien un paramètre "id" 
-         */
-        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
-            die(" Veuillez préciser l'id de l'article !");
-        }
-
-        $id = $_GET['id'];
-
-        /**
-         * Vérification que l'article existe bel et bien
-         */
-        $article = $this->model->find($id);
-        if (!$article) {
-            die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
-        }
-
-        /**
-         * Réelle suppression de l'article
-         */
-        $modelArticle = new \Models\Article();
-        $modelArticle->delete($id);
-
-        /**
-         * Redirection vers la page d'accueil
-         */
-        \Http::redirect("index.php?controller=admincontroller&action=index");
-
     }
 }

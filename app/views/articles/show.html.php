@@ -1,3 +1,28 @@
+<?php session_start() ?>
+<header>
+		<div class="container-fluid position-relative no-side-padding">
+			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+			<ul class="main-menu visible-on-click" id="main-menu">
+			
+				<li>
+					<a href="index.php?controller=usercontroller&action=index">Accueil</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=signIn">Inscription</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Connexion</a>
+				</li>
+			</ul><!-- main-menu -->
+			<div class="src-area">
+				<form>
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input class="src-input" type="text" placeholder="Type of search">
+				</form>
+			</div>
+		</div><!-- conatiner -->
+	</header>
 <!--Show User ce que voit l'utilisateur -->
 <div class="slider">
   <div class="display-table  center-text">
@@ -55,26 +80,17 @@
 <!-- Admin peut Supprimer un commentaire -->
                   <?php endforeach ?>
               <?php endif ?>
+              
             </div><!-- post-info -->
          
         </div><!-- commnets-area -->
       </div><!-- col-lg-8 col-md-12 -->
       <h4><b>LAISSER UN COMMENTAIRES</b></h4>
-      <div class="comment-form">
-            <div class="row">
-              <div class="col-sm-6">
-              <form action="index.php?controller=usercontroller&action=insert" method="POST" class="form-group">
-                <input type="text" aria-required="true" name="author" class="form-control"
-                placeholder="Votre pseudo !" aria-invalid="true" required >
-              </div><!-- col-sm-6 -->
-              <div class="col-sm-12">
-                    <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
-                    <input type="hidden" name="article_id" value="<?= $article_id ?>">
-                    <button class="btn btn-primary" type="submit" id="form-submit"><b>COMMENTER</b></button>
-                </form>
-                </div><!-- col-sm-12 -->
-              </div><!-- col-sm-12 -->
-        </div>
+
+      <div class="aler alert-link">
+      <p>Si vous souhaitez laisser un commentaire n'hésiter pas à vous inscrire ici<a href="index.php?controller=usercontroller&action=signIn">Inscription</a></p>
+      </div>
+      
     </div><!-- row -->
   </div><!-- container -->
 </section>

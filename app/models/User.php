@@ -11,17 +11,8 @@ class User extends Model {
 
     protected $table = "users";
 
-    /**Check level_id */
-    public function checkRolelId($role_id){
-        $req = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE role_id = :role_id");
-        $req->execute(array($role_id));
-        $resultat = $req->fetch();
-        return $resultat;
-    }
-
     /**Check if existing Pseudo */
-    public function checkPseudo()
-    {
+    public function checkPseudo(){
         $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE pseudo = ?");
         $req->execute([$_POST['pseudo']]);
         $user = $req->fetch();
@@ -29,8 +20,7 @@ class User extends Model {
     }
 
      /**Check if existing Email */
-    public function checkEmail()
-    {
+    public function checkEmail(){
          $req = $this->pdo->prepare("SELECT id FROM {$this->table} WHERE email = ?");
          $req->execute([$_POST['email']]);
          $user = $req->fetch();
@@ -40,16 +30,14 @@ class User extends Model {
     /**Insertion User + Encrypt Password in DB
      * 
      */
-    public function insertUser():void
-    {
+    public function insertUser():void{
         $req = $this->pdo->prepare("INSERT INTO {$this->table} (pseudo, pass, email) VALUES(?, ?, ?)");
         $pass_hache = password_hash($_POST['pass1'], PASSWORD_BCRYPT);
         $req->execute([$_POST['pseudo'], $pass_hache, $_POST['email']]);
     }
 
 
-   public function getInfoUser($pseudoConnect)
-    {
+   public function getInfoUser($pseudoConnect){
     $req = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE pseudo = ?");
     $req->execute(array($pseudoConnect));
     $resultat = $req->fetch();

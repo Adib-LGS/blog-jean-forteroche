@@ -1,10 +1,61 @@
 <?php session_start()?>
+<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] == "0" ): ?>
+	<header>
+		<div class="container-fluid position-relative no-side-padding">
+			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+			<ul class="main-menu visible-on-click" id="main-menu">
+				<li>
+					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Deconnexion</a>
+				</li>
+			</ul>
+
+			<div class="src-area">
+				<form>
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input class="src-input" type="text" placeholder="Type of search">
+				</form>
+			</div>
+		</div><!-- conatiner -->
+	</header>
+<?php endif ?>
+
+<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] == "1" ): ?>
+	<header>
+		<div class="container-fluid position-relative no-side-padding">
+			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+			<ul class="main-menu visible-on-click" id="main-menu">
+				<li>
+					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Deconnexion</a>
+				</li>
+				<li>
+					<a href="index.php?controller=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+				</li>
+			</ul>
+				<div class="src-area">
+				<form>
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input class="src-input" type="text" placeholder="Type of search">
+				</form>
+			</div>
+		</div><!-- conatiner -->
+	</header>
+<?php endif ?>
+
+
 <div class="slider"></div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
 		<?php 
-			if (isset($_SESSION['pseudo'])):?> 
-			<?= 'Bonjour ' . $_SESSION['pseudo']?>
+			if (isset($_SESSION['role_id']) && !empty($_SESSION['role_id'])):?> 
+			<?= 'Bonjour ' . $_SESSION['pseudo'] ?>
 		<?php endif ?>
 		<br>
 			<div class="row">

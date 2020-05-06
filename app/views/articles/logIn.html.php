@@ -1,5 +1,19 @@
+<?= $pageTitle ?>
 
-  <?= $pageTitle  ?>
+<?php if(!empty($errors2)): ?>
+
+<div class="arlert alert-danger">
+    
+<ul>
+<?php foreach($errors2 as $error): ?>
+    <li><?= $error ?></li>
+<?php endforeach ?>
+</ul>
+
+</div>
+<?php endif ?>
+
+
 <div>
     <form class="form-group" method="post" action="index.php?controller=usercontroller&action=login">
         <label for="pseudo">Pseudo</label><br>

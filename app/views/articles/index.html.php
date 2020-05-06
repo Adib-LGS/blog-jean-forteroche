@@ -1,3 +1,30 @@
+<?php if(!isset($_SESSION['role_id'])): ?>
+<header>
+		<div class="container-fluid position-relative no-side-padding">
+			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+			<ul class="main-menu visible-on-click" id="main-menu">
+			
+				<li>
+					<a href="index.php?controller=usercontroller&action=index">Accueil</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=signIn">Inscription</a>
+				</li>
+				<li>
+					<a href="index.php?controller=usercontroller&action=login">Connexion</a>
+				</li>
+			</ul><!-- main-menu -->
+			<div class="src-area">
+				<form>
+					<button class="src-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+					<input class="src-input" type="text" placeholder="Type of search">
+				</form>
+			</div>
+		</div><!-- conatiner -->
+	</header>
+<?php endif ?>
+
 <div class="slider"></div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">

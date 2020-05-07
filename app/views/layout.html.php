@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -9,10 +8,10 @@
 	<!-- Font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 	<!-- Stylesheets -->
-	<link href="public/common-css/bootstrap.css" rel="stylesheet">
-	<link href="public/common-css/ionicons.css" rel="stylesheet">
-	<link href="public/layout-1/css/styles.css" rel="stylesheet">
-	<link href="public/layout-1/css/responsive.css" rel="stylesheet">
+	<link href="common-css/bootstrap.css" rel="stylesheet">
+	<link href="common-css/ionicons.css" rel="stylesheet">
+	<link href="layout-1/css/styles.css" rel="stylesheet">
+	<link href="layout-1/css/responsive.css" rel="stylesheet">
 </head>
 <body >
 
@@ -25,9 +24,9 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-section">
 
-						<a class="logo" href="#"><img src="public/images/logo.png" alt="Logo Image"></a>
+						<a class="logo" href="#"><img src="images/logo.png" alt="Logo Image"></a>
 						<p class="copyright">Bona @ 2017. All rights reserved.</p>
-						<p class="copyright">Designed by <a href="public/https://colorlib.com" target="_blank">Colorlib</a></p>
+						<p class="copyright">Designed by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
 					</div><!-- footer-section -->
 				</div><!-- col-lg-4 col-md-6 -->
 
@@ -39,9 +38,9 @@
 		</div><!-- container -->
 	</footer>
 	<!-- SCIPTS -->
-	<script src="public/common-js/jquery-3.1.1.min.js"></script>
-	<script src="public/common-js/tether.min.js"></script>
-	<script src="public/common-js/bootstrap.js"></script>
-	<script src="public/common-js/scripts.js"></script>
+	<script src="common-js/jquery-3.1.1.min.js"></script>
+	<script src="common-js/tether.min.js"></script>
+	<script src="common-js/bootstrap.js"></script>
+	<script src="common-js/scripts.js"></script>
 </body>
 </html>

@@ -15,11 +15,12 @@ class Comment extends Model{
      * @return array
      */
     public function findAllCommentWithArticle(int $article_id) :array{
-        $query = $this->pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
+        $query = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE article_id = :article_id");
         $query->execute(['article_id' => $article_id]);
         $commentaires = $query->fetchAll();
         return $commentaires;
     }
+  
 
     /**
     * Insertion de Commentaires base de données
@@ -32,4 +33,6 @@ class Comment extends Model{
         $query = $this->pdo->prepare("INSERT INTO {$this->table} SET author = :author, content = :content, article_id = :article_id, created_at = NOW()");
         $query->execute(compact('author', 'content', 'article_id'));
     }
+
+    public function report(){}
 }

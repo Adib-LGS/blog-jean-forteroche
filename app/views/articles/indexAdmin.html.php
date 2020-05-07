@@ -1,15 +1,18 @@
 <?php session_start()?>
+<?php if(!isset($_SESSION['role_id'])):?>
+	<?php header('Location: index.php?'); die()?>
+<?php endif ?>
 <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" ): ?>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
-			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li>
-					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
+					<a href="index.php?request=admincontroller&action=index">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?controller=usercontroller&action=login">Deconnexion</a>
+					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
 				</li>
 			</ul>
 
@@ -26,17 +29,17 @@
 <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
-			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li>
-					<a href="index.php?controller=admincontroller&action=index">Accueil</a>
+					<a href="index.php?request=admincontroller&action=index">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?controller=usercontroller&action=login">Deconnexion</a>
+					<a href="index.php?request=admincontroller&action=indexModerate">Moderation</a>
 				</li>
 				<li>
-					<a href="index.php?controller=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
 				</li>
 			</ul>
 				<div class="src-area">
@@ -53,9 +56,9 @@
 <div class="slider"></div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
-		
+		<?php if(isset($_SESSION['role_id'])): ?>
 			<?= 'Bonjour ' . $_SESSION['pseudo'] ?>
-		
+		<?php endif ?>
 		<br>
 			<div class="row">
 <!-- ICI ON AFFICHE LES ARTICLES VISIBLES INDEX.PHP-->
@@ -64,12 +67,12 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card h-100">
 						<div class="single-post post-style-1">
-							<div class="blog-image"><img src="public/images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
 							
-							<a class="avatar" href="index.php?controller=admincontroller&action=show&id=<?= $article['id'] ?>"><img src="public/images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
 							<div class="blog-info">
 
-								<h4 class="title"><a href="index.php?controller=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
+								<h4 class="title"><a href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
 
 								<ul class="post-footer">
 									<li><a href="#"><i class="ion-heart"></i>57</a></li>

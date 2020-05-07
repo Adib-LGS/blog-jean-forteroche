@@ -14,7 +14,7 @@
 <?php endif ?>
 
 <div>
-    <form class="form-group" method="post" action="index.php?controller=usercontroller&action=signIn&id=JF">
+    <form class="form-group" method="post" action="index.php?request=usercontroller&action=signIn&id=JF">
         <label for="pseudo">Pseudo</label><br>
         <input type="text" id="pseudo" name="pseudo" class="form-control"><br>
         <label for="email">Adresse email</label>

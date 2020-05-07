@@ -5,8 +5,9 @@
  * En utilisant la class Router et sa Method Static route();
  */
 
-require_once 'app/autoload.php';
+require_once '../app/autoload.php';
 
 /**Apl du Router Method Static */
 \Router::route();
+
 

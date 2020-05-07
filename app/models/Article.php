@@ -12,21 +12,24 @@ class Article extends Model{
      
     /**
     * Insertion d' Article base de données
-    * @param string $title
-    * @param string $slug
+    * @param  $title
     * @param string $introduction
     * @param string $content
     * @return void  
     */
-     public function insert(string $title, string $slug, string $introduction, string $content) :void{
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} (title, slug, introduction, content, created_at) VALUES( :title, :slug, :introduction, :content, NOW())");
-        $query->execute(compact('title', 'slug', 'introduction', 'content'));
+     public function insert($title,  string $introduction, string $content) :void{
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} (title, introduction, content, created_at) VALUES( :title, :introduction, :content, NOW())");
+        $query->execute(compact('title', 'introduction', 'content'));
     }
 
     /**
      * Modification des articles
+     * A Verifier
      */
-    public function edit(){}
+    public function edit(string $title, string $introduction, string $content){
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET title = :title, introduction = :introduction, content = :content, NOW() WHERE id )");
+        $query->execute(compact('title', 'introduction', 'content'));
+    }
 
 
 }

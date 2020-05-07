@@ -1,28 +1,41 @@
 <?php session_start()?> 
 <?= $pageTitle ?>
 
-<h4><b>Créer un Article</b></h4>
-      <div class="comment-form">
-            <div class="row">
-              <div class="col-sm-6">
-            
-              <form action="index.php?controller=admincontroller&action=addArticle" method="POST" class="form-group">
+<script src="https://cdn.tiny.cloud/1/7y7wzz7wq0b0923cyy3t04n91woxhnkekhmppfwjifbl7gla/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+    tinymce.init({
+      selector: '#mytextarea'
+    });
+  </script>
 
-                <br />
-                <input type="text" aria-required="true" name="title" class="form-control"
-                placeholder="Titre de l'article" aria-invalid="true"  required >
-                <br />
-                <input type="text" aria-required="true" name="slug" class="form-control"
-                placeholder="slug de l'article" aria-invalid="true" required >
-            </div><!-- col-sm-6 -->
 
-              <div class="col-sm-12">
-                  <input name="introduction" id="" rows="2" class="text-area-messge form-control" placeholder="Intro"></input><br/>
-                  <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre Article"></textarea>
-                  <input type="hidden" name="article_id" value=""><br />
-                  <button class="btn btn-primary" type="submit" id="form-submit" ><b>Poster</button>
-                </form>
-              </div><!-- col-sm-12 -->
-            </div><!-- col-sm-12 -->
-        </div>
+
+    <h4><b>Créer un Article</b></h4>
+    <br />   
+        <form action="index.php?request=admincontroller&action=addArticle" method="POST" class="form-group" >
+          
+          <textarea  name="title" placeholder="Titre" ></textarea>
+
+          <textarea  name="introduction" placeholder="Introduction" ></textarea>
+
+          <textarea name="content" id="" placeholder="Contenu"></textarea>
+    <br/>
+          <button class="btn btn-primary" type="submit" id="form-submit" name="article_id" >
+            Poster
+          </button>
+    <br/>
+        </form>
+
+
+
+    <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+    });
+  </script>
         <br>

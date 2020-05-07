@@ -14,12 +14,11 @@ class AdminController extends Controllers{
     
     /**Va chercher via Constructor de Abstarct Controller*/
     protected $modelName = \Models\Comment::class;
+    protected $secondModelName = \Models\User::class;
 
-
-   
 
     /**Montrer la Liste des Articles */
-     public function index(){
+    public function index(){
         /**
          * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
          * Apl de la class Article Dossier Models
@@ -37,7 +36,28 @@ class AdminController extends Controllers{
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/indexAdmin', compact('pageTitle','articles'));
     }
-    
+
+    /**Moderator Page */
+    public function indexModerate(){
+        /**
+         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
+         * Apl de la class Article Dossier Models
+         */
+
+        $model3 = new \Models\Article();
+
+        /** Ranger les articles par Ordre Descendant */
+        $articles = $model3->findAll("created_at DESC");
+        $commentaires =$this->model->findAll("created_at DESC");
+
+        /**
+         * Affichage
+         */
+        $pageTitle = "Espace de Moderation";
+        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/moderationAdmin', compact('pageTitle', 'articles', 'commentaires'));
+    }
+      
     /**Montrer un Article */
     public function show(){
 
@@ -94,27 +114,21 @@ class AdminController extends Controllers{
 
                 // On commence par l'author
                 $title = htmlspecialchars($_POST['title']);
-                // le slug de l'article
-                $slug =  htmlspecialchars($_POST['slug']);
+               
                 // Ensuite l'intro
                 $introduction = htmlspecialchars($_POST['introduction']);
+
                 // Ensuite le contenu
                 $content = htmlspecialchars($_POST['content']);
-               
-                if (!$title || !$slug ||  !$introduction ||!$content) {
-                    die("Votre formulaire a été mal rempli !");
-                } else {
-                    /**
+                /**
                  * Insertion de l'Article
                  * */
                 $modelArticle = new \Models\Article(); 
-                $modelArticle->insert($title, $slug, $introduction, $content);
-                \Http::redirect("index.php?controller=admincontroller&action=index");
-                }
+                $modelArticle->insert($title, $introduction, $content);
+                \Http::redirect("index.php?request=admincontroller&action=index");
+            }
     
-                }
-            }      
-        
+        }
          /**
          * Affichage
          */
@@ -147,7 +161,8 @@ class AdminController extends Controllers{
         /**
          * Vérification que l'article existe bel et bien
          */
-        $article = $this->model->find($id);
+        $article = new \Models\Article();
+        $article->find($id);
         if (!$article) {
             die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
         }
@@ -161,7 +176,7 @@ class AdminController extends Controllers{
         /**
          * Redirection vers la page d'accueil
          */
-        \Http::redirect("index.php?controller=admincontroller&action=index");
+        \Http::redirect("index.php?request=admincontroller&action=index");
 
     }
     
@@ -222,7 +237,7 @@ class AdminController extends Controllers{
         $this->model->insert($author, $content, $article_id);
 
         // 4. Methode Static redirect Redirection vers l'article en question :
-        \Http::redirect("index.php?controller=admincontroller&action=show&id=" . $article_id);
+        \Http::redirect("index.php?request=admincontroller&action=show&id=" . $article_id);
     }
 
     /** Supprimer un commentaire */
@@ -261,6 +276,6 @@ class AdminController extends Controllers{
          * Redirection vers l'article en question
          */
 
-        \Http::redirect("index.php?controller=admincontroller&action=show&id=" . $article_id);
+        \Http::redirect("index.php?request=admincontroller&action=show&id=" . $article_id);
     }
 }

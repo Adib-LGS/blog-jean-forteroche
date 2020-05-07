@@ -13,15 +13,15 @@ class Router {
 
     public static function route(){
 
-            //Define ControllerName par Deafut
-            $controllerName = "UserController";
-            //Define la Method par Defaut
-            $action = "index";
+            
+            $controllerName = "UserController"; //ControllerName appeler
+            
+            $action = "index"; // Method appeler
     
-            if(!empty($_GET['controller'])){
+            if(!empty($_GET['request'])){
                 //For EX: le GET => UserController va se transformer en:
                     //UserController et se mettre ds $controllerName
-                $controllerName = ucfirst($_GET['controller']);
+                $controllerName = ucfirst($_GET['request']);
             }
             if(!empty($_GET['action'])){
                 $action = $_GET['action'];
@@ -34,11 +34,47 @@ class Router {
             $controller = new $controllerName();
             //Apl de l'action
             $controller->$action();
+            
     }
 }
 
 
 /*
+if(!empty($_GET['request'])){
+    $action = $_GET['action'];
+    switch($action){
+
+        case 'index':{
+            $controllerName = "UserController";
+            $controllerName = ucfirst($_GET['request']);
+            $controllerName = "\Controllers\\" .$controllerName;
+            $controller = new $controllerName();
+            $controller->$action();
+        }
+    break;
+
+        case 'U':{
+            $controllerName = "UserController";
+            $controllerName = ucfirst($_GET['request']);
+            $controllerName = "\Controllers\\" .$controllerName;
+            $controller = new $controllerName();
+            $controller->$action();
+        }
+    break;
+
+        case 'A':{
+            $controllerName = "AdminController";
+            $controllerName = ucfirst($_GET['']);
+            $controllerName = "\Controllers\\" .$controllerName;
+            $controller = new $controllerName();
+            $controller->$action();
+        }
+    break;
+    }
+}else{
+    echo 'Error 404';
+    die()
+}
 Tout doit passer par index.php?
 
 switch ($action)
@@ -49,7 +85,7 @@ http://localhost:8888/Sites/P4_Legastelois_Adib/index.php?controller=usercontrol
 
 Se transforme en   =>
 
-http://localhost:8888/Sites/P4_Legastelois_Adib/index.php?action=Uindex;
+http://localhost:8888/Sites/P4_Legastelois_Adib/index.php?request=Uindex;
 
 Différent niveau des controllers
 action = U index  (usercontroller) User
@@ -57,11 +93,4 @@ action = U index  (usercontroller) User
 action = A index (admincontroller) Admin
 
 action !=  A et U  (renvois sur index)
-
-Connecté ou pas il le droit de voir la page et de lire l'article
-
-Parti admin si SESSION =! de int admin rediriger vers index.php
---------------------------------------
-Ou voir le cours et effacer l'autoloader.
-
-cours sur node et mango db a regarder pr passer sur un vrai router*/
+*/

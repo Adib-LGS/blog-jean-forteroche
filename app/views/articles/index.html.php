@@ -1,18 +1,18 @@
 <?php if(!isset($_SESSION['role_id'])): ?>
 <header>
 		<div class="container-fluid position-relative no-side-padding">
-			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 			
 				<li>
-					<a href="index.php?controller=usercontroller&action=index">Accueil</a>
+					<a href="index.php?request=usercontroller&action=index">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?controller=usercontroller&action=signIn">Inscription</a>
+					<a href="index.php?request=usercontroller&action=signIn">Inscription</a>
 				</li>
 				<li>
-					<a href="index.php?controller=usercontroller&action=login">Connexion</a>
+					<a href="index.php?request=usercontroller&action=login">Connexion</a>
 				</li>
 			</ul><!-- main-menu -->
 			<div class="src-area">
@@ -39,12 +39,12 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card h-100">
 						<div class="single-post post-style-1">
-							<div class="blog-image"><img src="public/images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
 							
-							<a class="avatar" href="index.php?controller=usercontroller&action=show&id=<?= $article['id'] ?>"><img src="public/images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="index.php?request=usercontroller&action=show&id=<?= $article['id'] ?>"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
 							<div class="blog-info">
 
-								<h4 class="title"><a href="index.php?controller=usercontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
+								<h4 class="title"><a href="index.php?request=usercontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
 
 								<ul class="post-footer">
 									<li><a href="#"><i class="ion-heart"></i>57</a></li>

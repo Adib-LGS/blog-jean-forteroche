@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Les actions des utilisateur
  * EX: Laisser un Commentaire
@@ -7,7 +8,6 @@
  */
 
 namespace Controllers;
-
 use Renderer;
 
 
@@ -20,10 +20,11 @@ class UserController extends Controllers{
     
     /**Montrer la Liste des Articles */
     public function index(){
+        
         /**
-         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
-         * Apl de la class Article Dossier Models
-         */
+        * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
+        * Apl de la class Article Dossier Models
+        */
         /** Ranger les articles par Ordre Descendant */
         $articles = $this->model->findAll("created_at DESC");
         
@@ -33,6 +34,8 @@ class UserController extends Controllers{
         $pageTitle = "Mon superbe blog By Jean Forteroche";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/index', compact('pageTitle','articles'));
+    
+        
 
     }
 
@@ -112,7 +115,7 @@ class UserController extends Controllers{
         
                 if(empty($errors)){ // Insertion User + Encrypt Password in Data-Base
                     $user = $this->model2->insertUser();
-                    \Http::redirect('index.php?controller=usercontroller&action=login');//Redirection vers connexion.php
+                    \Http::redirect('index.php?request=usercontroller&action=login');//Redirection vers connexion.php
                 }
                 //\Utils::debug($errors);
             }   
@@ -152,7 +155,7 @@ class UserController extends Controllers{
                     $_SESSION['role_id'] = $resultat['role_id'];
                     $errors2['resultat'] = 'Vous êtes connecté !';
         
-                    \Http::redirect("index.php?controller=admincontroller&action=index&" . $_SESSION['pseudo'] . $_SESSION['role_id']);
+                    \Http::redirect("index.php?request=admincontroller&action=index&" . $_SESSION['pseudo'] . $_SESSION['role_id']);
 
                 }else{
                     $errors2['resultat'] = 'Mauvais identifiant ou mot de passe !';
@@ -228,9 +231,9 @@ class UserController extends Controllers{
         $modelComment->insert($author, $content, $article_id);
 
         // 4. Methode Static redirect Redirection vers l'article en question :
-        \Http::redirect("index.php?controller=usercontroller&action=show&id=" . $article_id);
+        \Http::redirect("index.php?request=usercontroller&action=show&id=" . $article_id);
     }
 
     /**Signaler un Commentaire Menancant :) */
-    public function signalComment(){}
+    public function reportComment(){}
 }

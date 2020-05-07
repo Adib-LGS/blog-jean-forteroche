@@ -1,18 +1,18 @@
 <?php session_start() ?>
 <header>
 		<div class="container-fluid position-relative no-side-padding">
-			<a href="#" class="logo"><img src="public/images/logo.png" alt="Logo Image"></a>
+			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 			
 				<li>
-					<a href="index.php?controller=usercontroller&action=index">Accueil</a>
+					<a href="index.php?request=usercontroller&action=index">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?controller=usercontroller&action=signIn">Inscription</a>
+					<a href="index.php?request=usercontroller&action=signIn">Inscription</a>
 				</li>
 				<li>
-					<a href="index.php?controller=usercontroller&action=login">Connexion</a>
+					<a href="index.php?request=usercontroller&action=login">Connexion</a>
 				</li>
 			</ul><!-- main-menu -->
 			<div class="src-area">
@@ -38,7 +38,7 @@
           <div class="blog-post-inner">
             <div class="post-info">
               <div class="left-area">
-                <a class="avatar" href="#"><img src="public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
               </div>
               <div class="middle-area">
               </div>
@@ -88,7 +88,7 @@
       <h4><b>LAISSER UN COMMENTAIRES</b></h4>
 
       <div class="aler alert-link">
-      <p>Si vous souhaitez laisser un commentaire n'hésiter pas à vous inscrire ici<a href="index.php?controller=usercontroller&action=signIn">Inscription</a></p>
+      <p>Si vous souhaitez laisser un commentaire n'hésiter pas à vous inscrire ici<a href="index.php?request=usercontroller&action=signIn">Inscription</a></p>
       </div>
       
     </div><!-- row -->

@@ -15,7 +15,7 @@
 
 
 <div>
-    <form class="form-group" method="post" action="index.php?controller=usercontroller&action=login">
+    <form class="form-group" method="post" action="index.php?request=usercontroller&action=login">
         <label for="pseudo">Pseudo</label><br>
         <input type="text" id="pseudo" name="pseudo" class="form-control"><br>
         <label for="password">Mot de passe</label><br>

@@ -34,5 +34,12 @@ class Comment extends Model{
         $query->execute(compact('author', 'content', 'article_id'));
     }
 
-    public function report(){}
+
+    /**Pour signaler un commentaire mais a voir... */
+    public function report(int $id){
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET reports_id = ?, created_at = NOW() WHERE id = ?");
+        $query->execute(array($id));
+        
+    }
+
 }

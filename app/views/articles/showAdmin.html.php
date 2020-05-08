@@ -71,10 +71,7 @@
             <br />
           <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
             <p>
-              <a href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">Supprimer Article</a>
-            </p>
-            <p>
-              <a href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">Modifier Article</a>
+              <a class="btn btn-danger" href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">Supprimer Article</a>
             </p>
           <?php endif ?>
           <br />
@@ -89,11 +86,11 @@
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
-                      <a href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+                      <a class="btn btn-danger" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                       <?php endif ?>
                       <!--Signaler un commentaire--> 
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" ):?>
-                      <a href="index.php?request=usercontroller&action=signalComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
+                      <a class="btn btn-danger" href="index.php?request=usercontroller&action=reportComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
                       <?php endif ?>
 
                   <?php endforeach ?>

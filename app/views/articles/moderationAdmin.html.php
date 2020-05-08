@@ -11,6 +11,9 @@
 				<li>
 					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
 				</li>
+				<li>
+				<a href="index.php?request=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+				</li>
 			</ul>
 				<div class="src-area">
 				<form>
@@ -20,46 +23,43 @@
 			</div>
 		</div><!-- conatiner -->
     </header>
-	<br/>
-			<button class="btn btn-primary">
-				<a href="index.php?request=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
-			</button> 
+	
 	<br>
 
-<section>
+<section style="margin-left: 50px;">
 	<h2><?= $pageTitle ?></h2>
 	<br />
 	<h3>Listes des Articles :</h3>
 	<br />
 	<p>Vous pouvez Modifier ou Supprimer les articles en cliquant sur leurs titres</p>
 	<br />
-<table class="table">
-	<thead>
-	<th scope="col">Titres des Articles:</th>
-	</thead>
-  <tbody>
-	  <th scope="col">
+
+<div class="panel panel-default" >
+	<div class="panel-body">
+
       <?php foreach ($articles as $article):?>					
 			<ul>
 				<li>
 			<h4 class="title"><a href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
 				</li>
+				<li>
+              		<a class="btn btn-primary" style="margin-left: 200px;" href="index.php?request=admincontroller&action=editArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">Modifier Article</a>
+				</li>
 			</ul>
 		<?php endforeach ?>
-	</th>
-  </tbody>
-</table>
+		</div>
+</div>
 </section>
 
-<section>
+<br/>
+
+<section style="margin-left: 50px;">
 	<h3>Listes des Commentaires Signalés:</h3>
 	<br />
 	<p>Vous pouvez Modifier ou Supprimer les commentaires en cliquant sur leurs titres</p>
 	<br />
-<table class="table">
-  <tbody>
-    <tr>
-	  <th scope="col">
+<div class="panel panel-default">
+	<div class="panel-body">
 	  <?php foreach ($commentaires as $commentaire) : ?>
                       <h3>Commentaire de <?= $commentaire['author'] ?></h3>
                       <small>Le <?= $commentaire['created_at'] ?></small>
@@ -68,15 +68,13 @@
                       </blockquote>
                       
                     <p>
-						<a href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+						<a class="btn btn-danger" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
 					</p>
 					<p>
-						<a href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Approuver</a>
+						<a class="btn btn-primary" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Approuver</a>
 					</p>
                       
         <?php endforeach ?>
-	</th>
-    </tr>
-  </tbody>
-</table>
+	</div>
+</div>
 </section>

@@ -25,5 +25,5 @@
         <input type="password" id="pass2" name="pass2" class="form-control" ><br>
         <button type="submit"  id="submit" name="submit" class="btn btn-primary">Connexion</button>
     </form>
-    <a href="../index.php">Retour à l'accueil</a>
+    <a href="index.php?request=usercontroller&action=index">Retour à l'accueil</a>
 </div>

@@ -110,7 +110,7 @@ class AdminController extends Controllers{
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
         if(isset($_POST)){
-            if(!empty($_POST)){
+            if(!empty($_POST) && !empty($_POST['title']) AND !empty($_POST['content'])){
 
                 // On commence par l'author
                 $title = htmlspecialchars($_POST['title']);
@@ -120,6 +120,11 @@ class AdminController extends Controllers{
 
                 // Ensuite le contenu
                 $content = htmlspecialchars($_POST['content']);
+
+                // On vérifie un minimum
+                if (!$title || !$introduction || !$content) {
+                    die("Votre formulaire a été mal rempli !");
+                }
                 /**
                  * Insertion de l'Article
                  * */
@@ -136,6 +141,64 @@ class AdminController extends Controllers{
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/addArticle', compact('pageTitle'));
     
+    }
+
+    /**Modifier un Article */
+    public function editArticle(){
+        /**
+         * CE FICHIER DOIT AFFICHER UN ARTICLE ET LE MODIFIER !
+         * On doit d'abord récupérer le paramètre "id" qui sera présent en GET et vérifier son existence
+         * Si on n'a pas de param "id", alors on affiche un message d'erreur !
+         */
+
+        // On part du principe qu'on ne possède pas de param "id"
+        $article_id = null;
+
+
+        if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
+            $article_id = $_GET['id'];
+        }
+
+
+        if (!$article_id) {
+            die("Vous devez préciser un paramètre `id` dans l'URL !");
+        }
+
+        /**
+        * Récupération de l'article en question
+        */
+        $articleModel = new \Models\Article();
+        $article = $articleModel->find($article_id);
+
+        /** Modification de l'article */
+        if(isset($_POST)){
+            if(!empty($_POST)){
+                $article_id = $_GET['id'];
+                // On commence par l'author
+                $title = htmlspecialchars($_POST['title']);
+               
+                // Ensuite l'intro
+                $introduction = htmlspecialchars($_POST['introduction']);
+
+                // Ensuite le contenu
+                $content = htmlspecialchars($_POST['content']);
+
+
+                $article = $articleModel->edit($title, $introduction, $content, $article_id);
+                \Http::redirect("index.php?request=admincontroller&action=index");
+            }
+
+        }
+        
+
+        /**
+         * Affichage 
+         */
+        $pageTitle = $article['title'];
+
+        /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        \Renderer::render('articles/editArticles', compact('pageTitle','article', 'article_id' ));
+
     }
 
     /**Supprimer un Article */

@@ -88,9 +88,12 @@
       <h4><b>LAISSER UN COMMENTAIRES</b></h4>
 
       <div class="aler alert-link">
-      <p>Si vous souhaitez laisser un commentaire n'hésiter pas à vous inscrire ici<a href="index.php?request=usercontroller&action=signIn">Inscription</a></p>
+      <p>Si vous souhaitez laisser un commentaire n'hésiter pas à vous inscrire en cliquant sur Inscription
+        <br/>
+        <a class="btn btn-primary" href="index.php?request=usercontroller&action=signIn">Inscription</a>
+      </p>
       </div>
-      
+      <br/>
     </div><!-- row -->
   </div><!-- container -->
 </section>

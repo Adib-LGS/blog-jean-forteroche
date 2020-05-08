@@ -235,5 +235,45 @@ class UserController extends Controllers{
     }
 
     /**Signaler un Commentaire Menancant :) */
-    public function reportComment(){}
+    public function reportComment(){
+       
+         /**
+         * DANS CE FICHIER ON CHERCHE A SIGNALER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
+         */
+
+        /**
+         * Récupération du paramètre "id" en GET
+         */
+        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
+            die(" Veuillez préciser le paramètre 'id' en GET !");
+        }
+
+        $id = $_GET['id'];
+
+        /**
+         * Vérification de l'existence du commentaire
+         */
+        $commentaire = $this->model->find($id);
+        if (!$commentaire) {
+            die("Aucun commentaire n'a l'identifiant $id !");
+        }
+
+        /**
+         * Signalement  du commentaire
+         * On récupère l'identifiant de l'article avant de signaler le commentaire
+         */
+
+        $id = $commentaire['article_id'];
+
+        $model3 = new \Models\Comment();
+        $model3->report($id);
+
+        /**
+         * Redirection vers l'article en question
+         */
+
+        \Http::redirect("index.php?request=usercontroller&action=reportComment&id=" .$commentaire['id']);
+        
+
+    }
 }

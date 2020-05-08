@@ -24,11 +24,11 @@ class Article extends Model{
 
     /**
      * Modification des articles
-     * A Verifier
+     * 
      */
-    public function edit(string $title, string $introduction, string $content){
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET title = :title, introduction = :introduction, content = :content, NOW() WHERE id )");
-        $query->execute(compact('title', 'introduction', 'content'));
+    public function edit(string $title, string $introduction, string $content, int $article_id) :void{
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET title = ?, introduction = ?, content = ?, created_at = NOW() WHERE id = ?");
+        $query->execute(array($title, $introduction, $content, $article_id));
     }
 
 

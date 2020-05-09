@@ -35,11 +35,10 @@ class Comment extends Model{
     }
 
 
-    /**Pour signaler un commentaire mais a voir... */
-    public function report(int $id){
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET reports_id = ?, created_at = NOW() WHERE id = ?");
+    /**Pour signaler un commentaire */
+    public function report(int $id)  {
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET reports_id = 1 WHERE id = ?");
         $query->execute(array($id));
-        
     }
 
 }

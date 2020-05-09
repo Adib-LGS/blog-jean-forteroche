@@ -20,5 +20,6 @@
    $pageContent = ob_get_clean();
    
    require('views/layout.html.php');
+   
    } 
 }

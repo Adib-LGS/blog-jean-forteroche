@@ -10,20 +10,20 @@
 
 
 
-    <h4><b>Créer un Article</b></h4>
+    <h4>Créer un Article</h4>
     <br />   
         <form action="index.php?request=admincontroller&action=addArticle" method="POST" class="form-group" >
           
-          <h3><textarea  name="title" placeholder="Titre" ></textarea></h3>
+          <textarea  name="title" placeholder="Titre" ></textarea>
 
-          <p><textarea  name="introduction" placeholder="Introduction" ></textarea></p>
+          <textarea  name="introduction" placeholder="Introduction" ></textarea>
 
-          <p><textarea name="content" id="" placeholder="Contenu"></textarea></p>
+          <textarea  name="content" id="" placeholder="Contenu"></textarea>
     <br/>
-          <button class="btn btn-primary" type="submit" id="form-submit" name="article_id" >
+        
+    <button class="btn btn-primary" type="submit" id="form-submit" name="article_id"  >
             Poster
           </button>
-    <br/>
         </form>
 
 

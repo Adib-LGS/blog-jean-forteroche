@@ -60,7 +60,9 @@
 	<br />
 <div class="panel panel-default">
 	<div class="panel-body">
+
 	  <?php foreach ($commentaires as $commentaire) : ?>
+		<?php if ($commentaire['reports_id'] === "1") : ?>
                       <h3>Commentaire de <?= $commentaire['author'] ?></h3>
                       <small>Le <?= $commentaire['created_at'] ?></small>
                       <blockquote>
@@ -72,9 +74,9 @@
 					</p>
 					<p>
 						<a class="btn btn-primary" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Approuver</a>
-					</p>
-                      
-        <?php endforeach ?>
+					</p>   
+					<?php endif ?>
+		<?php endforeach ?>
 	</div>
 </div>
 </section>

@@ -237,42 +237,47 @@ class UserController extends Controllers{
     /**Signaler un Commentaire Menancant :) */
     public function reportComment(){
        
+        /**
+         * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
+         * On va Signaler le commentaire
+         */
+
+        // On part du principe qu'on ne possède pas de param "id"
+        $article_id = null;
+
+
+        if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
+            $article_id = $_GET['id'];
+        }
+
+
+        if (!$article_id) {
+            die("Vous devez préciser un paramètre `id` dans l'URL !");
+        }
+
+        $id = $article_id;
+
+        /**
+         *  Récupération de l'article en question
+         */
+
+        //$articleModel = new \Models\Article();
+        $article = $this->model->find($article_id);
+
          /**
-         * DANS CE FICHIER ON CHERCHE A SIGNALER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
-         */
-
-        /**
-         * Récupération du paramètre "id" en GET
-         */
-        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
-            die(" Veuillez préciser le paramètre 'id' en GET !");
-        }
-
-        $id = $_GET['id'];
-
-        /**
-         * Vérification de l'existence du commentaire
-         */
-        $commentaire = $this->model->find($id);
-        if (!$commentaire) {
-            die("Aucun commentaire n'a l'identifiant $id !");
-        }
-
-        /**
          * Signalement  du commentaire
          * On récupère l'identifiant de l'article avant de signaler le commentaire
          */
 
-        $id = $commentaire['article_id'];
-
-        $model3 = new \Models\Comment();
-        $model3->report($id);
+        $commentModel = new \Models\Comment();
+        $commentaires = $commentModel->report($id);
+   
 
         /**
          * Redirection vers l'article en question
          */
 
-        \Http::redirect("index.php?request=usercontroller&action=reportComment&id=" .$commentaire['id']);
+        \Http::redirect("index.php?request=admincontroller&action=index");
         
 
     }

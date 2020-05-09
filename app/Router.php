@@ -10,61 +10,56 @@
 
 class Router {
     
-
     public static function route(){
 
-            
+        if(isset($_GET)){
+
+            /**Page d'Accueil*/
             $controllerName = "UserController"; //ControllerName appeler
-            
             $action = "index"; // Method appeler
-    
+            
+            /**Commence Navigation vers autre Page*/
             if(!empty($_GET['request'])){
-                //For EX: le GET => UserController va se transformer en:
-                    //UserController et se mettre ds $controllerName
-                $controllerName = ucfirst($_GET['request']);
-            }
-            if(!empty($_GET['action'])){
+                $controllerName = $_GET['request'];
                 $action = $_GET['action'];
             }
             //Rendre possible l'apl d'Autres Controllers via leur Nom
             $controllerName = "\Controllers\\" .$controllerName;
-
-            
+    
             //Crée nvl Objet controllerName9()
             $controller = new $controllerName();
             //Apl de l'action
             $controller->$action();
-            
+            var_dump($_GET);
+            }   
     }
 }
 
 
 /*
-if(!empty($_GET['request'])){
-    $action = $_GET['action'];
-    switch($action){
+if(isset($_GET)){
+    $controllerName = "UserController";
+    $action = 'index';
+    $request = $_GET;
+    switch($request){
 
-        case 'index':{
-            $controllerName = "UserController";
-            $controllerName = ucfirst($_GET['request']);
+        case "U":{
+            if(!empty($_GET['request'])){
+                $controllerName = $_GET['request'];
+                $action = $_GET['action'];
+            }
             $controllerName = "\Controllers\\" .$controllerName;
             $controller = new $controllerName();
             $controller->$action();
         }
     break;
 
-        case 'U':{
-            $controllerName = "UserController";
-            $controllerName = ucfirst($_GET['request']);
-            $controllerName = "\Controllers\\" .$controllerName;
-            $controller = new $controllerName();
-            $controller->$action();
-        }
-    break;
-
-        case 'A':{
+        case "A":{
             $controllerName = "AdminController";
-            $controllerName = ucfirst($_GET['']);
+            if(!empty($_GET['request'])){
+                $controllerName = $_GET['request'];
+                $action = $_GET['action'];
+            }
             $controllerName = "\Controllers\\" .$controllerName;
             $controller = new $controllerName();
             $controller->$action();
@@ -93,4 +88,29 @@ action = U index  (usercontroller) User
 action = A index (admincontroller) Admin
 
 action !=  A et U  (renvois sur index)
+
+ public static function route(){
+
+        if(isset($_GET)){
+
+        Page d'Accueil 
+        $controllerName = "UserController"; //ControllerName appeler
+        $action = "index"; // Method appeler
+        
+        Commence Navigation vers autre Page 
+        if(!empty($_GET['request'])){
+            $controllerName = $_GET['request'];
+            $action = $_GET['action'];
+        }
+        //Rendre possible l'apl d'Autres Controllers via leur Nom
+        $controllerName = "\Controllers\\" .$controllerName;
+
+        //Crée nvl Objet controllerName9()
+        $controller = new $controllerName();
+        //Apl de l'action
+        $controller->$action();
+        var_dump($_GET);
+        }   
+            
+    }
 */

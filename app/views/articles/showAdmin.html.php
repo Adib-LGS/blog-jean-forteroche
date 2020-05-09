@@ -89,7 +89,7 @@
                       <a class="btn btn-danger" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
                       <?php endif ?>
                       <!--Signaler un commentaire--> 
-                      <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" ):?>
+                      <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "0" ):?>
                       <a class="btn btn-danger" href="index.php?request=usercontroller&action=reportComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
                       <?php endif ?>
 

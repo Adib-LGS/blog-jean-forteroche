@@ -47,10 +47,15 @@
             </div><!-- post-info -->
             <br>
             <p class="para">
-            <h3 class="title"><a href="#"><b><h1><?= $article['title'] ?></h1>
+            <h3 class="title">
+              <a href="#"><?= $article['title'] ?> </a>
+                </h3>
+                <p>
                   <small>Ecrit le <?= $article['created_at'] ?></small>
-                  <p><?= $article['introduction'] ?></p>
-                  <hr></b></a></h3>
+                  </p>
+                  <p>
+                    <?= $article['introduction'] ?>
+                  </p>
             </p>
           </div><!-- blog-post-inner -->
         </div><!-- main-post -->
@@ -71,8 +76,9 @@
             <br />
           <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
             <p>
-              <a class="btn btn-danger" href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">Supprimer Article</a>
+              <a class="btn btn-outline-danger btn-sm" style="width:20%" href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">Supprimer Article</a>
             </p>
+            <a class="btn btn-outline-primary btn-sm" style="width:20%" href="index.php?request=admincontroller&action=editArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">Modifier Article</a>
           <?php endif ?>
           <br />
               <?php if (count($commentaires) === 0) : ?>
@@ -86,13 +92,15 @@
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
-                      <a class="btn btn-danger" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+                      <a class="alert alert-success btn-sm" href="index.php?request=admincontroller&action=indexModerate">Modération</a>
                       <?php endif ?>
                       <!--Signaler un commentaire--> 
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "0" ):?>
-                      <a class="btn btn-danger" href="index.php?request=usercontroller&action=reportComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
+                      <a class="btn btn-danger btn-sm" href="index.php?request=usercontroller&action=reportComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
                       <?php endif ?>
-
+                      <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "1" ):?>
+                        <p class="alert alert-success btn-sm" style="width: 38%">Ce commentaire à déja été signaler</p>
+                        <?php endif ?>
                   <?php endforeach ?>
               <?php endif ?>
             </div><!-- post-info -->
@@ -106,15 +114,18 @@
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
-              <form action="index.php?request=usercontroller&action=insert" method="POST" class="form-group">
+              <form action="index.php?request=usercontroller&action=insert" method="POST" >
+                <div class="form-group">
                 <input type="text" aria-required="true" name="author" class="form-control"
                 placeholder="Votre pseudo !" aria-invalid="true" required >
               </div><!-- col-sm-6 -->
-              <div class="col-sm-12">
+              <div class="form-group">
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
                     <input type="hidden" name="article_id" value="<?= $article_id ?>">
+              </div>
                     <button class="btn btn-primary" type="submit" id="form-submit"><b>COMMENTER</b></button>
                 </form>
+                <br />
                 </div><!-- col-sm-12 -->
               </div><!-- col-sm-12 -->
         </div>

@@ -38,34 +38,34 @@
           <div class="blog-post-inner">
             <div class="post-info">
               <div class="left-area">
-                <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                <a class="avatar" href="#"><img src="../public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
               </div>
               <div class="middle-area">
               </div>
             </div><!-- post-info -->
             <br>
             <p class="para">
-            <h3 class="title"><a href="#"><b><h1><?= $article['title'] ?></h1>
+            <h3 class="title">
+              <a href="#"><?= $article['title'] ?> </a>
+                </h3>
+                <p>
                   <small>Ecrit le <?= $article['created_at'] ?></small>
-                  <p><?= $article['introduction'] ?></p>
-                  <hr></b></a></h3>
+                  </p>
+                  <p>
+                    <?= $article['introduction'] ?>
+                  </p>
             </p>
           </div><!-- blog-post-inner -->
         </div><!-- main-post -->
     </div><!-- row -->
   </div><!-- container -->
 </section><!-- post-area -->
+
+
+
+
 <section class="comment-section">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-12">
-        </div><!-- row -->
-        </div><!-- comment-form -->
-        <div class="col-lg-8 col-md-12">
-        <div class="commnets-area">
-          <div class="comment">
-            <div class="post-info">
-            <?= $article['content'] ?>
 <!--Admin peut Supprimer un Article -->
               <?php if (count($commentaires) === 0) : ?>
                   <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
@@ -80,6 +80,13 @@
 <!-- Admin peut Supprimer un commentaire -->
                   <?php endforeach ?>
               <?php endif ?>
+    <div class="row">
+
+        <div class="col-lg-8 col-md-12">
+        <div class="commnets-area">
+          <div class="comment">
+            <div class="post-info">
+            
               
             </div><!-- post-info -->
          

@@ -34,49 +34,51 @@
 	<p>Vous pouvez Modifier ou Supprimer les articles en cliquant sur leurs titres</p>
 	<br />
 
-<div class="panel panel-default" >
-	<div class="panel-body">
-
-      <?php foreach ($articles as $article):?>					
-			<ul>
-				<li>
-			<h4 class="title"><a href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
-				</li>
-				<li>
-              		<a class="btn btn-primary" style="margin-left: 200px;" href="index.php?request=admincontroller&action=editArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">Modifier Article</a>
-				</li>
-			</ul>
+	<div class="list-group" style="width: 30%">
+	  <?php foreach ($articles as $article):?>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item">
+				<a class="title" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></a>
+			</li>
+		</ul>							
 		<?php endforeach ?>
 		</div>
-</div>
+
 </section>
 
 <br/>
 
-<section style="margin-left: 50px;">
+<section>
+
 	<h3>Listes des Commentaires Signalés:</h3>
 	<br />
 	<p>Vous pouvez Modifier ou Supprimer les commentaires en cliquant sur leurs titres</p>
 	<br />
-<div class="panel panel-default">
-	<div class="panel-body">
 
+	<div class="list-group" style="width: 50%">
 	  <?php foreach ($commentaires as $commentaire) : ?>
+		<ul class="list-group list-group-flush">
 		<?php if ($commentaire['reports_id'] === "1") : ?>
-                      <h3>Commentaire de <?= $commentaire['author'] ?></h3>
-                      <small>Le <?= $commentaire['created_at'] ?></small>
-                      <blockquote>
-                          <em><?= $commentaire['content'] ?></em>
-                      </blockquote>
-                      
-                    <p>
-						<a class="btn btn-danger" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
-					</p>
-					<p>
-						<a class="btn btn-primary" href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Approuver</a>
-					</p>   
-					<?php endif ?>
+			<li class="list-group-item">
+				<h3>Commentaire de <?= $commentaire['author'] ?></h3>
+				<small>Le <?= $commentaire['created_at'] ?></small>
+				<blockquote>
+					<em><?= $commentaire['content'] ?></em>
+				</blockquote>
+			</li>
+			</ul>
+			
+			<button type="button" class="btn btn-danger btn-sm" style="width: 20%" >
+				<a  href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+			</button>
+			
+			<button type="button" class="btn btn-primary btn-sm" style="width: 20%" >
+					<a href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Approuver</a>
+			</button>
+		  
+		<?php endif ?>
 		<?php endforeach ?>
+		
 	</div>
-</div>
+	</div>
 </section>

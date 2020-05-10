@@ -25,7 +25,11 @@
 	</header>
 <?php endif ?>
 
-<div class="slider"></div><!-- slider -->
+<div class="slider">
+  <div class="display-table  center-text">
+    <h1 class="title display-table-cell"><b>Un Billet Pour L'Alaska</b></h1>
+  </div>
+</div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
 		<h1>Bienvenue Sur mon Blog !</h1>

@@ -41,4 +41,10 @@ class Comment extends Model{
         $query->execute(array($id));
     }
 
+    /**Pour Approuver un commentaire */
+    public function approuve(int $id)  {
+        $query = $this->pdo->prepare("UPDATE {$this->table} SET reports_id = 0 WHERE id = ?");
+        $query->execute(array($id));
+    }
+
 }

@@ -74,13 +74,6 @@
             <div class="post-info">
             <?= $article['content'] ?>
             <br />
-          <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
-            <p>
-              <a class="btn btn-outline-danger btn-sm" style="width:20%" href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">Supprimer Article</a>
-            </p>
-            <a class="btn btn-outline-primary btn-sm" style="width:20%" href="index.php?request=admincontroller&action=editArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">Modifier Article</a>
-          <?php endif ?>
-          <br />
               <?php if (count($commentaires) === 0) : ?>
                   <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
               <?php else : ?>
@@ -91,9 +84,6 @@
                       <blockquote>
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
-                      <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
-                      <a class="alert alert-success btn-sm" href="index.php?request=admincontroller&action=indexModerate">Modération</a>
-                      <?php endif ?>
                       <!--Signaler un commentaire--> 
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "0" ):?>
                       <a class="btn btn-danger btn-sm" href="index.php?request=usercontroller&action=reportComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>

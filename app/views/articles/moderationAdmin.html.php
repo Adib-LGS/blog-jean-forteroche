@@ -9,10 +9,10 @@
 					<a href="index.php?request=admincontroller&action=index">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
+				<a href="index.php?request=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
 				</li>
 				<li>
-				<a href="index.php?request=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
 				</li>
 			</ul>
 				<div class="src-area">
@@ -26,24 +26,31 @@
 	
 	<br>
 
-<section style="margin-left: 50px;">
+
+<section >
 	<h2><?= $pageTitle ?></h2>
-	<br />
+		<br />
 	<h3>Listes des Articles :</h3>
-	<br />
-	<p>Vous pouvez Modifier ou Supprimer les articles en cliquant sur leurs titres</p>
-	<br />
-
-	<div class="list-group" style="width: 30%">
-	  <?php foreach ($articles as $article):?>
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item">
-				<a class="title" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></a>
-			</li>
-		</ul>							
-		<?php endforeach ?>
-		</div>
-
+		<br />
+	<p>Vous pouvez Modifier ou Supprimer les articles, ou les lire en cliquant sur leurs titres</p>
+		<br />
+	<ul class="list-group">
+<?php foreach ($articles as $article):?>
+  	<li class="list-group-item d-flex justify-content-between align-items-center">
+    		<a class="title" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></a>
+    	<div class="btn-group">
+  		<button	button type="button" class="btn btn-primary"> 
+	  		<a href="index.php?request=admincontroller&action=editArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">
+	  		Modifier</a>
+		</button>
+  		<button type="button" class="btn btn-danger">
+  			<a href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">
+  			Supprimer</a>
+		</button>
+    	</div>
+  	</li>
+<?php endforeach ?>
+	</ul>
 </section>
 
 <br/>
@@ -51,34 +58,28 @@
 <section>
 
 	<h3>Listes des Commentaires Signalés:</h3>
-	<br />
-	<p>Vous pouvez Modifier ou Supprimer les commentaires en cliquant sur leurs titres</p>
-	<br />
-
-	<div class="list-group" style="width: 50%">
-	  <?php foreach ($commentaires as $commentaire) : ?>
-		<ul class="list-group list-group-flush">
-		<?php if ($commentaire['reports_id'] === "1") : ?>
-			<li class="list-group-item">
-				<h3>Commentaire de <?= $commentaire['author'] ?></h3>
+		<br />
+	<p>Vous pouvez Modifier ou Supprimer les commentaires</p>
+		<br />
+	<ul class="list-group">
+<?php foreach ($commentaires as $commentaire) : ?>
+<?php if ($commentaire['reports_id'] === "1") : ?>
+	<li class="list-group-item d-flex justify-content-between align-items-center">
+			<h3>Commentaire de <?= $commentaire['author'] ?></h3>
 				<small>Le <?= $commentaire['created_at'] ?></small>
-				<blockquote>
+			<blockquote>
 					<em><?= $commentaire['content'] ?></em>
-				</blockquote>
-			</li>
-			</ul>
-			
-			<button type="button" class="btn btn-danger btn-sm" style="width: 20%" >
+			</blockquote>
+		<div class="btn-group">
+			<button type="button" class="btn btn-danger btn-sm" >
 				<a  href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
 			</button>
-			
-			<button type="button" class="btn btn-primary btn-sm" style="width: 20%" >
-					<a href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Approuver</a>
+			<button type="button" class="btn btn-primary btn-sm"  >
+				<a href="index.php?request=admincontroller&action=approuveComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir approuver ce commentaire ?!`)">Approuver</a>
 			</button>
-		  
-		<?php endif ?>
-		<?php endforeach ?>
-		
-	</div>
-	</div>
+		</div> 	
+<?php endif ?>
+<?php endforeach ?>
+	</li>
+	</ul>
 </section>

@@ -37,7 +37,7 @@ abstract class Model {
     }
 
     /**
-    * Supprimer un article Back-End 
+    * Supprimer un article ou Commentaire Back-End 
     * @param integer $id
     * @return void
     */

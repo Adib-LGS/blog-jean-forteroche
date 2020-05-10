@@ -16,7 +16,7 @@ class UserController extends Controllers{
     //Va chercher via Constructor de Abstarct Controller
     protected $modelName = \Models\Article::class;
     protected $secondModelName = \Models\User::class;
-    protected $renderName = "show";
+    protected $renderName = "show"; //Show function Controller Class
 
     /**Subscribe  */
     public function signIn(){
@@ -115,8 +115,8 @@ class UserController extends Controllers{
          * On va Signaler le commentaire
          */
 
-        // On part du principe qu'on ne possède pas de param "id"
-        $article_id = null;
+        // On part du principe qu'on possède le param "id"
+        $article_id = $_GET['id'];
 
 
         if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
@@ -127,31 +127,23 @@ class UserController extends Controllers{
         if (!$article_id) {
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
-
-        $id = $article_id;
-
         /**
          *  Récupération de l'article en question
          */
-
-        //$articleModel = new \Models\Article();
-        $article = $this->model->find($article_id);
+        $this->model->find($article_id);
 
          /**
          * Signalement  du commentaire
          * On récupère l'identifiant de l'article avant de signaler le commentaire
          */
-        
+        $id = $article_id;
         $commentModel = new \Models\Comment();
-        $commentaires = $commentModel->report($id);
+        $commentModel->report($id);
    
-
         /**
          * Redirection vers l'article en question
          */
 
         \Http::redirect("index.php?request=admincontroller&action=index");
-        
-
     }
 }

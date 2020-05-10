@@ -127,12 +127,12 @@ class AdminController extends Controllers{
                     die("Votre formulaire a été mal rempli !");
                     
                 }else{
-                /**
-                 * Insertion de l'Article
-                 * */
-                $modelArticle = new \Models\Article(); 
-                $modelArticle->insert($title, $introduction, $content);
-                \Http::redirect("index.php?request=admincontroller&action=index");
+                    /**
+                     * Insertion de l'Article
+                     * */
+                    $modelArticle = new \Models\Article(); 
+                    $modelArticle->insert($title, $introduction, $content);
+                    \Http::redirect("index.php?request=admincontroller&action=index");
                 }
                 
             }
@@ -243,7 +243,7 @@ class AdminController extends Controllers{
         /**
          * Redirection vers la page d'accueil
          */
-        \Http::redirect("index.php?request=admincontroller&action=index");
+        \Http::redirect("index.php?request=admincontroller&action=indexModerate");
 
     }
     
@@ -283,6 +283,38 @@ class AdminController extends Controllers{
          * Redirection vers l'article en question
          */
 
-        \Http::redirect("index.php?request=admincontroller&action=show&id=" . $article_id);
+        \Http::redirect("index.php?request=admincontroller&action=indexModerate");
+    }
+
+    /** Approuver un commentaire */
+    public function approuveComment(){
+        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
+            die(" Veuillez préciser le paramètre 'id' en GET !");
+        }
+
+        $id = $_GET['id'];
+
+        /**
+         * Vérification de l'existence du commentaire
+         */
+        $commentaire = $this->model->find($id);
+        if (!$commentaire) {
+            die("Aucun commentaire n'a l'identifiant $id !");
+        }
+
+        /**
+         * Suppression réelle du commentaire
+         * On récupère l'identifiant de l'article avant de supprimer le commentaire
+         */
+
+        $article_id = $commentaire['article_id'];
+
+        $this->model->approuve($id);
+
+        /**
+         * Redirection vers l'article en question
+         */
+
+        \Http::redirect("index.php?request=admincontroller&action=indexModerate");
     }
 }

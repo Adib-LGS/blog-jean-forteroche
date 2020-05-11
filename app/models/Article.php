@@ -31,6 +31,12 @@ class Article extends Model{
         $query->execute(array($title, $introduction, $content, $article_id));
     }
 
+    public function deleteAll(int $id) :void{
+        $query = $this->pdo->prepare("DELETE FROM comments WHERE article_id = ?");
+        $query->execute(array($id));
+        $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
+        $query->execute(array($id));
+    }
 
 }
 

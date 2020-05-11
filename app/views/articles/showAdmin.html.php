@@ -86,7 +86,7 @@
                       </blockquote>
                       <!--Signaler un commentaire--> 
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "0" ):?>
-                      <a class="btn btn-danger btn-sm" href="index.php?request=usercontroller&action=reportComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
+                      <a class="btn btn-danger btn-sm" href="index.php?request=usercontroller&action=reportComment&commentaire=<?= $commentaire['id'] ?>&id=<?= $article_id ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
                       <?php endif ?>
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "1" ):?>
                         <p class="alert alert-success btn-sm" style="width: 38%">Ce commentaire à déja été signaler</p>

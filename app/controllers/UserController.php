@@ -77,34 +77,31 @@ class UserController extends Controllers{
                     $pseudoConnect = htmlspecialchars($_POST['pseudo']);
                     //  Récupération de l'utilisateur et de son pass hashé
                     $resultat = $this->model2->getInfoUser($pseudoConnect);
-                    // Comparaison du pass envoyé via le formulaire avec la base
-                    $isPasswordCorrect = password_verify($_POST['password'], $resultat['pass']);
-                    
+       
                 if(!$resultat){
                     $errors2['resultat'] = 'Mauvais identifiant ou mot de passe !';
-
-                }elseif($isPasswordCorrect){
-                    session_start();
-                    $_SESSION['pseudo'] = $resultat['pseudo'];
-                    $_SESSION['role_id'] = $resultat['role_id'];
-                    $errors2['resultat'] = 'Vous êtes connecté !';
-        
-                    \Http::redirect("index.php?request=admincontroller&action=index&" . $_SESSION['pseudo'] . $_SESSION['role_id']);
-
                 }else{
-                    $errors2['resultat'] = 'Mauvais identifiant ou mot de passe !';
-                }
-                //\Utils::debug($errors2);   
+                     // Comparaison du pass envoyé via le formulaire avec la base
+                     $isPasswordCorrect = password_verify($_POST['password'], $resultat['pass']);
+                     if(($isPasswordCorrect)){
+                        session_start();
+                        $_SESSION['pseudo'] = $resultat['pseudo'];
+                        $_SESSION['role_id'] = $resultat['role_id'];
+                        $errors2['resultat'] = 'Vous êtes connecté !';
+                        \Http::redirect("index.php?request=admincontroller&action=index&" . $_SESSION['pseudo'] . $_SESSION['role_id']);
+                    }else{
+                        $errors2['resultat'] = 'Mauvais identifiant ou mot de passe !';
+                    }
+                    //\Utils::debug($errors2);  
+                } 
             }
         }
-        
         /**
          * Affichage
          */
         $pageTitle = "Mon compte";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/logIn', compact('pageTitle', 'errors2'));
-    
     }
 
     /**Signaler un Commentaire :) */
@@ -117,33 +114,34 @@ class UserController extends Controllers{
 
         // On part du principe qu'on possède le param "id"
         $article_id = $_GET['id'];
-
+        $comment_id = $_GET['id_comment'];
 
         if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
             $article_id = $_GET['id'];
         }
 
+        if (!empty($_GET['id_comment']) && ctype_digit($_GET['id_comment'])) {
+            $comment_id = $_GET['id_comment'];
+        }
 
         if (!$article_id) {
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
-        /**
-         *  Récupération de l'article en question
-         */
-        $this->model->find($article_id);
+
+        if (!$comment_id) {
+            die("Vous devez préciser un paramètre `id` dans l'URL !");
+        }
+        
 
          /**
          * Signalement  du commentaire
          * On récupère l'identifiant de l'article avant de signaler le commentaire
          */
-        $id = $article_id;
+        $id = $comment_id;
         $commentModel = new \Models\Comment();
         $commentModel->report($id);
-   
-        /**
-         * Redirection vers l'article en question
-         */
-
-        \Http::redirect("index.php?request=admincontroller&action=index");
+            
+        \Http::redirect("index.php?request=admincontroller&action=show&id=" .$article_id);         
+        
     }
 }

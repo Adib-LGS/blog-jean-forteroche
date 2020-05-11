@@ -45,7 +45,7 @@ abstract class Model {
         $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
         $query->execute(['id' => $id]);
     }
-
+    
      /**
      * Return articles par date de creation
      * Peut recevoir une string Optionelle

@@ -207,15 +207,11 @@ class AdminController extends Controllers{
 
     /**Supprimer un Article */
     public function deleteArticle(){
-                
-        
         /**
          * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
-         * 
          * S'assurer qu'un paramètre "id" est bien passé en GET, puis que cet article existe bel et bien
-         * Ensuite, supprimer l'article et rediriger vers la page d'accueil
          */
-        //$model = new \Models\Article();
+
         /**
          * Vérifie que le GET possède bien un paramètre "id" 
          */
@@ -224,7 +220,7 @@ class AdminController extends Controllers{
         }
 
         $id = $_GET['id'];
-
+        
         /**
          * Vérification que l'article existe bel et bien
          */
@@ -238,7 +234,7 @@ class AdminController extends Controllers{
          * Réelle suppression de l'article
          */
         $modelArticle = new \Models\Article();
-        $modelArticle->delete($id);
+        $modelArticle->deleteAll($id);
 
         /**
          * Redirection vers la page d'accueil

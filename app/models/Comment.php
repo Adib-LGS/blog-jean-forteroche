@@ -46,5 +46,6 @@ class Comment extends Model{
         $query = $this->pdo->prepare("UPDATE {$this->table} SET reports_id = 0 WHERE id = ?");
         $query->execute(array($id));
     }
+    
 
 }

@@ -44,16 +44,5 @@ class User extends Model {
     
     return $resultat;
     } 
-
-    
-/*
-    public function getInfoUser($pseudoConnect)
-    {
-    $req = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE pseudo = :pseudo");
-    $req->execute(['pseudo' => $_POST['pseudo']]);
-    $resultat = $req->fetch();
-    
-    return $resultat;
-    }*/
     
 }

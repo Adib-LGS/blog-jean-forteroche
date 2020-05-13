@@ -106,7 +106,6 @@ class UserController extends Controllers{
 
     /**Signaler un Commentaire :) */
     public function reportComment(){
-       
         /**
          * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
          * On va Signaler le commentaire
@@ -129,7 +128,7 @@ class UserController extends Controllers{
         }
 
         if (!$comment_id) {
-            die("Vous devez préciser un paramètre `id` dans l'URL !");
+            die("Vous devez préciser le paramètre `id` du commentaire dans l'URL !");
         }
         
 

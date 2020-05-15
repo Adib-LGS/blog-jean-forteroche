@@ -12,13 +12,12 @@ namespace Controllers;
 
 class AdminController extends Controllers{
     
-    /**Va chercher via Constructor de Abstarct Controller*/
     protected $modelName = \Models\Comment::class;
     protected $secondModelName = \Models\User::class;
     protected $renderName = "showAdmin";
 
 
-    /**Montrer la Liste des Articles */
+    /**Show All Articles */
     public function index(){
         /**
          * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
@@ -59,7 +58,7 @@ class AdminController extends Controllers{
         \Renderer::render('articles/moderationAdmin', compact('pageTitle', 'articles', 'commentaires'));
     }
       
-    /**Montrer un Article */
+    /**Show one Article */
     public function show(){
 
         /**
@@ -102,7 +101,7 @@ class AdminController extends Controllers{
 
     }
 
-    /** Créer un Article */
+    /**Create  Article */
     public function addArticle(){
 
         /**
@@ -147,7 +146,7 @@ class AdminController extends Controllers{
     
     }
 
-    /**Modifier un Article */
+    /**Eddit Article */
     public function editArticle(){
         /**
          * CE FICHIER DOIT AFFICHER UN ARTICLE ET LE MODIFIER !
@@ -205,7 +204,7 @@ class AdminController extends Controllers{
 
     }
 
-    /**Supprimer un Article */
+    /**Delete Article */
     public function deleteArticle(){
         /**
          * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
@@ -243,7 +242,7 @@ class AdminController extends Controllers{
 
     }
     
-    /** Supprimer un commentaire */
+    /**Delete Comment*/
     public function deleteComment(){
         /**
          * DANS CE FICHIER ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
@@ -282,7 +281,7 @@ class AdminController extends Controllers{
         \Http::redirect("index.php?request=admincontroller&action=indexModerate");
     }
 
-    /** Approuver un commentaire */
+    /**Approuve Comment */
     public function approuveComment(){
         if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
             die(" Veuillez préciser le paramètre 'id' en GET !");

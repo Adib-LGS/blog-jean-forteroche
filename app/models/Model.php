@@ -10,20 +10,18 @@ namespace Models;
 
 abstract class Model {
 
-    /**Récupere la Connexion de Database */
+    /**Get DataBase Connexion */
     protected $pdo;
-    
     protected $table;
 
     public function __construct()
     {
-        //Récupere Metthode static de la Base de Données pr Connexion
+        //Use Static Methode to Get DataBase Connexion
         $this->pdo = \Database::getPdo();
     }
 
     /**
-     * Renvoi un Article ou Commentaires sous form d'array
-     * en utilisant l'$id de l'article
+     * Return Article or Comment in Array
      * @param integer $id
      * @return array
      */
@@ -37,7 +35,7 @@ abstract class Model {
     }
 
     /**
-    * Supprimer un article ou Commentaire Back-End 
+    * Delete Articles or Comments 
     * @param integer $id
     * @return void
     */
@@ -47,8 +45,7 @@ abstract class Model {
     }
     
      /**
-     * Return articles par date de creation
-     * Peut recevoir une string Optionelle
+     * Return Articles by Creation Date
      * @param string $order
      * @return array
      */

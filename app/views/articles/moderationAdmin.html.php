@@ -65,7 +65,7 @@
 <?php foreach ($commentaires as $commentaire) : ?>
 <?php if ($commentaire['reports_id'] === "1") : ?>
 	<li class="list-group-item d-flex justify-content-between align-items-center">
-			<h3>Commentaire de <?= $commentaire['author'] ?></h3>
+			<h3>Commentaire de <?= $commentaire['pseudo'] ?></h3>
 				<small>Le <?= $commentaire['created_at'] ?></small>
 			<blockquote>
 					<em><?= $commentaire['content'] ?></em>

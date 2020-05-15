@@ -10,8 +10,7 @@ namespace Controllers;
 
 abstract class Controllers{
 
-    //Faire en sorte d'avoir le bon Model pour le bon Controller en permanence
-
+    // Keep the good Model With the good Controllers
     protected $modelName; // \Models\Article ou \Models\Comment ect...
     protected $secondModelName; // \Models\Admin ou \Models\User ect...
     protected $renderName;
@@ -19,11 +18,10 @@ abstract class Controllers{
     public function __construct()
     {
         $this->model = new $this->modelName(); //$this->modelArticle = new \Models\Article() || $this->modelComment = new \Models\Comment();
-
         $this->model2 = new $this->secondModelName();
     }
 
-    /**Montrer la Liste des Articles */
+    /**Show list Articles */
     public function index(){
         
         /**
@@ -45,7 +43,7 @@ abstract class Controllers{
     }
 
 
-    /**Montrer un Article */
+    /**show Article */
     public function show(){
 
         /**
@@ -90,45 +88,26 @@ abstract class Controllers{
 
     }
 
-    /**Inserer un Commentaire */
+    /**Insert  Comment */
     public function insert(){
-
-        /**
-         * On vérifie que les données ont bien été envoyées en POST
-         * D'abord, on récupère les informations à partir du POST
-         * Ensuite, on vérifie qu'elles ne sont pas nulles
-         */
-
-        // On commence par l'author
-        $author = null;
-        if (!empty($_POST['author'])) {
-            $author = $_POST['author'];
+        $pseudo = null;
+        if (!empty($_POST['pseudo'])) {
+            $pseudo = $_POST['pseudo'];
         }
 
-        // Ensuite le contenu
         $content = null;
         if (!empty($_POST['content'])) {
-            // On fait quand même gaffe à ce que le gars n'essaye pas des balises cheloues dans son commentaire
             $content = htmlspecialchars($_POST['content']);
         }
 
-        // Enfin l'id de l'article
         $article_id = null;
         if (!empty($_POST['article_id']) && ctype_digit($_POST['article_id'])) {
             $article_id = $_POST['article_id'];
         }
 
-        // Vérification finale des infos envoyées dans le formulaire (donc dans le POST)
-        // Si il n'y a pas d'auteur OU qu'il n'y a pas de contenu OU qu'il n'y a pas d'identifiant d'article
-        if (!$author || !$article_id || !$content) {
+        if ( !$article_id || !$content) {
             die("Votre formulaire a été mal rempli !");
         }
-
-        /**
-         * Vérification que l'id de l'article pointe bien vers un article qui existe
-         * Ca nécessite une connexion à la base de données puis une requête qui va aller chercher l'article en question
-         * Si rien ne revient, la personne se fout de nous.
-         */
 
         //Retrouver L'Article
         $article = new \Models\Article();
@@ -136,7 +115,7 @@ abstract class Controllers{
 
         // Si rien n'est revenu, on fait une erreur
         if (!$article) {
-            die("Ho ! L'article $article_id n'existe pas boloss !");
+            die("Ho ! L'article $article_id n'existe pas.");
         }
 
         /**
@@ -144,10 +123,9 @@ abstract class Controllers{
          * */
         
         $modelComment = new \Models\Comment(); 
-        $modelComment->insert($author, $content, $article_id);
+        $modelComment->insert($pseudo, $content, $article_id);
 
         // 4. Methode Static redirect Redirection vers l'article en question :
         \Http::redirect("index.php?request=admincontroller&action=show&id=" . $article_id);
     }
-
 }

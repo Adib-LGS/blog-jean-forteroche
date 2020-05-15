@@ -9,5 +9,3 @@ require_once '../app/autoload.php';
 
 /**Apl du Router Method Static */
 \Router::route();
-
-

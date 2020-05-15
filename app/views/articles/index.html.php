@@ -27,7 +27,7 @@
 
 <div class="slider">
   <div class="display-table  center-text">
-    <h1 class="title display-table-cell"><b>Un Billet Pour L'Alaska</b></h1>
+    <h1 class="title display-table-cell"><b>Un Billet Simple Pour L'Alaska</b></h1>
   </div>
 </div><!-- slider -->
 	<section class="blog-area section">

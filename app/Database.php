@@ -4,7 +4,6 @@
  * $pdo = Database::getPdo();
  * Retourne une Connexion a la DataBase
  * + Simple Singleton Éviter de créer plusieurs connexion (just in case)
- * @return PDO 
  * */ 
 
 class Database{

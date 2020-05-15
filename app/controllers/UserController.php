@@ -13,10 +13,9 @@ use Renderer;
 
 class UserController extends Controllers{
 
-    //Va chercher via Constructor de Abstarct Controller
     protected $modelName = \Models\Article::class;
     protected $secondModelName = \Models\User::class;
-    protected $renderName = "show"; //Show function Controller Class
+    protected $renderName = "show";
 
     /**Subscribe  */
     public function signIn(){

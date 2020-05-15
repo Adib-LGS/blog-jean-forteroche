@@ -27,21 +27,18 @@ class User extends Model {
          return $user;
     }
     
-    /**Insertion User + Encrypt Password in DB
-     * 
-     */
+    /**Insertion User + Encrypt Password in DB*/
     public function insertUser():void{
         $req = $this->pdo->prepare("INSERT INTO {$this->table} (pseudo, pass, email) VALUES(?, ?, ?)");
         $pass_hache = password_hash($_POST['pass1'], PASSWORD_BCRYPT);
         $req->execute([$_POST['pseudo'], $pass_hache, $_POST['email']]);
     }
 
-
-   public function getInfoUser($pseudoConnect){
+    /**Login Check if User exist */
+    public function getInfoUser($pseudoConnect){
     $req = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE pseudo = ?");
     $req->execute(array($pseudoConnect));
     $resultat = $req->fetch();
-    
     return $resultat;
     } 
     

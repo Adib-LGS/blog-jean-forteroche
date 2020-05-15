@@ -30,7 +30,7 @@ class Router {
             $controller = new $controllerName();
             //Apl de l'action
             $controller->$action();
-            var_dump($_GET);
+            //var_dump($_GET);
             }   
     }
 }

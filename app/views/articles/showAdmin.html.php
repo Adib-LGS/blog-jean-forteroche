@@ -79,7 +79,7 @@
               <?php else : ?>
                   <h2>Il y a déjà <?= count($commentaires) ?> réactions : </h2>
                   <?php foreach ($commentaires as $commentaire) : ?>
-                      <h3>Commentaire de <?= $commentaire['author'] ?></h3>
+                      <h3>Commentaire de <?= $commentaire['pseudo'] ?></h3>
                       <small>Le <?= $commentaire['created_at'] ?></small>
                       <blockquote>
                           <em><?= $commentaire['content'] ?></em>
@@ -100,14 +100,13 @@
       <br>
       <h4><b>LAISSER UN COMMENTAIRES</b></h4>
       <br>
-      <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" || $_SESSION['role_id'] === "1"): ?>
+      <?php if(isset($_SESSION['pseudo']) && $_SESSION['role_id'] === "0" || $_SESSION['role_id'] === "1"): ?>
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
               <form action="index.php?request=usercontroller&action=insert" method="POST" >
                 <div class="form-group">
-                <input type="text" aria-required="true" name="author" class="form-control"
-                placeholder="Votre pseudo !" aria-invalid="true" required >
+                <input type="text"  name="pseudo" class="form-control" value="<?= $_SESSION['pseudo'] ?>">
               </div><!-- col-sm-6 -->
               <div class="form-group">
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>

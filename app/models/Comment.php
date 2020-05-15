@@ -9,7 +9,7 @@ class Comment extends Model{
     
     protected $table = "comments";
     /**
-     * Récupération des commentaires de l'article en question
+     * Get Comments With Article
      * Jointure de table
      * @param integer $article_id
      * @return array
@@ -23,25 +23,29 @@ class Comment extends Model{
   
 
     /**
-    * Insertion de Commentaires base de données
-    * @param string $author
+    * Insert Comments in DataBase
+    * @param string $pseudo
     * @param string $content
     * @param string $article_id
     * @return void  
     */
-    public function insert(string $author, string $content, int $article_id) :void {
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET author = :author, content = :content, article_id = :article_id, created_at = NOW()");
-        $query->execute(compact('author', 'content', 'article_id'));
+    public function insert(string $pseudo, string $content, int $article_id) :void {
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET pseudo = :pseudo, content = :content, article_id = :article_id, created_at = NOW()");
+        $query->execute(compact('pseudo', 'content', 'article_id'));
     }
 
 
-    /**Pour signaler un commentaire */
+    /**Pour signaler un commentaire
+     * @param integer $id
+     */
     public function report(int $id)  {
         $query = $this->pdo->prepare("UPDATE {$this->table} SET reports_id = 1 WHERE id = ?");
         $query->execute(array($id));
     }
 
-    /**Pour Approuver un commentaire */
+    /**Approuve Comments
+     * @param integer $id
+     */
     public function approuve(int $id)  {
         $query = $this->pdo->prepare("UPDATE {$this->table} SET reports_id = 0 WHERE id = ?");
         $query->execute(array($id));

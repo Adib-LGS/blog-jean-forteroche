@@ -1,10 +1,9 @@
 <?php
 
 /**
- * Les actions des utilisateur
- * EX: Laisser un Commentaire
+ * Les actions des utilisateurs Anonymous
+ * EX: S'inscrire ou se connecter 
  * Lire un Article ou l'afficher
- * Signaler un Commentaire
  */
 
 namespace Controllers;
@@ -103,43 +102,5 @@ class UserController extends Controllers{
         \Renderer::render('articles/logIn', compact('pageTitle', 'errors2'));
     }
 
-    /**Signaler un Commentaire :) */
-    public function reportComment(){
-        /**
-         * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
-         * On va Signaler le commentaire
-         */
-
-        // On part du principe qu'on possède le param "id"
-        $article_id = $_GET['id'];
-        $comment_id = $_GET['id_comment'];
-
-        if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
-            $article_id = $_GET['id'];
-        }
-
-        if (!empty($_GET['id_comment']) && ctype_digit($_GET['id_comment'])) {
-            $comment_id = $_GET['id_comment'];
-        }
-
-        if (!$article_id) {
-            die("Vous devez préciser un paramètre `id` dans l'URL !");
-        }
-
-        if (!$comment_id) {
-            die("Vous devez préciser le paramètre `id` du commentaire dans l'URL !");
-        }
-        
-
-         /**
-         * Signalement  du commentaire
-         * On récupère l'identifiant de l'article avant de signaler le commentaire
-         */
-        $id = $comment_id;
-        $commentModel = new \Models\Comment();
-        $commentModel->report($id);
-            
-        \Http::redirect("index.php?request=admincontroller&action=show&id=" .$article_id);         
-        
-    }
+    
 }

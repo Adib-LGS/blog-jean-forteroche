@@ -2,7 +2,7 @@
 /**
  * Idéee Commune a tous les Controllers
  * Ce que tout les Controllers ont en communs
- * Les Actions Commune (Users/Admin)
+ * Les Actions Commune (UsersConnu/Admin)
  */
 
 namespace Controllers;
@@ -127,5 +127,45 @@ abstract class Controllers{
 
         // 4. Methode Static redirect Redirection vers l'article en question :
         \Http::redirect("index.php?request=admincontroller&action=show&id=" . $article_id);
+    }
+
+    /**Signaler un Commentaire :) */
+    public function reportComment(){
+        /**
+         * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
+         * On va Signaler le commentaire
+         */
+
+        // On part du principe qu'on possède le param "id"
+        $article_id = $_GET['id'];
+        $comment_id = $_GET['id_comment'];
+
+        if (!empty($_GET['id']) && ctype_digit($_GET['id'])) {
+            $article_id = $_GET['id'];
+        }
+
+        if (!empty($_GET['id_comment']) && ctype_digit($_GET['id_comment'])) {
+            $comment_id = $_GET['id_comment'];
+        }
+
+        if (!$article_id) {
+            die("Vous devez préciser un paramètre `id` dans l'URL !");
+        }
+
+        if (!$comment_id) {
+            die("Vous devez préciser le paramètre `id` du commentaire dans l'URL !");
+        }
+        
+
+         /**
+         * Signalement  du commentaire
+         * On récupère l'identifiant de l'article avant de signaler le commentaire
+         */
+        $id = $comment_id;
+        $commentModel = new \Models\Comment();
+        $commentModel->report($id);
+            
+        \Http::redirect("index.php?request=admincontroller&action=show&id=" .$article_id);         
+        
     }
 }

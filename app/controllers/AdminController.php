@@ -4,7 +4,6 @@
  * EX: L'Admin veut se connecter a Son profi Admin
  * L'Admin veut Supprimer Article/Commentaire
  * L'Admin veut add un Article
- * 
  */
 
 namespace Controllers;

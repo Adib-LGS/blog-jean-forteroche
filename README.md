@@ -9,27 +9,28 @@ Le livre de Jean Forteroche reste à écrire... mais il sera publié en ligne !
 Le livre de Jean Forteroche reste à écrire... mais il sera publié en ligne !
 Vous développerez une application de blog simple en PHP et avec une base de données MySQL. Elle doit fournir une interface frontend (lecture des billets) et une interface backend (administration des billets pour l'écriture). On doit y retrouver tous les éléments d'un CRUD :
 
-Create : création de billets
-Read : lecture de billets
-Update : mise à jour de billets
-Delete : suppression de billets
-Chaque billet doit permettre l'ajout de commentaires, qui pourront être modérés dans l'interface d'administration au besoin.
-Les lecteurs doivent pouvoir "signaler" les commentaires pour que ceux-ci remontent plus facilement dans l'interface d'administration pour être modérés.
+#Create : création de billets
+#Read : lecture de billets
+#Update : mise à jour de billets
+#Delete : suppression de billets
 
-L'interface d'administration sera protégée par mot de passe. La rédaction de billets se fera dans une interface WYSIWYG basée sur TinyMCE, pour que Jean n'ait pas besoin de rédiger son histoire en HTML (on comprend qu'il n'ait pas très envie !).
+#Chaque billet doit permettre l'ajout de commentaires, qui pourront être modérés dans l'interface d'administration au besoin.
+#Les lecteurs doivent pouvoir "signaler" les commentaires pour que ceux-ci remontent plus facilement dans l'interface #d'administration pour être modérés.
 
-Vous développerez en PHP sans utiliser de framework pour vous familiariser avec les concepts de base de la programmation. Le code sera construit sur une architecture MVC. Vous développerez autant que possible en orienté objet (au minimum, le modèle doit être construit sous forme d'objet).
+#L'interface d'administration sera protégée par mot de passe. La rédaction de billets se fera dans une interface WYSIWYG basée #sur TinyMCE, pour que Jean n'ait pas besoin de rédiger son histoire en HTML (on comprend qu'il n'ait pas très envie !).
+
+#Vous développerez en PHP sans utiliser de framework pour vous familiariser avec les concepts de base de la programmation. Le #code sera construit sur une architecture MVC. Vous développerez autant que possible en orienté objet (au minimum, le modèle doit être construit sous forme d'objet).
 
 Ressources complémentaires
 En plus des cours du parcours, vous pouvez consulter les ressources suivantes pour vous aider :
 
-Chapitre "Fonctions d'aggrégation" du cours MySQL
-Fichiers à fournir
-Code HTML, CSS, PHP et JavaScript
-Export de la base de données MySQL
-Lien vers la page GitHub contenant l'historique des commits
-(votre historique de commits doit montrer une progression régulière par petites étapes)
-Pour faciliter votre passage au jury, déposez sur la plateforme, dans un dossier nommé “P4_nom_prenom”, tous les livrables du projet. Chaque livrable doit être nommé avec le numéro du projet et selon l'ordre dans lequel il apparaît, par exemple “P4_01_code”, “P4_02_export”, et ainsi de suite.
+#Chapitre "Fonctions d'aggrégation" du cours MySQL
+#Fichiers à fournir
+#Code HTML, CSS, PHP et JavaScript
+#Export de la base de données MySQL
+#Lien vers la page GitHub contenant l'historique des commits
+#(votre historique de commits doit montrer une progression régulière par petites étapes)
+
 
 Soutenance
 Votre soutenance se déroulera avec votre évaluateur Pour cette soutenance, vous vous positionnerez comme un développeur présentant pendant 25 minutes son travail à son collègue plus senior dans l’agence web afin de vérifier que le projet peut être présenté tel quel à Jean Forteroche. Cette étape sera suivie de 5 minutes de questions/réponses.

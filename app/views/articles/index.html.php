@@ -37,7 +37,6 @@
 		<p>Je suis Jean Forteroche, Venez découvrir mes histoires...</p>
 		<br />
 			<div class="row">
-
 <!-- ICI ON AFFICHE LES ARTICLES VISIBLES INDEX.PHP-->
         <?php
         foreach ($articles as $article):

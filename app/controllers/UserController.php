@@ -42,7 +42,7 @@ class UserController extends Controllers{
                 }
 
                 if(empty($_POST['pass1']) || $_POST['pass1'] != $_POST['pass2']){
-                    $errors['pass1'] = "Vous devez entrer un mot de passe cool";
+                    $errors['pass1'] = "Les mots de passe doivent etre identique !";
                 }
         
                 if(empty($errors)){ // Insertion User + Encrypt Password in Data-Base

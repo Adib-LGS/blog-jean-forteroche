@@ -29,11 +29,6 @@
         <input type="password" id="password" name="password" class="form-control" >
       </div>
 
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
       <button type="submit"  id="submit" name="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
     </form>

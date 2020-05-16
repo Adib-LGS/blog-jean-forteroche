@@ -55,13 +55,13 @@
 
 <div class="slider">
   <div class="display-table  center-text">
-    <h1 class="title display-table-cell"><b>Un Billet Pour L'Alaska</b></h1>
+    <h1 class="title display-table-cell"><b>Un Billet Simple Pour L'Alaska</b></h1>
   </div>
 </div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
 		<?php if(isset($_SESSION['role_id'])): ?>
-			<?= 'Bonjour ' . $_SESSION['pseudo'] ?>
+			<?= '<p>Bonjour ' . $_SESSION['pseudo'] .'</p>' ?>
 		<?php endif ?>
 		<br>
 			<div class="row">
@@ -71,9 +71,9 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card h-100">
 						<div class="single-post post-style-1">
-							<div class="blog-image"><img src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="images/denali3.jpeg" alt="Blog Image"></div>
 							
-							<a class="avatar" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><img src="images/denali6.jpeg" alt="Profile Image"></a>
 							<div class="blog-info">
 
 								<h4 class="title"><a href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>

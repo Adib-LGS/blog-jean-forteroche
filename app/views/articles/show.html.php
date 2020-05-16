@@ -26,7 +26,7 @@
 <!--Show User ce que voit l'utilisateur -->
 <div class="slider">
   <div class="display-table  center-text">
-    <h1 class="title display-table-cell"><b>DESIGN</b></h1>
+    <h1 class="title display-table-cell"><b>Un Billet Simple Pour L'Alaska</b></h1>
   </div>
 </div><!-- slider -->
 
@@ -36,18 +36,12 @@
       <div class="col-lg-8 col-md-12 no-right-padding">
         <div class="main-post">
           <div class="blog-post-inner">
-            <div class="post-info">
-              <div class="left-area">
-                <a class="avatar" href="#"><img src="../public/images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-              </div>
-              <div class="middle-area">
-              </div>
-            </div><!-- post-info -->
+           
             <br>
             <p class="para">
-            <h3 class="title">
+            <h1 class="title">
               <a href="#"><?= $article['title'] ?> </a>
-                </h3>
+                </h1>
                 <p>
                   <small>Ecrit le <?= $article['created_at'] ?></small>
                   </p>

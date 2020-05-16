@@ -27,13 +27,15 @@
 
 <div class="slider">
   <div class="display-table  center-text">
-    <h1 class="title display-table-cell"><b>Un Billet Simple Pour L'Alaska</b></h1>
+	<h1 class="title display-table-cell"><b>Un Billet Simple Pour L'Alaska</b></h1>
+	
   </div>
 </div><!-- slider -->
 	<section class="blog-area section">
 		<div class="container">
-		<h1>Bienvenue Sur mon Blog !</h1>
-        <p>Vous trouverez en dessous mes dérniers Posts</p>
+		<h2>Bienvenue sur mon Blog</h2>
+		<p>Je suis Jean Forteroche, Venez découvrir mes histoires...</p>
+		<br />
 			<div class="row">
 
 <!-- ICI ON AFFICHE LES ARTICLES VISIBLES INDEX.PHP-->
@@ -43,9 +45,9 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="card h-100">
 						<div class="single-post post-style-1">
-							<div class="blog-image"><img src="images/marion-michele-330691.jpg" alt="Blog Image"></div>
+							<div class="blog-image"><img src="images/denali3.jpeg" alt="Blog Image"></div>
 							
-							<a class="avatar" href="index.php?request=usercontroller&action=show&id=<?= $article['id'] ?>"><img src="images/icons8-team-355979.jpg" alt="Profile Image"></a>
+							<a class="avatar" href="index.php?request=usercontroller&action=show&id=<?= $article['id'] ?>"><img src="images/denali6.jpeg" alt="Profile Image"></a>
 							<div class="blog-info">
 
 								<h4 class="title"><a href="index.php?request=usercontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>

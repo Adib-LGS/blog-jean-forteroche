@@ -9,10 +9,10 @@
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li>
-					<a href="index.php?request=admincontroller&action=index">Accueil</a>
+					<a href="index.php?action=Aindex">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
+					<a href="index.php?action=Uindex">Deconnexion</a>
 				</li>
 			</ul>
 
@@ -33,13 +33,13 @@
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li>
-					<a href="index.php?request=admincontroller&action=index">Accueil</a>
+					<a href="index.php?action=Aindex">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?request=admincontroller&action=indexModerate">Moderation</a>
+					<a href="index.php?action=AindexModerate">Moderation</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
+					<a href="index.php?action=Uindex">Deconnexion</a>
 				</li>
 			</ul>
 				<div class="src-area">
@@ -73,10 +73,10 @@
 						<div class="single-post post-style-1">
 							<div class="blog-image"><img src="images/denali3.jpeg" alt="Blog Image"></div>
 							
-							<a class="avatar" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><img src="images/denali6.jpeg" alt="Profile Image"></a>
+							<a class="avatar" href="index.php?action=Ashow&id=<?= $article['id'] ?>"><img src="images/denali6.jpeg" alt="Profile Image"></a>
 							<div class="blog-info">
 
-								<h4 class="title"><a href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
+								<h4 class="title"><a href="index.php?action=Ashow&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
 
 								<ul class="post-footer">
 									<li><a href="#"><i class="ion-heart"></i>57</a></li>

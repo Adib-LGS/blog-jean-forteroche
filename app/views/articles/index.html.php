@@ -1,4 +1,3 @@
-<?php if(!isset($_SESSION['role_id'])): ?>
 <header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
@@ -6,13 +5,14 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 			
 				<li>
-					<a href="index.php?request=usercontroller&action=index">Accueil</a>
+					<a href="index.php?action=Uindex">Accueil</a>
+					
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=signIn">Inscription</a>
+					<a href="index.php?action=UsignIn">Inscription</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=login">Connexion</a>
+					<a href="index.php?action=Ulogin">Connexion</a>
 				</li>
 			</ul><!-- main-menu -->
 			<div class="src-area">
@@ -23,7 +23,7 @@
 			</div>
 		</div><!-- conatiner -->
 	</header>
-<?php endif ?>
+
 
 <div class="slider">
   <div class="display-table  center-text">
@@ -46,10 +46,10 @@
 						<div class="single-post post-style-1">
 							<div class="blog-image"><img src="images/denali3.jpeg" alt="Blog Image"></div>
 							
-							<a class="avatar" href="index.php?request=usercontroller&action=show&id=<?= $article['id'] ?>"><img src="images/denali6.jpeg" alt="Profile Image"></a>
+							<a class="avatar" href="index.php?action=Ushow&id=<?= $article['id'] ?>"><img src="images/denali6.jpeg" alt="Profile Image"></a>
 							<div class="blog-info">
 
-								<h4 class="title"><a href="index.php?request=usercontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
+								<h4 class="title"><a href="index.php?action=Ushow&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></b></a></h4>
 
 								<ul class="post-footer">
 									<li><a href="#"><i class="ion-heart"></i>57</a></li>

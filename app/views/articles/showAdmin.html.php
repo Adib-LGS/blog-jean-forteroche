@@ -9,10 +9,10 @@
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li>
-					<a href="index.php?request=admincontroller&action=index">Accueil</a>
+					<a href="index.php?action=Aindex">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
+					<a href="index.php?action=Uindex">Deconnexion</a>
 				</li>
 			</ul>
 
@@ -69,9 +69,9 @@
             <?= $article['content'] ?>
             <br />
               <?php if (count($commentaires) === 0) : ?>
-                  <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
+                <h3><strong>Il n'y a pas encore de commentaires pour cet article ... </strong></h3>
               <?php else : ?>
-                  <h2>Il y a déjà <?= count($commentaires) ?> réactions : </h2>
+                  <h3><strong>Il y a déjà <?= count($commentaires) ?> réactions : </strong></h3>
                   <?php foreach ($commentaires as $commentaire) : ?>
                       <h3>Commentaire de <?= $commentaire['pseudo'] ?></h3>
                       <small>Le <?= $commentaire['created_at'] ?></small>
@@ -80,7 +80,7 @@
                       </blockquote>
                       <!--Signaler un commentaire--> 
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "0" ):?>
-                      <a class="btn btn-danger btn-sm" href="index.php?request=usercontroller&action=reportComment&id_comment=<?= $commentaire['id'] ?>&id=<?= $article_id ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
+                      <a class="btn btn-danger btn-sm" href="index.php?action=UreportComment&id_comment=<?= $commentaire['id'] ?>&id=<?= $article_id ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
                       <?php endif ?>
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "1" ):?>
                         <p class="alert alert-success btn-sm" style="width: 38%">Ce commentaire à déja été signaler</p>
@@ -92,15 +92,15 @@
         </div><!-- commnets-area -->
       </div><!-- col-lg-8 col-md-12 -->
       <br>
-      <h4><b>LAISSER UN COMMENTAIRES</b></h4>
+      <h4><b>LAISSER UN COMMENTAIRE</b></h4>
       <br>
       <?php if(isset($_SESSION['pseudo']) && $_SESSION['role_id'] === "0" || $_SESSION['role_id'] === "1"): ?>
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
-              <form action="index.php?request=usercontroller&action=insert" method="POST" >
+              <form action="index.php?action=Uinsert" method="POST" >
                 <div class="form-group">
-                <input type="text"  name="pseudo" class="form-control" value="<?= $_SESSION['pseudo'] ?>">
+                <input type="hidden"  name="pseudo" class="form-control" value="<?= $_SESSION['pseudo'] ?>">
               </div><!-- col-sm-6 -->
               <div class="form-group">
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>

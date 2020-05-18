@@ -65,26 +65,18 @@ abstract class Controllers{
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
 
-
-
-        /**
-         *  Récupération de l'article en question
-         */
-
-        $articleModel = new \Models\Article();
+        /**Récupération de l'article en question*/
         $article = $this->model->find($article_id);
 
         /**Recupére les commentaires */
         $commentModel = new \Models\Comment();
         $commentaires = $commentModel->findAllCommentWithArticle($article_id);
 
-        /**
-         * Affiche 
-         */
+        /** Affiche */
         $pageTitle = $article['title'];
 
         /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        \Renderer::render("articles/{$this->renderName}", compact('article', 'commentaires', 'article_id' ));
+        \Renderer::render("articles/{$this->renderName}", compact('pageTitle','article', 'commentaires', 'article_id' ));
 
     }
 
@@ -94,6 +86,8 @@ abstract class Controllers{
         if (!empty($_POST['pseudo'])) {
             $pseudo = $_POST['pseudo'];
         }
+
+        //recuperer l'user id et le recuperer en variable de session
 
         $content = null;
         if (!empty($_POST['content'])) {
@@ -126,7 +120,7 @@ abstract class Controllers{
         $modelComment->insert($pseudo, $content, $article_id);
 
         // 4. Methode Static redirect Redirection vers l'article en question :
-        \Http::redirect("index.php?request=admincontroller&action=show&id=" . $article_id);
+        \Http::redirect("index.php?action=Ashow&id=" . $article_id);
     }
 
     /**Signaler un Commentaire :) */
@@ -165,7 +159,7 @@ abstract class Controllers{
         $commentModel = new \Models\Comment();
         $commentModel->report($id);
             
-        \Http::redirect("index.php?request=admincontroller&action=show&id=" .$article_id);         
+        \Http::redirect("index.php?action=Ashow&id=" .$article_id);         
         
     }
 }

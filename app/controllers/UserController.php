@@ -47,7 +47,7 @@ class UserController extends Controllers{
         
                 if(empty($errors)){ // Insertion User + Encrypt Password in Data-Base
                     $user = $this->model2->insertUser();
-                    \Http::redirect('index.php?request=usercontroller&action=login');//Redirection vers connexion.php
+                    \Http::redirect('index.php?action=Ulogin');//Redirection vers connexion.php
                 }
                 //\Utils::debug($errors);
             }   
@@ -86,7 +86,7 @@ class UserController extends Controllers{
                         $_SESSION['pseudo'] = $resultat['pseudo'];
                         $_SESSION['role_id'] = $resultat['role_id'];
                         $errors2['resultat'] = 'Vous êtes connecté !';
-                        \Http::redirect("index.php?request=admincontroller&action=index&" . $_SESSION['pseudo'] . $_SESSION['role_id']);
+                        \Http::redirect("index.php?action=Aindex");
                     }else{
                         $errors2['resultat'] = 'Mauvais identifiant ou mot de passe !';
                     }
@@ -100,7 +100,5 @@ class UserController extends Controllers{
         $pageTitle = "Mon compte";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/logIn', compact('pageTitle', 'errors2'));
-    }
-
-    
+    }  
 }

@@ -3,7 +3,7 @@
 
     <h4>Créer un Article</h4>
     <br />   
-        <form action="index.php?request=admincontroller&action=addArticle" method="POST" class="form-group" style="width: 50%; margin-left:20%" >
+        <form action="index.php?action=AaddArticle" method="POST" class="form-group" style="width: 50%; margin-left:20%" >
         <div class="form-group" >   
           <input  name="title" placeholder="Titre" ></input>
         </div>

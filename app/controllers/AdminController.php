@@ -10,6 +10,8 @@ namespace Controllers;
 
 
 class AdminController extends Controllers{
+
+
     
     protected $modelName = \Models\Comment::class;
     protected $secondModelName = \Models\User::class;
@@ -130,7 +132,7 @@ class AdminController extends Controllers{
                      * */
                     $modelArticle = new \Models\Article(); 
                     $modelArticle->insert($title, $introduction, $content);
-                    \Http::redirect("index.php?request=admincontroller&action=index");
+                    \Http::redirect("index.php?action=Aindex");
                 }
                 
             }
@@ -187,7 +189,7 @@ class AdminController extends Controllers{
 
 
                 $article = $articleModel->edit($title, $introduction, $content, $article_id);
-                \Http::redirect("index.php?request=admincontroller&action=index");
+                \Http::redirect("index.php?action=Aindex");
             }
 
         }
@@ -237,7 +239,7 @@ class AdminController extends Controllers{
         /**
          * Redirection vers la page d'accueil
          */
-        \Http::redirect("index.php?request=admincontroller&action=indexModerate");
+        \Http::redirect("index.php?action=AindexModerate");
 
     }
     
@@ -277,7 +279,7 @@ class AdminController extends Controllers{
          * Redirection vers l'article en question
          */
 
-        \Http::redirect("index.php?request=admincontroller&action=indexModerate");
+        \Http::redirect("index.php?action=AindexModerate");
     }
 
     /**Approuve Comment */
@@ -309,6 +311,6 @@ class AdminController extends Controllers{
          * Redirection vers l'article en question
          */
 
-        \Http::redirect("index.php?request=admincontroller&action=indexModerate");
+        \Http::redirect("index.php?action=AindexModerate");
     }
 }

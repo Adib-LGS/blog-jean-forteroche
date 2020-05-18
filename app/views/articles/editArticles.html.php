@@ -3,7 +3,7 @@
 
     <h4><b>Modifier un Article</b></h4>
     <br />   
-      <form action="index.php?request=admincontroller&action=editArticle&id=<?= $article_id ?>"  method="POST"  >
+      <form action="index.php?action=AeditArticle&id=<?= $article_id ?>"  method="POST"  >
         <div class="form-group" > 
           <input  name="title" placeholder="Ici le Nouveau Titre"><?= $article['title'] ?></input>
         </div>

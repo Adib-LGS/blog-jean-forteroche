@@ -1,4 +1,5 @@
 <?php session_start() ?>
+
 <header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
@@ -6,13 +7,13 @@
 			<ul class="main-menu visible-on-click" id="main-menu">
 			
 				<li>
-					<a href="index.php?request=usercontroller&action=index">Accueil</a>
+					<a href="index.php?action=Uindex">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=signIn">Inscription</a>
+					<a href="index.php?action=UsignIn">Inscription</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=login">Connexion</a>
+					<a href="index.php?action=Ulogin">Connexion</a>
 				</li>
 			</ul><!-- main-menu -->
 			<div class="src-area">
@@ -62,9 +63,9 @@
   <div class="container">
 <!--Admin peut Supprimer un Article -->
               <?php if (count($commentaires) === 0) : ?>
-                  <h2>Il n'y a pas encore de commentaires pour cet article ... SOYEZ LE PREMIER ! :D</h2>
+                  <h3><strong>Il n'y a pas encore de commentaires pour cet article ...</strong></h3>
               <?php else : ?>
-                  <h2>Il y a déjà <?= count($commentaires) ?> réactions : </h2>
+                  <h3><strong>Il y a déjà <?= count($commentaires) ?> réactions : </strong></h3>
                   <?php foreach ($commentaires as $commentaire) : ?>
                       <h3>Commentaire de <?= $commentaire['pseudo'] ?></h3>
                       <small>Le <?= $commentaire['created_at'] ?></small>
@@ -86,13 +87,12 @@
          
         </div><!-- commnets-area -->
       </div><!-- col-lg-8 col-md-12 -->
-      <h4><b>LAISSER UN COMMENTAIRES</b></h4>
-
+      <h4><b>LAISSER UN COMMENTAIRE</b></h4>
+      <br>
       <div class="aler alert-link">
-      <p>Si vous souhaitez laisser un commentaire n'hésiter pas à vous inscrire en cliquant sur Inscription
-        <br/>
-        <a class="btn btn-primary" href="index.php?request=usercontroller&action=signIn">Inscription</a>
-      </p>
+      <p>Si vous souhaitez laisser un commentaire n'hésiter pas à vous inscrire en cliquant sur Inscription</p>
+      <br>
+      <a class="btn btn-primary" href="index.php?action=UsignIn">Inscription</a>
       </div>
       <br/>
     </div><!-- row -->

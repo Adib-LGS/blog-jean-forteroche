@@ -6,13 +6,13 @@
 			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
 			<ul class="main-menu visible-on-click" id="main-menu">
 				<li>
-					<a href="index.php?request=admincontroller&action=index">Accueil</a>
+					<a href="index.php?action=Aindex">Accueil</a>
 				</li>
 				<li>
-				<a href="index.php?request=admincontroller&action=addArticle&id=jf">Ajouter un article</a>
+				<a href="index.php?action=AaddArticle&id=jf">Ajouter un article</a>
 				</li>
 				<li>
-					<a href="index.php?request=usercontroller&action=index">Deconnexion</a>
+					<a href="index.php?action=Uindex">Deconnexion</a>
 				</li>
 			</ul>
 				<div class="src-area">
@@ -37,14 +37,14 @@
 	<ul class="list-group">
 <?php foreach ($articles as $article):?>
   	<li class="list-group-item d-flex justify-content-between align-items-center">
-    		<a class="title" href="index.php?request=admincontroller&action=show&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></a>
+    		<a class="title" href="index.php?action=Ashow&id=<?= $article['id'] ?>"><b><?= $article['title'] ?></a>
     	<div class="btn-group">
   		<button	button type="button" class="btn btn-primary"> 
-	  		<a href="index.php?request=admincontroller&action=editArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">
+	  		<a href="index.php?action=AeditArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir modifier cet Article ?!`)">
 	  		Modifier</a>
 		</button>
   		<button type="button" class="btn btn-danger">
-  			<a href="index.php?request=admincontroller&action=deleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">
+  			<a href="index.php?action=AdeleteArticle&id=<?= $article['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer cet Article ?!`)">
   			Supprimer</a>
 		</button>
     	</div>
@@ -72,10 +72,10 @@
 			</blockquote>
 		<div class="btn-group">
 			<button type="button" class="btn btn-danger btn-sm" >
-				<a  href="index.php?request=admincontroller&action=deleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
+				<a  href="index.php?action=AdeleteComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?!`)">Supprimer</a>
 			</button>
 			<button type="button" class="btn btn-primary btn-sm"  >
-				<a href="index.php?request=admincontroller&action=approuveComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir approuver ce commentaire ?!`)">Approuver</a>
+				<a href="index.php?action=AapprouveComment&id=<?= $commentaire['id'] ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir approuver ce commentaire ?!`)">Approuver</a>
 			</button>
 		</div> 	
 <?php endif ?>

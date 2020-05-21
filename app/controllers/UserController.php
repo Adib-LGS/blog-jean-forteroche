@@ -52,21 +52,14 @@ class UserController extends Controllers{
                 //\Utils::debug($errors);
             }   
         }
-
-        /**  
-         * Affichage
-         */
+        /** Affichage*/
         $pageTitle = "Inscription";
-        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
         \Renderer::render('articles/signIn', compact('pageTitle', 'errors'));
-
     }
 
-    /**Connection */
+    /**Connexion */
     public function login(){
-        /**
-        * CE FICHIER A POUR BUT D'AFFICHER LA PAGE DE CONNECTION et de conencter les Users!
-        */
 
         if(isset($_POST)){
             $errors2 = array();
@@ -94,11 +87,10 @@ class UserController extends Controllers{
                 } 
             }
         }
-        /**
-         * Affichage
-         */
+        /** Affichage*/
         $pageTitle = "Mon compte";
-        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
         \Renderer::render('articles/logIn', compact('pageTitle', 'errors2'));
-    }  
+    }
+    
 }

@@ -12,7 +12,7 @@
 					<a href="index.php?action=Aindex">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?action=Uindex">Deconnexion</a>
+					<a href="index.php?action=Udisconnect">Deconnexion</a>
 				</li>
 			</ul>
 
@@ -39,7 +39,7 @@
 					<a href="index.php?action=AindexModerate">Moderation</a>
 				</li>
 				<li>
-					<a href="index.php?action=Uindex">Deconnexion</a>
+					<a href="index.php?action=Udisconnect">Deconnexion</a>
 				</li>
 			</ul>
 				<div class="src-area">

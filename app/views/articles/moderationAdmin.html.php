@@ -1,5 +1,8 @@
 <?php session_start() ?>
-
+<?php if(!isset($_SESSION['role_id'])):?>
+	<?php header('Location: index.php?'); die()?>
+<?php endif ?>
+<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
@@ -12,7 +15,7 @@
 				<a href="index.php?action=AaddArticle&id=jf">Ajouter un article</a>
 				</li>
 				<li>
-					<a href="index.php?action=Uindex">Deconnexion</a>
+					<a href="index.php?action=Udisconnect">Deconnexion</a>
 				</li>
 			</ul>
 				<div class="src-area">
@@ -26,11 +29,10 @@
 	
 	<br>
 
-
-<section >
+<section>
 	<h2><?= $pageTitle ?></h2>
 		<br />
-	<h3>Listes des Articles :</h3>
+	<h3>Liste des Articles :</h3>
 		<br />
 	<p>Vous pouvez Modifier ou Supprimer les articles, ou les lire en cliquant sur leurs titres</p>
 		<br />
@@ -57,7 +59,7 @@
 
 <section>
 
-	<h3>Listes des Commentaires Signalés:</h3>
+	<h3>Liste des Commentaires Signalés:</h3>
 		<br />
 	<p>Vous pouvez Modifier ou Supprimer les commentaires</p>
 		<br />
@@ -83,3 +85,4 @@
 	</li>
 	</ul>
 </section>
+<?php endif ?>

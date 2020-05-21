@@ -14,25 +14,19 @@ class AdminController extends Controllers{
 
     
     protected $modelName = \Models\Comment::class;
-    protected $secondModelName = \Models\User::class;
+    protected $secondModelName = \Models\Article::class;
     protected $renderName = "showAdmin";
 
 
     /**Show All Articles */
     public function index(){
-        /**
-         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
-         * Apl de la class Article Dossier Models
-         */
-
-        $model = new \Models\Article();
+        /** CETTE FUNCTION  A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
+         * Apl de la class Article Dossier Models*/
 
         /** Ranger les articles par Ordre Descendant */
-        $articles = $model->findAll("created_at DESC");
+        $articles = $this->model2->findAll("created_at DESC");
 
-        /**
-         * Affichage
-         */
+        /** Affichage*/
         $pageTitle = "Accueil";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/indexAdmin', compact('pageTitle','articles'));
@@ -40,20 +34,13 @@ class AdminController extends Controllers{
 
     /**Moderator Page */
     public function indexModerate(){
-        /**
-         * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
-         * Apl de la class Article Dossier Models
-         */
-
-        $model3 = new \Models\Article();
-
-        /** Ranger les articles par Ordre Descendant */
-        $articles = $model3->findAll("created_at DESC");
+        /** CETTE FUNCTION  A POUR BUT D'AFFICHER LA PAGE DE MODERATION!*/
+        
+        /** Ranger les articles par Ordre Descendant*/
+        $articles = $this->model2->findAll("created_at DESC");
         $commentaires =$this->model->findAll("created_at DESC");
 
-        /**
-         * Affichage
-         */
+        /** Affichage*/
         $pageTitle = "Espace de Moderation";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/moderationAdmin', compact('pageTitle', 'articles', 'commentaires'));
@@ -63,7 +50,7 @@ class AdminController extends Controllers{
     public function show(){
 
         /**
-         * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
+         * CETTE FUNCTION  DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
          * On doit d'abord récupérer le paramètre "id" qui sera présent en GET et vérifier son existence
          * Si on n'a pas de param "id", alors on affiche un message d'erreur !
          */
@@ -81,20 +68,13 @@ class AdminController extends Controllers{
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
 
-        /**
-         *  Récupération de l'article en question
-         */
+        /** Récupération de l'article en question*/
+        $article = $this->model2->find($article_id);
 
-        $articleModel = new \Models\Article();
-        $article = $articleModel->find($article_id);
-
-        /**Recupére les commentaires */
-       
+        /** Recupére les commentaires */
         $commentaires = $this->model->findAllCommentWithArticle($article_id);
 
-        /**
-         * Affichage 
-         */
+        /** Affichage*/
         $pageTitle = $article['title'];
 
         /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
@@ -127,21 +107,14 @@ class AdminController extends Controllers{
                     die("Votre formulaire a été mal rempli !");
                     
                 }else{
-                    /**
-                     * Insertion de l'Article
-                     * */
-                    $modelArticle = new \Models\Article(); 
-                    $modelArticle->insert($title, $introduction, $content);
+                    /** Insertion de l'Article*/
+                    $this->model2->insert($title, $introduction, $content);
                     \Http::redirect("index.php?action=Aindex");
-                }
-                
+                } 
             }
-    
         }
-         /**
-         * Affichage
-         */
-        $pageTitle = "Ajouter un Article";
+         /** Affichage*/
+        $pageTitle = "Créer un Article";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render('articles/addArticle', compact('pageTitle'));
     
@@ -150,7 +123,7 @@ class AdminController extends Controllers{
     /**Eddit Article */
     public function editArticle(){
         /**
-         * CE FICHIER DOIT AFFICHER UN ARTICLE ET LE MODIFIER !
+         * CETTE FUNCTION  DOIT AFFICHER UN ARTICLE ET LE MODIFIER !
          * On doit d'abord récupérer le paramètre "id" qui sera présent en GET et vérifier son existence
          * Si on n'a pas de param "id", alors on affiche un message d'erreur !
          */
@@ -168,117 +141,91 @@ class AdminController extends Controllers{
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
 
-        /**
-        * Récupération de l'article en question
-        */
-        $articleModel = new \Models\Article();
-        $article = $articleModel->find($article_id);
+        /** Récupération de l'article en question*/
+        $article = $this->model2->find($article_id);
 
         /** Modification de l'article */
         if(isset($_POST)){
-            if(!empty($_POST)){
-                $article_id = $_GET['id'];
-                // On commence par l'author
-                $title = htmlspecialchars($_POST['title']);
-               
-                // Ensuite l'intro
-                $introduction = htmlspecialchars($_POST['introduction']);
+            $errors = array();
+            if(!empty($_POST  && !empty($_POST['title']) AND !empty($_POST['introduction']) && !empty($_POST['content']))){
+             
+                if(empty($title = htmlspecialchars($_POST['title']))){
+                    $errors['title'] = 'Veuillez completer le titre';
+                }
 
-                // Ensuite le contenu
-                $content = htmlspecialchars($_POST['content']);
+                if(empty($introduction = htmlspecialchars($_POST['introduction']))){
+                    $errors['introduction'] = 'Veuillez completer l\'intro';
+                }
 
+                if(empty($content = htmlspecialchars($_POST['content']))){
+                    $errors['content'] = 'Veuillez ajouter du contenu';
+                }
 
-                $article = $articleModel->edit($title, $introduction, $content, $article_id);
-                \Http::redirect("index.php?action=Aindex");
+                if(empty($errors)){
+                    $article = $this->model2->edit($title, $introduction, $content, $article_id);
+                    \Http::redirect("index.php?action=Aindex");
+                }
+                //\Utils::debug($errors);
             }
-
         }
         
 
-        /**
-         * Affichage 
-         */
-        $pageTitle = $article['title'];
+        /** Affichage*/
+        $pageTitle = 'Modifier votre Article';
 
-        /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        \Renderer::render('articles/editArticles', compact('pageTitle','article', 'article_id' ));
+        /** Compact() créer un Array $k=>Value a partir des valeurs entrées*/
+        \Renderer::render('articles/editArticles', compact('pageTitle','article', 'article_id', 'errors' ));
 
     }
 
     /**Delete Article */
     public function deleteArticle(){
         /**
-         * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
+         * DANS CETTE FUNCTION  ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET
          * S'assurer qu'un paramètre "id" est bien passé en GET, puis que cet article existe bel et bien
          */
 
-        /**
-         * Vérifie que le GET possède bien un paramètre "id" 
-         */
+        /** Vérifie que le GET possède bien un paramètre "id" */
         if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
             die(" Veuillez préciser l'id de l'article !");
         }
 
         $id = $_GET['id'];
         
-        /**
-         * Vérification que l'article existe bel et bien
-         */
-        $article = new \Models\Article();
-        $article->find($id);
+        /** Vérification que l'article existe bel et bien*/
+        $article = $this->model2->find($id);
         if (!$article) {
             die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
         }
 
-        /**
-         * Réelle suppression de l'article
-         */
-        $modelArticle = new \Models\Article();
-        $modelArticle->deleteAll($id);
+        /** Suppression de l'article et des Comments Associés*/
+        $this->model2->deleteAll($id);
 
-        /**
-         * Redirection vers la page d'accueil
-         */
+        /** Redirection vers la page d'accueil*/
         \Http::redirect("index.php?action=AindexModerate");
-
     }
     
     /**Delete Comment*/
     public function deleteComment(){
-        /**
-         * DANS CE FICHIER ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
-         */
+        /** DANS CETTE FUNCTION ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !*/
 
-        /**
-         * Récupération du paramètre "id" en GET
-         */
+        /** Récupération du paramètre "id" en GET*/
         if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
             die(" Veuillez préciser le paramètre 'id' en GET !");
         }
 
         $id = $_GET['id'];
 
-        /**
-         * Vérification de l'existence du commentaire
-         */
+        /** Vérification de l'existence du commentaire*/
         $commentaire = $this->model->find($id);
         if (!$commentaire) {
             die("Aucun commentaire n'a l'identifiant $id !");
         }
 
-        /**
-         * Suppression réelle du commentaire
-         * On récupère l'identifiant de l'article avant de supprimer le commentaire
-         */
-
-        $article_id = $commentaire['article_id'];
-
+        /** Suppression du commentaire*/
         $this->model->delete($id);
 
-        /**
-         * Redirection vers l'article en question
-         */
-
+        /** Redirection vers l'article en question*/
         \Http::redirect("index.php?action=AindexModerate");
     }
 
@@ -298,18 +245,10 @@ class AdminController extends Controllers{
             die("Aucun commentaire n'a l'identifiant $id !");
         }
 
-        /**
-         * Suppression réelle du commentaire
-         * On récupère l'identifiant de l'article avant de supprimer le commentaire
-         */
-
-        $article_id = $commentaire['article_id'];
-
+        /**Approbation du commentaire */
         $this->model->approuve($id);
 
-        /**
-         * Redirection vers l'article en question
-         */
+        /** Redirection vers la page de Moderation*/
 
         \Http::redirect("index.php?action=AindexModerate");
     }

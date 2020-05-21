@@ -11,43 +11,36 @@ namespace Controllers;
 abstract class Controllers{
 
     // Keep the good Model With the good Controllers
-    protected $modelName; // \Models\Article ou \Models\Comment ect...
-    protected $secondModelName; // \Models\Admin ou \Models\User ect...
+    protected $modelName; // \Models\Article or \Models\Comment 
+    protected $secondModelName; // \Models\Admin or \Models\User 
     protected $renderName;
 
     public function __construct()
     {
-        $this->model = new $this->modelName(); //$this->modelArticle = new \Models\Article() || $this->modelComment = new \Models\Comment();
-        $this->model2 = new $this->secondModelName();
+        $this->model = new $this->modelName(); 
+        $this->model2 = new $this->secondModelName(); 
     }
 
     /**Show list Articles */
     public function index(){
         
-        /**
-        * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
-        * Apl de la class Article Dossier Models
-        */
-        /** Ranger les articles par Ordre Descendant */
+        /** CETTE FUNCTION  A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL ! Apl de la class Article Dossier Models*/
+
+        /** Ranger les articles par Ordre Descendant*/
         $articles = $this->model->findAll("created_at DESC");
         
-        /**
-         * Affichage
-         */
+        /** Affichage*/
         $pageTitle = "Mon superbe blog By Jean Forteroche";
-        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
-        \Renderer::render('articles/index', compact('pageTitle','articles'));
-    
-        
+        /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
+        \Renderer::render('articles/index', compact('pageTitle','articles'));  
 
     }
 
-
-    /**show Article */
+    /**Show Article && Comments */
     public function show(){
 
         /**
-         * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
+         * CETTE FUNCTION  DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
          * On doit d'abord récupérer le paramètre "id" qui sera présent en GET et vérifier son existence
          * Si on n'a pas de param "id", alors on affiche un message d'erreur !
          */
@@ -60,27 +53,25 @@ abstract class Controllers{
             $article_id = $_GET['id'];
         }
 
-
         if (!$article_id) {
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
 
-        /**Récupération de l'article en question*/
+        /** Récupération de l'article en question*/
         $article = $this->model->find($article_id);
 
-        /**Recupére les commentaires */
+        /** Recupére les commentaires*/
         $commentModel = new \Models\Comment();
         $commentaires = $commentModel->findAllCommentWithArticle($article_id);
 
-        /** Affiche */
+        /** Affiche*/
         $pageTitle = $article['title'];
 
-        /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        /** Compact() créer un Array $k=>Value a partir des valeurs entrées*/
         \Renderer::render("articles/{$this->renderName}", compact('pageTitle','article', 'commentaires', 'article_id' ));
-
     }
 
-    /**Insert  Comment */
+    /**Insert Comment */
     public function insert(){
         $pseudo = null;
         if (!empty($_POST['pseudo'])) {
@@ -112,23 +103,17 @@ abstract class Controllers{
             die("Ho ! L'article $article_id n'existe pas.");
         }
 
-        /**
-         * Insertion du commentaire
-         * */
-        
+        /** Insertion du commentaire*/
         $modelComment = new \Models\Comment(); 
         $modelComment->insert($pseudo, $content, $article_id);
 
-        // 4. Methode Static redirect Redirection vers l'article en question :
+        /** Methode Static redirect Redirection vers l'article en question*/
         \Http::redirect("index.php?action=Ashow&id=" . $article_id);
     }
 
     /**Signaler un Commentaire :) */
     public function reportComment(){
-        /**
-         * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
-         * On va Signaler le commentaire
-         */
+        /** CETTE FUNCTION DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES ! On va Signaler le commentaire*/
 
         // On part du principe qu'on possède le param "id"
         $article_id = $_GET['id'];
@@ -151,15 +136,24 @@ abstract class Controllers{
         }
         
 
-         /**
-         * Signalement  du commentaire
-         * On récupère l'identifiant de l'article avant de signaler le commentaire
-         */
+        /** Signalement  du commentaire On récupère l'identifiant de l'article avant de signaler le commentaire*/
         $id = $comment_id;
         $commentModel = new \Models\Comment();
         $commentModel->report($id);
             
         \Http::redirect("index.php?action=Ashow&id=" .$article_id);         
         
+    }
+
+    /**Disconnect */
+    public function disconnect(){
+        $disconnect = session_start();
+
+        if($disconnect){
+            session_destroy();
+            \Http::redirect('index.php?');
+        }else{
+            die('Il y a une erreur de droit');
+        }
     }
 }

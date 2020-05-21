@@ -16,7 +16,7 @@ class Database{
         if(self::$connexion === null){
 
             //Alors on crée une connexion
-            self::$connexion = new PDO('mysql:host=localhost;dbname=blogpoo;charset=utf8', 'root', 'root', [
+            self::$connexion = new PDO('mysql:host=localhost;dbname=alaska;charset=utf8', 'root', 'root', [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]);

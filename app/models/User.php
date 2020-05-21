@@ -40,6 +40,8 @@ class User extends Model {
     $req->execute(array($pseudoConnect));
     $resultat = $req->fetch();
     return $resultat;
-    } 
+    }
+    
+    
     
 }

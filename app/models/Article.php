@@ -42,6 +42,11 @@ class Article extends Model{
         $query->execute(array($id));
         $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
         $query->execute(array($id));
+
+        /**
+         * $query = $this->pdo->prepare("ALTER TABLE comments ADD CONSTRAINT fk_article_id FOREIGN KEY (article_id = ?) REFERENCES articles (id = ?) ON DELETE CASCADE ON UPDATE CASCADE");
+         * $query->execute(array($id));
+         */
     }
 
 }

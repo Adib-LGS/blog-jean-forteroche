@@ -11,14 +11,16 @@ class Article extends Model{
 
     /**
     * Insert Article in DataBase
-    * @param  $title
+    * @param string $title
     * @param string $introduction
     * @param string $content
+    * @param int $author_id
     * @return void  
+    * Using Fireign Key in db
     */
-     public function insert($title,  string $introduction, string $content) :void{
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} (title, introduction, content, created_at) VALUES( :title, :introduction, :content, NOW())");
-        $query->execute(compact('title', 'introduction', 'content'));
+     public function insert(string $title,  string $introduction, string $content, int $author_id) :void{
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} (title, introduction, content, author_id, created_at) VALUES( :title, :introduction, :content, :author_id, NOW())");
+        $query->execute(compact('title', 'introduction', 'content', 'author_id'));
     }
 
     /**Eddit Articles
@@ -36,17 +38,11 @@ class Article extends Model{
     /**Delete Articles with All linked comments
     * @param integer $id
     * @return void 
+    * Using Fireign Key in db
     */
     public function deleteAll(int $id) :void{
-        $query = $this->pdo->prepare("DELETE FROM comments WHERE article_id = ?");
-        $query->execute(array($id));
         $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
         $query->execute(array($id));
-
-        /**
-         * $query = $this->pdo->prepare("ALTER TABLE comments ADD CONSTRAINT fk_article_id FOREIGN KEY (article_id = ?) REFERENCES articles (id = ?) ON DELETE CASCADE ON UPDATE CASCADE");
-         * $query->execute(array($id));
-         */
     }
 
 }

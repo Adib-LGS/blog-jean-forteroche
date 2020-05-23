@@ -12,7 +12,7 @@
 					<a href="index.php?action=Aindex">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?action=Uindex">Deconnexion</a>
+					<a href="index.php?action=Udisconnect">Deconnexion</a>
 				</li>
 			</ul>
 
@@ -98,7 +98,7 @@
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
-              <form action="index.php?action=Uinsert" method="POST" >
+              <form action="index.php?action=Uinsert&id=" method="POST" >
                 <div class="form-group">
                 <input type="hidden"  name="pseudo" class="form-control" value="<?= $_SESSION['pseudo'] ?>">
               </div><!-- col-sm-6 -->
@@ -106,7 +106,7 @@
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
                     <input type="hidden" name="article_id" value="<?= $article_id ?>">
               </div>
-                    <button class="btn btn-primary" type="submit" id="form-submit"><b>COMMENTER</b></button>
+                    <button class="btn btn-primary" type="submit" id="form-submit" name="user_id" value="<?= $_SESSION['id'] ?>"><b>COMMENTER</b></button>
                 </form>
                 <br />
                 </div><!-- col-sm-12 -->

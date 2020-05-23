@@ -20,27 +20,30 @@ class Router {
                 $controller = substr($action,0, 1); // récuperer la premiere lettre de $action
                 $restAction = substr($action,1,strlen($action)-1); // ce qui reste de l'action $action sauf la premiere lettre index (serController)
                 //var_dump($action, $controller, $restAction);
-                switch($controller){
+                switch($controller):
             
-                    case "U":{
+                    case "U":
                         $controllerName = "UserController";
                         $controllerName = "\Controllers\\" .$controllerName;
                         $controller = new $controllerName();
                         $controller->$restAction();
-                    }
+                    
                 break;
             
-                    case "A":{
+                    case "A":
                         $controllerName = "AdminController";
                         $controllerName = "\Controllers\\" .$controllerName;
                         $controller = new $controllerName();
                         $controller->$restAction();
-                    }
+                    
                 break;
-    
-                }
 
-            }else {
+                    default :
+                    throw new Exception('BAD IDEA');
+                endswitch;
+    
+            }elseif(!isset($_GET['action'])){
+
                 $restAction = 'index';
                 $controllerName = "UserController";
                 $controllerName = "\Controllers\\" .$controllerName;
@@ -48,8 +51,8 @@ class Router {
                 $controller->$restAction();
             }
 
-        }catch(\Exception $e){
-            echo ($e ->getMessage());   
+        }catch(Exception $e){
+            die('Erreur : '.$e->getMessage()); 
         }        
     }
 }

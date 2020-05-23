@@ -12,7 +12,7 @@
 					<a href="index.php?action=Aindex">Accueil</a>
 				</li>
 				<li>
-				<a href="index.php?action=AaddArticle&id=jf">Ajouter un article</a>
+				<a href="index.php?action=AaddArticle&id=">Ajouter un article</a>
 				</li>
 				<li>
 					<a href="index.php?action=Udisconnect">Deconnexion</a>

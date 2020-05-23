@@ -82,7 +82,7 @@ class AdminController extends Controllers{
 
     }
 
-    /**Create  Article */
+    /**Create Article */
     public function addArticle(){
 
         /**
@@ -102,13 +102,14 @@ class AdminController extends Controllers{
                 // Ensuite le contenu
                 $content = htmlspecialchars($_POST['content']);
 
+                $author_id = $_POST['author_id'];
                 // On vérifie un minimum
                 if (!$title || !$introduction || !$content) {
                     die("Votre formulaire a été mal rempli !");
                     
                 }else{
                     /** Insertion de l'Article*/
-                    $this->model2->insert($title, $introduction, $content);
+                    $this->model2->insert($title, $introduction, $content, $author_id);
                     \Http::redirect("index.php?action=Aindex");
                 } 
             }

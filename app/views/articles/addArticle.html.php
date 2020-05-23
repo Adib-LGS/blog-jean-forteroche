@@ -1,5 +1,5 @@
 <?php session_start() ?>
-<?php if(!isset($_SESSION['role_id'])):?>
+<?php if(!isset($_SESSION['id']) === 1):?>
 	<?php header('Location: index.php?'); die()?>
 <?php endif ?>
 <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
@@ -26,7 +26,8 @@
 <?php endif ?> 
 <br>
 <section class="article" style="width: 50%; margin-left:20%" >
-    <p><strong><?= $pageTitle ?></strong></p>
+	<p><strong><?= $pageTitle ?></strong></p>
+
     <br />   
         <form action="index.php?action=AaddArticle" method="POST" class="form-group">
         <div class="form-group" >   
@@ -34,11 +35,11 @@
         </div>
           <div class="form-group" >
           <input  name="introduction" placeholder="Introduction" ></input>
-          </div>
-          
+		  </div>
+		  
           <textarea id="tiny" name="content" id="" placeholder="Contenu"></textarea>
         <br/>
        
-      <button class="btn btn-primary" type="submit" id="form-submit" name="article_id"  >Poster</button>
+      <button class="btn btn-primary" type="submit" id="form-submit" name="author_id"  value="<?= $_SESSION['id'] ?>" >Poster</button>
         </form>
 </section>

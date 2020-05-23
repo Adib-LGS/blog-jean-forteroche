@@ -27,11 +27,13 @@ class Comment extends Model{
     * @param string $pseudo
     * @param string $content
     * @param string $article_id
-    * @return void  
+    * @param int $user_id
+    * @return void
+    * Using Fireign Key in db  
     */
-    public function insert(string $pseudo, string $content, int $article_id) :void {
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET pseudo = :pseudo, content = :content, article_id = :article_id, created_at = NOW()");
-        $query->execute(compact('pseudo', 'content', 'article_id'));
+    public function insert(string $pseudo, string $content, int $article_id, int $user_id) :void {
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET pseudo = :pseudo, content = :content, article_id = :article_id, user_id = :user_id, created_at = NOW()");
+        $query->execute(compact('pseudo', 'content', 'article_id', 'user_id'));
     }
 
 

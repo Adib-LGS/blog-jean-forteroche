@@ -78,6 +78,7 @@ class UserController extends Controllers{
                         session_start();
                         $_SESSION['pseudo'] = $resultat['pseudo'];
                         $_SESSION['role_id'] = $resultat['role_id'];
+                        $_SESSION['id'] = $resultat['id'];
                         $errors2['resultat'] = 'Vous êtes connecté !';
                         \Http::redirect("index.php?action=Aindex");
                     }else{

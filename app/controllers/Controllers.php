@@ -90,6 +90,11 @@ abstract class Controllers{
             $article_id = $_POST['article_id'];
         }
 
+        $user_id = null;
+        if (!empty($_POST['user_id']) && ctype_digit($_POST['user_id'])) {
+            $user_id = $_POST['user_id'];
+        }
+
         if ( !$article_id || !$content) {
             die("Votre formulaire a été mal rempli !");
         }
@@ -105,7 +110,7 @@ abstract class Controllers{
 
         /** Insertion du commentaire*/
         $modelComment = new \Models\Comment(); 
-        $modelComment->insert($pseudo, $content, $article_id);
+        $modelComment->insert($pseudo, $content, $article_id, $user_id);
 
         /** Methode Static redirect Redirection vers l'article en question*/
         \Http::redirect("index.php?action=Ashow&id=" . $article_id);

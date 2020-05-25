@@ -32,8 +32,7 @@ abstract class Controllers{
         /** Affichage*/
         $pageTitle = "Mon superbe blog By Jean Forteroche";
         /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
-        \Renderer::render('articles/index', compact('pageTitle','articles'));  
-
+        \Renderer::render('articles/index', compact('pageTitle','articles')); 
     }
 
     /**Show Article && Comments */
@@ -73,47 +72,35 @@ abstract class Controllers{
 
     /**Insert Comment */
     public function insert(){
-        $pseudo = null;
-        if (!empty($_POST['pseudo'])) {
-            $pseudo = $_POST['pseudo'];
+        
+        if(isset($_POST)){
+            if(!empty($_POST['content']) AND !empty($_POST['article_id'])){
+                $content = htmlspecialchars($_POST['content']);
+                $article_id = htmlspecialchars($_POST['article_id']);
+                $user_id = $_SESSION['id'];
+
+                if ( !$article_id || !$content) {
+                    die("Votre formulaire a été mal rempli !");
+                }else{
+
+                     //Retrouver L'Article
+                    $article = new \Models\Article();
+                    $article->find($article_id);
+
+                    // Si rien n'est revenu, on fait une erreur
+                    if (!$article) {
+                        die("Ho ! L'article $article_id n'existe pas.");
+                    }
+
+                    /** Insertion du commentaire*/
+                    $modelComment = new \Models\Comment(); 
+                    $modelComment->insert($content, $article_id, $user_id);
+
+                    /** Methode Static redirect Redirection vers l'article en question*/
+                    \Http::redirect("index.php?action=Ashow&id=" . $article_id);
+                }
+            }
         }
-
-        //recuperer l'user id et le recuperer en variable de session
-
-        $content = null;
-        if (!empty($_POST['content'])) {
-            $content = htmlspecialchars($_POST['content']);
-        }
-
-        $article_id = null;
-        if (!empty($_POST['article_id']) && ctype_digit($_POST['article_id'])) {
-            $article_id = $_POST['article_id'];
-        }
-
-        $user_id = null;
-        if (!empty($_POST['user_id']) && ctype_digit($_POST['user_id'])) {
-            $user_id = $_POST['user_id'];
-        }
-
-        if ( !$article_id || !$content) {
-            die("Votre formulaire a été mal rempli !");
-        }
-
-        //Retrouver L'Article
-        $article = new \Models\Article();
-        $article->find($article_id);
-
-        // Si rien n'est revenu, on fait une erreur
-        if (!$article) {
-            die("Ho ! L'article $article_id n'existe pas.");
-        }
-
-        /** Insertion du commentaire*/
-        $modelComment = new \Models\Comment(); 
-        $modelComment->insert($pseudo, $content, $article_id, $user_id);
-
-        /** Methode Static redirect Redirection vers l'article en question*/
-        \Http::redirect("index.php?action=Ashow&id=" . $article_id);
     }
 
     /**Signaler un Commentaire :) */
@@ -158,7 +145,7 @@ abstract class Controllers{
             session_destroy();
             \Http::redirect('index.php?');
         }else{
-            die('Il y a une erreur de droit');
+            die('Il y a une erreur de destruction des biens');
         }
     }
 }

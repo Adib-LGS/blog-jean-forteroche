@@ -1,5 +1,3 @@
-<?php session_start() ?>
-
 <header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
@@ -68,7 +66,6 @@
                   <h3><strong>Il y a déjà <?= count($commentaires) ?> réactions : </strong></h3>
                   <?php foreach ($commentaires as $commentaire) : ?>
                       <h3>Commentaire de <?= $commentaire['pseudo'] ?></h3>
-                      <small>Le <?= $commentaire['created_at'] ?></small>
                       <blockquote>
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>

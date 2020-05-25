@@ -1,5 +1,4 @@
-<?php session_start() ?>
-<?php if(!isset($_SESSION['role_id'])):?>
+<?php if(!isset($_SESSION['id']) && $_SESSION['id'] != "1" || $_SESSION['role_id'] != "1"):?>
 	<?php header('Location: index.php?'); die()?>
 <?php endif ?>
 <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>

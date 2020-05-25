@@ -39,7 +39,7 @@ class AdminController extends Controllers{
         /** Ranger les articles par Ordre Descendant*/
         $articles = $this->model2->findAll("created_at DESC");
         $commentaires =$this->model->findAll("created_at DESC");
-
+        
         /** Affichage*/
         $pageTitle = "Espace de Moderation";
         /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
@@ -91,7 +91,7 @@ class AdminController extends Controllers{
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
         if(isset($_POST)){
-            if(!empty($_POST) && !empty($_POST['title']) AND !empty($_POST['content'])){
+            if(!empty($_POST) && !empty(htmlspecialchars($_POST['title'])) AND !empty(htmlspecialchars($_POST['content']))){
 
                 // On commence par l'author
                 $title = htmlspecialchars($_POST['title']);
@@ -102,7 +102,7 @@ class AdminController extends Controllers{
                 // Ensuite le contenu
                 $content = htmlspecialchars($_POST['content']);
 
-                $author_id = $_POST['author_id'];
+                $author_id = htmlspecialchars($_POST['author_id']);
                 // On vérifie un minimum
                 if (!$title || !$introduction || !$content) {
                     die("Votre formulaire a été mal rempli !");
@@ -148,7 +148,7 @@ class AdminController extends Controllers{
         /** Modification de l'article */
         if(isset($_POST)){
             $errors = array();
-            if(!empty($_POST  && !empty($_POST['title']) AND !empty($_POST['introduction']) && !empty($_POST['content']))){
+            if(!empty($_POST  && !empty(htmlspecialchars($_POST['title'])) AND !empty(htmlspecialchars($_POST['introduction'])) && !empty(htmlspecialchars($_POST['content'])))){
              
                 if(empty($title = htmlspecialchars($_POST['title']))){
                     $errors['title'] = 'Veuillez completer le titre';

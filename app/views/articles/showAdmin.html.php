@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <?php if(!isset($_SESSION['role_id'])):?>
   <?php header('Location: index.php?'); die()?>
 <?php endif ?>
@@ -74,7 +73,6 @@
                   <h3><strong>Il y a déjà <?= count($commentaires) ?> réactions : </strong></h3>
                   <?php foreach ($commentaires as $commentaire) : ?>
                       <h3>Commentaire de <?= $commentaire['pseudo'] ?></h3>
-                      <small>Le <?= $commentaire['created_at'] ?></small>
                       <blockquote>
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
@@ -94,19 +92,18 @@
       <br>
       <h4><b>LAISSER UN COMMENTAIRE</b></h4>
       <br>
-      <?php if(isset($_SESSION['pseudo']) && $_SESSION['role_id'] === "0" || $_SESSION['role_id'] === "1"): ?>
+      <?php if(isset($_SESSION['id']) && $_SESSION['role_id'] === "0" || $_SESSION['role_id'] === "1"): ?>
+        
       <div class="comment-form">
             <div class="row">
               <div class="col-sm-6">
-              <form action="index.php?action=Uinsert&id=" method="POST" >
-                <div class="form-group">
-                <input type="hidden"  name="pseudo" class="form-control" value="<?= $_SESSION['pseudo'] ?>">
-              </div><!-- col-sm-6 -->
+              <form action="index.php?action=Uinsert" method="POST" >
+    
               <div class="form-group">
                     <textarea name="content" id="" rows="2" class="text-area-messge form-control" placeholder="Votre commentaire ..."></textarea>
                     <input type="hidden" name="article_id" value="<?= $article_id ?>">
               </div>
-                    <button class="btn btn-primary" type="submit" id="form-submit" name="user_id" value="<?= $_SESSION['id'] ?>"><b>COMMENTER</b></button>
+                    <button class="btn btn-primary" type="submit" id="form-submit" name="user_id"><b>COMMENTER</b></button>
                 </form>
                 <br />
                 </div><!-- col-sm-12 -->

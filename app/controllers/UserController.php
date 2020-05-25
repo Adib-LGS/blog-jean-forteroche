@@ -75,7 +75,6 @@ class UserController extends Controllers{
                      // Comparaison du pass envoyé via le formulaire avec la base
                      $isPasswordCorrect = password_verify($_POST['password'], $resultat['pass']);
                      if(($isPasswordCorrect)){
-                        session_start();
                         $_SESSION['pseudo'] = $resultat['pseudo'];
                         $_SESSION['role_id'] = $resultat['role_id'];
                         $_SESSION['id'] = $resultat['id'];
@@ -93,5 +92,12 @@ class UserController extends Controllers{
         /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
         \Renderer::render('articles/logIn', compact('pageTitle', 'errors2'));
     }
+
+    /*public function error(){
+
+        try//{
+            
+        }
+    }*/
     
 }

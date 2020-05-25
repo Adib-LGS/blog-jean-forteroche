@@ -1,5 +1,4 @@
-<?php session_start() ?>
-<?php if(!isset($_SESSION['role_id'])):?>
+<?php if(!isset($_SESSION['id']) && $_SESSION['id'] != "1" || $_SESSION['role_id'] != "1"):?>
 	<?php header('Location: index.php?'); die()?>
 <?php endif ?>
 <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
@@ -61,16 +60,15 @@
 
 	<h3>Liste des Commentaires Signalés:</h3>
 		<br />
-	<p>Vous pouvez Modifier ou Supprimer les commentaires</p>
+	<p>Vous pouvez Approuver ou Supprimer les commentaires</p>
 		<br />
 	<ul class="list-group">
 <?php foreach ($commentaires as $commentaire) : ?>
 <?php if ($commentaire['reports_id'] === "1") : ?>
 	<li class="list-group-item d-flex justify-content-between align-items-center">
-			<h3>Commentaire de <?= $commentaire['pseudo'] ?></h3>
-				<small>Le <?= $commentaire['created_at'] ?></small>
+			<h4>Commentaire Signalé :</h4>
 			<blockquote>
-					<em><?= $commentaire['content'] ?></em>
+					<p><strong><?= $commentaire['content'] ?></strong></p>
 			</blockquote>
 		<div class="btn-group">
 			<button type="button" class="btn btn-danger btn-sm" >

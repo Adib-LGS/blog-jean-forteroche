@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 <title> <?= $pageTitle ?></title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,21 +15,6 @@
 
 	<script src="https://cdn.tiny.cloud/1/7y7wzz7wq0b0923cyy3t04n91woxhnkekhmppfwjifbl7gla/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     
- 	<script>
-    tinymce.init({
-      selector: '#tiny',
-      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable  tinymcespellchecker bbcode',
-	  spellchecker_language: 'fr',
-  	  bbcode_dialect: "punbb",
-	  toolbar: 'undo redo | styleselect | bold italic | link image',
-      toolbar_mode: 'floating',
-  	  language: 'fr_FR',
-      width: 600,
-      height: 300,
-    });
-
-  	</script>
-	
 </head>
 <body >
 
@@ -60,5 +45,22 @@
 	<script src="common-js/tether.min.js"></script>
 	<script src="common-js/bootstrap.js"></script>
 	<script src="common-js/scripts.js"></script>
+
+	<script>
+    tinymce.init({
+      selector: '#tiny',
+      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable  bbcode',
+	  bbcode_dialect: 'punbb',
+	  toolbar: 'undo redo | styleselect | bold italic | link image',
+      toolbar_mode: 'floating',
+  	  language: 'fr_FR',
+      width: 600,
+      height: 300,
+	  convert_fonts_to_spans : false,
+	  element_format : 'html',
+	  entities : '160,nbsp,162,cent,8364,euro,163,pound'
+    });
+
+  	</script>
 </body>
 </html>

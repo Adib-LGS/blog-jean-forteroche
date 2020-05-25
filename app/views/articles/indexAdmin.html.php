@@ -1,8 +1,7 @@
-<?php session_start()?>
-<?php if(!isset($_SESSION['role_id'])):?>
-	<?php header('Location: index.php?'); die()?>
+<?php if(!isset($_SESSION['id'])):?>
+	<?php header('Location: index.php?') ?>
 <?php endif ?>
-<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" ): ?>
+<?php if(isset($_SESSION['id']) && $_SESSION['role_id'] === "0" ): ?>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>
@@ -26,7 +25,7 @@
 	</header>
 <?php endif ?>
 
-<?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
+<?php if(isset($_SESSION['id']) && $_SESSION['role_id']=== "1"): ?>
 	<header>
 		<div class="container-fluid position-relative no-side-padding">
 			<a href="#" class="logo"><img src="images/logo.png" alt="Logo Image"></a>

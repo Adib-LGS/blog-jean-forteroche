@@ -1,5 +1,4 @@
-<?php session_start() ?>
-<?php if(!isset($_SESSION['id']) === 1):?>
+<?php if(!isset($_SESSION['id']) && $_SESSION['id'] != "1" || $_SESSION['role_id'] != "1"):?>
 	<?php header('Location: index.php?'); die()?>
 <?php endif ?>
 <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" ): ?>
@@ -36,8 +35,9 @@
           <div class="form-group" >
           <input  name="introduction" placeholder="Introduction" ></input>
 		  </div>
-		  
-          <textarea id="tiny" name="content" id="" placeholder="Contenu"></textarea>
+		  <div class="form-group" >
+		  <textarea id="tiny" name="content" id="" placeholder="Contenu"></textarea>
+		  <div>
         <br/>
        
       <button class="btn btn-primary" type="submit" id="form-submit" name="author_id"  value="<?= $_SESSION['id'] ?>" >Poster</button>

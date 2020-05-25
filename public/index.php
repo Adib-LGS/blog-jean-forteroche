@@ -8,4 +8,5 @@
 require_once '../app/autoload.php';
 
 /**Apl du Router Method Static */
+session_start();
 \Router::route();

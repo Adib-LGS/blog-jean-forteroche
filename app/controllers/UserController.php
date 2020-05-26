@@ -7,6 +7,8 @@
  */
 
 namespace Controllers;
+
+use Exception;
 use Renderer;
 
 
@@ -92,12 +94,5 @@ class UserController extends Controllers{
         /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
         \Renderer::render('articles/logIn', compact('pageTitle', 'errors2'));
     }
-
-    /*public function error(){
-
-        try//{
-            
-        }
-    }*/
     
 }

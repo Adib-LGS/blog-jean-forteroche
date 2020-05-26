@@ -148,4 +148,13 @@ abstract class Controllers{
             die('Il y a une erreur de destruction des biens');
         }
     }
+
+    /**Error Page */
+    public function indexError(){
+        /** Affichage*/
+        $pageTitle = "The page you requested was not found.";
+        
+
+        \Renderer::render("articles/{$this->renderName}", compact('pageTitle')); 
+    }
 }

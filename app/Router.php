@@ -50,12 +50,13 @@ class Router {
             }
 
         }catch(Exception $e){
-            $restAction = 'error';
-                $controllerName = "UserController";
+            $e->getMessage();
+            $restAction = 'indexError';
+                $controllerName = "ErrorController";
                 $controllerName = "\Controllers\\" .$controllerName;
                 $controller = new $controllerName();
                 $controller->$restAction();
-                $e->getMessage();
+                
         }        
     }
 }

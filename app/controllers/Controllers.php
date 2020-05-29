@@ -22,11 +22,9 @@ abstract class Controllers{
     }
 
     /**Show list Articles */
-    public function index(){
-        
+    public function index(){        
         /** CETTE FUNCTION  A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL ! Apl de la class Article Dossier Models*/
 
-        /** Ranger les articles par Ordre Descendant*/
         $articles = $this->model->findAll("created_at DESC");
         
         /** Affichage*/
@@ -66,7 +64,6 @@ abstract class Controllers{
         /** Affiche*/
         $pageTitle = $article['title'];
 
-        /** Compact() créer un Array $k=>Value a partir des valeurs entrées*/
         \Renderer::render("articles/{$this->renderName}", compact('pageTitle','article', 'commentaires', 'article_id' ));
     }
 
@@ -82,11 +79,8 @@ abstract class Controllers{
                 if ( !$article_id || !$content) {
                     die("Votre formulaire a été mal rempli !");
                 }else{
-
-                     //Retrouver L'Article
                     $article = new \Models\Article();
                     $article->find($article_id);
-
                     // Si rien n'est revenu, on fait une erreur
                     if (!$article) {
                         die("Ho ! L'article $article_id n'existe pas.");
@@ -96,7 +90,6 @@ abstract class Controllers{
                     $modelComment = new \Models\Comment(); 
                     $modelComment->insert($content, $article_id, $user_id);
 
-                    /** Methode Static redirect Redirection vers l'article en question*/
                     \Http::redirect("index.php?action=Ashow&id=" . $article_id);
                 }
             }
@@ -153,7 +146,6 @@ abstract class Controllers{
     public function indexError(){
         /** Affichage*/
         $pageTitle = "The page you requested was not found.";
-        
 
         \Renderer::render("articles/{$this->renderName}", compact('pageTitle')); 
     }

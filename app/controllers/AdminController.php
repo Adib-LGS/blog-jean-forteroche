@@ -32,17 +32,17 @@ class AdminController extends Controllers{
         \Renderer::render('articles/indexAdmin', compact('pageTitle','articles'));
     }
 
-    /**Moderator Page */
+    /**Moderator Page Rendering */
     public function indexModerate(){
         /** CETTE FUNCTION  A POUR BUT D'AFFICHER LA PAGE DE MODERATION!*/
         
-        /** Ranger les articles par Ordre Descendant*/
+        
         $articles = $this->model2->findAll("created_at DESC");
         $commentaires =$this->model->findAll("created_at DESC");
         
         /** Affichage*/
         $pageTitle = "Espace de Moderation";
-        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        
         \Renderer::render('articles/moderationAdmin', compact('pageTitle', 'articles', 'commentaires'));
     }
       
@@ -63,21 +63,16 @@ class AdminController extends Controllers{
             $article_id = $_GET['id'];
         }
 
-
         if (!$article_id) {
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
-
-        /** Récupération de l'article en question*/
         $article = $this->model2->find($article_id);
-
-        /** Recupére les commentaires */
+       
         $commentaires = $this->model->findAllCommentWithArticle($article_id);
 
         /** Affichage*/
         $pageTitle = $article['title'];
 
-        /**Compact() créer un Array $k=>Value a partir des valeurs entrées */
         \Renderer::render("articles/{$this->renderName}", compact('pageTitle','article', 'commentaires', 'article_id' ));
 
     }
@@ -91,15 +86,13 @@ class AdminController extends Controllers{
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
         if(isset($_POST)){
+        
             if(!empty($_POST) && !empty(htmlspecialchars($_POST['title'])) AND !empty(htmlspecialchars($_POST['content']))){
-
-                // On commence par l'author
+                
                 $title = htmlspecialchars($_POST['title']);
-               
-                // Ensuite l'intro
+
                 $introduction = htmlspecialchars($_POST['introduction']);
 
-                // Ensuite le contenu
                 $content = htmlspecialchars($_POST['content']);
 
                 $author_id = htmlspecialchars($_POST['author_id']);
@@ -116,7 +109,7 @@ class AdminController extends Controllers{
         }
          /** Affichage*/
         $pageTitle = "Créer un Article";
-        /**Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées */
+        
         \Renderer::render('articles/addArticle', compact('pageTitle'));
     
     }
@@ -142,7 +135,6 @@ class AdminController extends Controllers{
             die("Vous devez préciser un paramètre `id` dans l'URL !");
         }
 
-        /** Récupération de l'article en question*/
         $article = $this->model2->find($article_id);
 
         /** Modification de l'article */
@@ -174,9 +166,7 @@ class AdminController extends Controllers{
         /** Affichage*/
         $pageTitle = 'Modifier votre Article';
 
-        /** Compact() créer un Array $k=>Value a partir des valeurs entrées*/
         \Renderer::render('articles/editArticles', compact('pageTitle','article', 'article_id', 'errors' ));
-
     }
 
     /**Delete Article */
@@ -199,10 +189,8 @@ class AdminController extends Controllers{
             die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
         }
 
-        /** Suppression de l'article et des Comments Associés*/
         $this->model2->deleteAll($id);
 
-        /** Redirection vers la page d'accueil*/
         \Http::redirect("index.php?action=AindexModerate");
     }
     
@@ -217,13 +205,11 @@ class AdminController extends Controllers{
 
         $id = $_GET['id'];
 
-        /** Vérification de l'existence du commentaire*/
         $commentaire = $this->model->find($id);
         if (!$commentaire) {
             die("Aucun commentaire n'a l'identifiant $id !");
         }
 
-        /** Suppression du commentaire*/
         $this->model->delete($id);
 
         /** Redirection vers l'article en question*/
@@ -237,7 +223,6 @@ class AdminController extends Controllers{
         }
 
         $id = $_GET['id'];
-
         /**
          * Vérification de l'existence du commentaire
          */
@@ -248,8 +233,6 @@ class AdminController extends Controllers{
 
         /**Approbation du commentaire */
         $this->model->approuve($id);
-
-        /** Redirection vers la page de Moderation*/
 
         \Http::redirect("index.php?action=AindexModerate");
     }

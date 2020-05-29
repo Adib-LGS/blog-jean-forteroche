@@ -8,5 +8,4 @@ class ErrorController extends Controllers {
     protected $secondModelName = \Models\Article::class;
     protected $renderName = "indexError";
     
-
 }

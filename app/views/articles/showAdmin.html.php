@@ -76,12 +76,19 @@
                       <blockquote>
                           <em><?= $commentaire['content'] ?></em>
                       </blockquote>
-                      <!--Signaler un commentaire--> 
+                      <!--Signaler un commentaire-->
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "0" ):?>
                       <a class="btn btn-danger btn-sm" href="index.php?action=UreportComment&id_comment=<?= $commentaire['id'] ?>&id=<?= $article_id ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
                       <?php endif ?>
                       <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "0" AND $commentaire['reports_id'] === "1" ):?>
                         <p class="alert alert-success btn-sm" style="width: 38%">Ce commentaire à déja été signaler</p>
+                        <?php endif ?>
+
+                        <?php if(isset($_SESSION['role_id']) && $_SESSION['role_id'] === "1" AND $commentaire['reports_id'] === "0" ):?>
+                      <a class="btn btn-danger btn-sm" href="index.php?action=UreportComment&id_comment=<?= $commentaire['id'] ?>&id=<?= $article_id ?>" onclick="return window.confirm(`Êtes vous sûr de vouloir signaler ce commentaire ?!`)">Signaler Commentaire</a>
+                      <?php endif ?>
+                      <?php if(isset($_SESSION['id']) && $_SESSION['id'] === "1" AND $commentaire['reports_id'] === "1" ):?>
+                        <p class="alert alert-success btn-sm" style="width: 38%">Ce commentaire est en attente de Modération dans votre espace</p>
                         <?php endif ?>
                   <?php endforeach ?>
               <?php endif ?>

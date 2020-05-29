@@ -56,7 +56,7 @@ class UserController extends Controllers{
         }
         /** Affichage*/
         $pageTitle = "Inscription";
-        /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
+
         \Renderer::render('articles/signIn', compact('pageTitle', 'errors'));
     }
 
@@ -91,7 +91,7 @@ class UserController extends Controllers{
         }
         /** Affichage*/
         $pageTitle = "Mon compte";
-        /** Static Methode Render + Compact() créer un Array $k=>Value a partir des valeurs entrées*/
+        
         \Renderer::render('articles/logIn', compact('pageTitle', 'errors2'));
     }
     

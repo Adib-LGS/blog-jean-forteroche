@@ -1,7 +1,7 @@
 <?php
 /**
  * Le but est de remplacer les différentes
- * Instansations des class Controllers ds les différents Fichiers
+ * Instansations des class Controllers ds les différentes views
  * Et de pouvoir Moduler plus facilement le blog
  * En cas d'ajout de nouvelles functionalités
  * En gros centraliser les apl dans une meme place :|)
@@ -9,11 +9,8 @@
 
 
 class Router {
-
-   
-    
+  
     public static function route(){
-
        
         try{
            

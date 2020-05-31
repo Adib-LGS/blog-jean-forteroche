@@ -1,7 +1,7 @@
 <?php 
 /**
  * Methode Static
- * debug() est Utilsier dans Tableau $errors \Controllers\DefaultPage();
+ * debug() est Utilsier dans Tableau $errors afficher des errors
  * Cette Methode n'appartient pas un Objet mais a la Class Elle meme
  */
 class Utils {

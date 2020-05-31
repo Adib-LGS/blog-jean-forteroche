@@ -24,6 +24,21 @@
 	</header>
 <?php endif ?> 
 <br>
+
+<?php if(!empty($errors)): ?>
+
+<div class="arlert alert-danger">
+    <p>Vous devez remplir tout les champs du formulaire</p>
+<ul>
+<?php foreach($errors as $error): ?>
+    <li><?= $error ?></li>
+<?php endforeach ?>
+</ul>
+
+</div>
+  <?php endif ?>
+  <br>
+
 <section class="article" style="width: 50%; margin-left:20%" >
 	<p><strong><?= $pageTitle ?></strong></p>
 

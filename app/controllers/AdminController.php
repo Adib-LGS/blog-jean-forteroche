@@ -86,31 +86,35 @@ class AdminController extends Controllers{
          * Ensuite, on vérifie qu'elles ne sont pas nulles
          */
         if(isset($_POST)){
-        
-            if(!empty($_POST) && !empty(htmlspecialchars($_POST['title'])) AND !empty(htmlspecialchars($_POST['content']))){
+            $errors = array();
+            if(!empty($_POST)){
                 
-                $title = htmlspecialchars($_POST['title']);
+                if(empty($title = htmlspecialchars($_POST['title']))){
+                    $errors['title'] = 'Vous devez ajouter un titre';
+                }
 
-                $introduction = htmlspecialchars($_POST['introduction']);
+                if(empty($introduction = htmlspecialchars($_POST['introduction']))){
+                    $errors['introduction'] = 'Vous devez ajouter une introduction';
+                }
 
-                $content = htmlspecialchars($_POST['content']);
+                if(empty($content = htmlspecialchars($_POST['content']))){
+                    $errors['content'] = 'Vous devez ajouter un contenu';
+                }
 
                 $author_id = htmlspecialchars($_POST['author_id']);
-                // On vérifie un minimum
-                if (!$title || !$introduction || !$content) {
-                    die("Votre formulaire a été mal rempli !");
-                    
-                }else{
+                
+                if(empty($errors)){
                     /** Insertion de l'Article*/
                     $this->model2->insert($title, $introduction, $content, $author_id);
                     \Http::redirect("index.php?action=Aindex");
-                } 
+                }
+                //\Utils::debug($errors); 
             }
         }
          /** Affichage*/
         $pageTitle = "Créer un Article";
         
-        \Renderer::render('articles/addArticle', compact('pageTitle'));
+        \Renderer::render('articles/addArticle', compact('pageTitle', 'errors'));
     
     }
 
@@ -140,18 +144,18 @@ class AdminController extends Controllers{
         /** Modification de l'article */
         if(isset($_POST)){
             $errors = array();
-            if(!empty($_POST  && !empty(htmlspecialchars($_POST['title'])) AND !empty(htmlspecialchars($_POST['introduction'])) && !empty(htmlspecialchars($_POST['content'])))){
+            if(!empty($_POST)){
              
                 if(empty($title = htmlspecialchars($_POST['title']))){
-                    $errors['title'] = 'Veuillez completer le titre';
+                    $errors['title'] = 'Veuillez modifier ou laisser le titre par défaut';
                 }
 
                 if(empty($introduction = htmlspecialchars($_POST['introduction']))){
-                    $errors['introduction'] = 'Veuillez completer l\'intro';
+                    $errors['introduction'] = 'Veuillez completer l\'intro ou laisser l\'intro par defaut';
                 }
 
                 if(empty($content = htmlspecialchars($_POST['content']))){
-                    $errors['content'] = 'Veuillez ajouter du contenu';
+                    $errors['content'] = 'Veuillez modifier le contenu ou laisser le contenu par defaut';
                 }
 
                 if(empty($errors)){

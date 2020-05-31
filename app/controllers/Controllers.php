@@ -98,7 +98,7 @@ abstract class Controllers{
 
     /**Signaler un Commentaire :) */
     public function reportComment(){
-        /** CETTE FUNCTION DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES ! On va Signaler le commentaire*/
+        /** CETTE FUNCTION VA PERMETTRE DE SIGNALER UN COMMENTAIRE*/
 
         // On part du principe qu'on possède le param "id"
         $article_id = $_GET['id'];

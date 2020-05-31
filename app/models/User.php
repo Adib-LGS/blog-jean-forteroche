@@ -1,10 +1,10 @@
 <?php
-
-namespace Models;
 /**
  * Cette class Hérite du Model Principale
  * Permet d'ajouter des futurs functionalité pour les Utilisateurs
  */
+
+namespace Models;
 
 
 class User extends Model {
@@ -27,14 +27,18 @@ class User extends Model {
          return $user;
     }
     
-    /**Insertion User + Encrypt Password in DB*/
+    /**Insertion User + Encrypt Password in DB
+    * @return void 
+    */
     public function insertUser():void{
         $req = $this->pdo->prepare("INSERT INTO {$this->table} (pseudo, pass, email) VALUES(?, ?, ?)");
         $pass_hache = password_hash($_POST['pass1'], PASSWORD_BCRYPT);
         $req->execute([$_POST['pseudo'], $pass_hache, $_POST['email']]);
     }
 
-    /**Login Check if User exist */
+    /**Login Check if User exist
+    * @param $pseudoConnect
+    */
     public function getInfoUser($pseudoConnect){
     $req = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE pseudo = ?");
     $req->execute(array($pseudoConnect));

@@ -10,13 +10,12 @@ namespace Models;
 
 abstract class Model {
 
-    /**Get DataBase Connexion */
     protected $pdo;
     protected $table;
 
     public function __construct()
     {
-        //Use Static Methode to Get DataBase Connexion
+        //Use Static Methode to Get DataBase Connexion in every class
         $this->pdo = \Database::getPdo();
     }
 

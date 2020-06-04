@@ -1,4 +1,8 @@
 <?php
+/**Créer une methode static 
+ * Appeler dans public/index.php 
+ * Charge les pages auto */
+
 
 class Autoload{
 

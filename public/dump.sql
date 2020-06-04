@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Base de données :  `alaska`
+-- Base de données :  ``
 --
 
 -- --------------------------------------------------------
@@ -81,8 +81,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `pass`, `email`, `role_id`) VALUES
-(1, 'Jean', '$2y$10$DQBYkBMBy5dk9U.wxhmg.e/s1M1AYnhsFq1frbyAcojkPek1njt/C', 'jeanF@gmail.com', 1),
-(2, 'PSG', '$2y$10$VBrAxsG.pomiFfgYi27tteUQaob1RKn7ud6PASM3X1vKha7jAyNaS', 'psg@gmail.fr', 0);
+
 
 --
 -- Index pour les tables déchargées

@@ -2,7 +2,7 @@
 /**
  * Idéee Commune a tous les Controllers
  * Ce que tout les Controllers ont en communs
- * Les Actions Commune (UsersConnu/Admin)
+ * Les Actions Commune (Users/Admin)
  */
 
 namespace Controllers;

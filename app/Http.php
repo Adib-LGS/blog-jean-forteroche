@@ -8,7 +8,6 @@
 
 class Http {
 
-    /**Va remplacer les Redirections de page via header(Location:) */
     public static function redirect(string $url):void {
     //Redirection vers l'article en question :
     header("Location: $url ");

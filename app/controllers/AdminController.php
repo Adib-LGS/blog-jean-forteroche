@@ -1,7 +1,7 @@
 <?php
 /**
  * Les différentes actions de l'Administrateur
- * EX: L'Admin veut se connecter a Son profi Admin
+ * EX: L'Admin veut se connecter a Son profil Admin
  * L'Admin veut Supprimer Article/Commentaire
  * L'Admin veut add un Article
  */
@@ -35,7 +35,6 @@ class AdminController extends Controllers{
     /**Moderator Page Rendering */
     public function indexModerate(){
         /** CETTE FUNCTION  A POUR BUT D'AFFICHER LA PAGE DE MODERATION!*/
-        
         
         $articles = $this->model2->findAll("created_at DESC");
         $commentaires =$this->model->findAll("created_at DESC");
@@ -227,9 +226,8 @@ class AdminController extends Controllers{
         }
 
         $id = $_GET['id'];
-        /**
-         * Vérification de l'existence du commentaire
-         */
+        
+        /**Vérification de l'existence du commentaire*/
         $commentaire = $this->model->find($id);
         if (!$commentaire) {
             die("Aucun commentaire n'a l'identifiant $id !");

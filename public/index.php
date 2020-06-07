@@ -7,7 +7,7 @@
 
 require_once '../app/Autoload.php';
 
-/**Apl du Router Method Static */
+/**Apl du Router et Autoloader Method Static */
 session_start();
 \Autoload::autoloader();
 \Router::route();

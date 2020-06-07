@@ -18,7 +18,4 @@ class Autoload{
             //var_dump($className);
         });
     }
- 
 }
-
-

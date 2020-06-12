@@ -8,15 +8,23 @@
 
 namespace Controllers;
 
+use Exception;
 
 class AdminController extends Controllers{
 
-
-    
     protected $modelName = \Models\Comment::class;
     protected $secondModelName = \Models\Article::class;
     protected $renderName = "showAdmin";
 
+    public function __construct()
+    {
+        parent::__construct();
+        
+        if(!isset($_SESSION['id']) && $_SESSION['role_id'] != "1"){
+            throw new Exception('Error 404');
+            die();
+        }
+    }
 
     /**Show All Articles */
     public function index(){

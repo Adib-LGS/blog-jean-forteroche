@@ -49,7 +49,7 @@
 	<script>
     tinymce.init({
       selector: '#tiny',
-      plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable  bbcode',
+      plugins: 'autolink lists bbcode',
 	  bbcode_dialect: 'punbb',
 	  toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image',
       toolbar_mode: 'floating',

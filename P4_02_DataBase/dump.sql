@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 01 juin 2020 à 16:46
+-- Généré le :  lun. 08 juin 2020 à 11:43
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.4.2
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Base de données :  ``
+-- Base de données :  `alaska`
 --
 
 -- --------------------------------------------------------
@@ -59,7 +59,7 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`id`, `article_id`, `content`, `created_at`, `reports_id`, `user_id`) VALUES
 (7, 5, 'xxxxx', '2020-05-25 14:28:02', 0, 2),
-(11, 7, ' &lt;script&gt;alert(&quot;This Website has been hacked&quot;)&lt;/script&gt;', '2020-05-30 20:21:09', 1, 2),
+(11, 7, ' &lt;script&gt;alert(&quot;This Website has been hacked&quot;)&lt;/script&gt;', '2020-05-30 20:21:09', 0, 2),
 (13, 7, 'hhhh', '2020-06-01 14:07:27', 1, 2);
 
 -- --------------------------------------------------------
@@ -81,7 +81,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `pass`, `email`, `role_id`) VALUES
-
+(1, 'Jean', '$2y$10$DQBYkBMBy5dk9U.wxhmg.e/s1M1AYnhsFq1frbyAcojkPek1njt/C', 'jeanF@gmail.com', 1),
+(2, 'PSG', '$2y$10$VBrAxsG.pomiFfgYi27tteUQaob1RKn7ud6PASM3X1vKha7jAyNaS', 'psg@gmail.fr', 0);
 
 --
 -- Index pour les tables déchargées
